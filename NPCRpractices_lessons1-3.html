@@ -1,0 +1,1924 @@
+<!doctype html>
+<html lang="en" data-character-detectives>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Character Detectives · 汉字侦探</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 16px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans:
+    -apple-system-body, ui-sans-serif, -apple-system, system-ui, "Segoe UI",
+    Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 8px);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-weight: var(--font-weight-normal);
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  font-weight: inherit;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+.table {
+  font-family: var(--font-sans);
+}
+
+h1 {
+  font-size: calc(var(--font-size-base) * 1.5);
+  line-height: 1.3333333333;
+}
+
+h2 {
+  font-size: calc(var(--font-size-base) * 1.25);
+  line-height: 1.4;
+}
+h3 {
+  font-size: calc(var(--font-size-base) * 1.125);
+  line-height: 1.5555555556;
+}
+h4 {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+h5,
+h6 {
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 600;
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+pre,
+pre code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: calc(var(--font-size-base) * 0.875);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-family: var(--font-sans);
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+.table :is(th, td):not(:last-child) {
+  padding-inline-end: calc(var(--font-size-base) * 1.5);
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead :is(th, td) {
+  border-bottom-color: var(--border-strong, var(--input));
+  padding-block: calc(var(--font-size-base) / 2);
+  line-height: var(--font-size-base);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.table tbody :is(th, td) {
+  padding-block: calc(var(--font-size-base) * 0.625);
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 8px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget > :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  border: 1px solid var(--border);
+  corner-shape: var(--corner-shape);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-sans);
+  padding: 5px 12px;
+  border-color: color-mix(
+    in oklab,
+    light-dark(var(--primary-foreground), var(--foreground)) 5%,
+    transparent
+  );
+  border-radius: var(--radius-2xl);
+  color: light-dark(var(--primary-foreground), var(--foreground));
+  background: light-dark(var(--foreground), var(--popover));
+  box-shadow: 0 8px 18px rgb(15 23 42 / 20%);
+  letter-spacing: -0.15px;
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: color-mix(in srgb, var(--foreground) 40%, var(--muted-foreground));
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1;
+}
+
+small,
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+/* Match inline alignment without overriding a containing flex or grid layout. */
+.btn,
+.nav-link,
+.form-control,
+.form-select,
+.form-range,
+.form-check {
+  vertical-align: middle;
+}
+
+.btn,
+.nav-link {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: inherit;
+  font-family: var(--font-sans);
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  border-color: transparent;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.btn {
+  border-color: var(--border);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-link:not(:disabled):not([aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.btn-primary {
+  border-color: var(--border);
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: border-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: border-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--muted-foreground);
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(> .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel > [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel > [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host's design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker > summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-picker > summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls > button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker > summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls > button > svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls > button::before,
+.viz-carousel-picker > summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: "";
+  pointer-events: none;
+}
+
+.viz-carousel-controls > button:hover::before,
+.viz-carousel-picker > summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls > button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker > summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker > summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options > button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options > [aria-current="true"],
+.viz-carousel-options > button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: calc(4px + var(--control-spacing, 12px) / 2);
+  border-color: var(--input);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--popover) 96%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.4285714286;
+}
+.form-control:is(
+  [type="file"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="color"]
+) {
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  line-height: 18px;
+}
+.form-control:is(
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"]
+) {
+  padding-inline: var(--control-spacing, 12px);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+  padding: 0;
+}
+
+.form-control[type="file"]::file-selector-button {
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+  min-height: calc(10px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  margin-inline-end: var(--control-spacing, 12px);
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: none;
+}
+.form-control:disabled {
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  opacity: 1;
+}
+.form-control[aria-invalid="true"] {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 20%, transparent);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  margin: 0;
+  /* The secondary icon role is 14px at compact density and 16px at web density. */
+  --icon-size: calc(10px + var(--control-spacing, 12px) / 2);
+  /* Settings dropdowns retain a 12px inset and a 4px text-to-chevron gap. */
+  padding: 0 calc(16px + var(--icon-size)) 0 12px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    ),
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    );
+  background-position:
+    calc(100% - 12px - var(--icon-size) / 2) 50%,
+    calc(100% - 12px - var(--icon-size) * 0.18) 50%;
+  background-repeat: no-repeat;
+  background-size: calc(var(--icon-size) * 0.32) calc(var(--icon-size) * 0.32);
+  cursor: var(--cursor-interaction, default);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.form-select option {
+  color: var(--popover-foreground);
+  background-color: var(--popover);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.form-select:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.form-select:disabled {
+  opacity: 0.4;
+}
+
+.form-check {
+  display: flex;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  corner-shape: round;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  width: calc(10px + var(--control-spacing, 12px) / 2);
+  height: calc(10px + var(--control-spacing, 12px) / 2);
+  border-color: var(--border-strong, var(--input));
+  border-radius: calc(var(--radius-sm) / 2);
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:is(:checked, :indeterminate) {
+  border-color: var(--border-strong, var(--input));
+  background-color: color-mix(in srgb, var(--popover) 96%, transparent);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+  background-color: var(--foreground);
+}
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:indeterminate::before {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 65%;
+  height: 6.65%;
+  margin: auto;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  mask: none;
+  content: "";
+}
+
+.form-check-input[type="radio"] {
+  border-radius: var(--radius-full);
+  width: 16px;
+  height: 16px;
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--input);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 0;
+  background: radial-gradient(
+    circle,
+    var(--primary-foreground) 0 3px,
+    var(--foreground) 3px
+  );
+  box-shadow: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:focus-visible {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+.form-check:not(.form-switch) .form-check-input[type="radio"]:disabled,
+.form-check:not(.form-switch)
+  .form-check-input[type="radio"]:disabled
+  + .form-check-label {
+  opacity: 0.5;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-color: #fff;
+  background: #fff;
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--blue);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+  outline: none;
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  accent-color: var(--primary);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  outline: none;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: transparent;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  margin-top: -9px;
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Outline the native track and thumb, preserving the larger input hit area. */
+.form-range:focus-visible::-webkit-slider-runnable-track {
+  outline: 2px auto Highlight;
+  outline-color: -webkit-focus-ring-color;
+}
+
+.form-range::-moz-range-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+.form-range:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed="true"],
+  [aria-selected="true"],
+  .is-selected
+) {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--blue);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Web recipes are the default, including on renderers without inline style queries. */
+@supports (border-radius: if(style(--corner-shape: round): 1px; else: 2px)) {
+  /* Match the host's proportional text-sm scale at every text preference. */
+  .tooltip,
+  .viz-badge,
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    font-size: if(
+      style(--corner-shape: round): round(
+          nearest,
+          calc(var(--font-size-base) * 14 / 16),
+          1px
+        );
+        else: round(nearest, calc(var(--font-size-base) * 13 / 14), 1px)
+    );
+  }
+
+  .btn,
+  .nav-link,
+  .form-select {
+    border-radius: if(
+      style(--corner-shape: round): var(--radius-full); else: var(--radius-lg)
+    );
+  }
+
+  .form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+    border-radius: if(
+      style(--corner-shape: round): calc(var(--radius-sm) / 2);
+        else: calc(var(--radius-lg) * 0.4)
+    );
+  }
+
+  .tooltip {
+    font-weight: if(
+      style(--corner-shape: round): 600; else: var(--font-weight-normal)
+    );
+  }
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(> .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker > summary,
+  .form-control,
+  .form-select {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+  .form-control:is(
+    [type="file"],
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="week"],
+    [type="time"],
+    [type="color"]
+  ) {
+    height: 44px;
+    min-height: 44px;
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+
+  .form-control[type="file"]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type="color"] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type="date"],
+    [type="datetime-local"],
+    [type="month"],
+    [type="time"],
+    [type="week"]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: "";
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html>body{padding:0}</style>
+
+<style>html{background:light-dark(#fff,#181818)}html>body{max-width:1056px;margin:0 auto;padding:16px;box-sizing:border-box}</style>
+</head>
+<body>
+<script>
+// The exported game stores progress in this browser, for this page path.
+(() => {
+  const key = 'character-detectives-v3:' + window.location.pathname;
+  let saved = null;
+  try {
+    saved = JSON.parse(window.localStorage.getItem(key) || 'null');
+  } catch (_) {}
+  window.openai = {
+    widgetState: saved,
+    setWidgetState(next) {
+      this.widgetState = next;
+      try {
+        window.localStorage.setItem(key, JSON.stringify(next));
+        return Promise.resolve();
+      } catch (error) {
+        return Promise.reject(error);
+      }
+    }
+  };
+})();
+</script>
+<div id="character-detectives"></div>
+<style>
+#character-detectives{--paper:light-dark(#f8f5ee,#1d211f);--panel:light-dark(#fffdf8,#252b27);--ink:light-dark(#243d32,#e7eee8);--quiet:light-dark(#617267,#b1c0b5);--line:light-dark(#dcded3,#455248);--verm:light-dark(#ab3c2d,#f09a86);--wash:light-dark(#f6e7de,#46332d);--green:light-dark(#e5ecdf,#344738);--good:light-dark(#315a36,#b2d8ad);color-scheme:light dark;background:var(--paper);color:var(--ink);font:400 15px/1.5 system-ui,sans-serif;border-radius:16px;overflow:hidden;min-width:0}
+#character-detectives *{box-sizing:border-box}
+#character-detectives button{font:inherit;color:inherit;cursor:inherit}
+#character-detectives .cd-head{display:flex;align-items:center;gap:12px;padding:22px 28px;border-bottom:1px solid var(--line);padding-right:105px}
+#character-detectives .cd-seal{background:var(--verm);color:var(--paper);font:500 30px/1.4 'PingFang SC','Microsoft YaHei',sans-serif;width:45px;text-align:center;border-radius:9px;flex-shrink:0}
+#character-detectives .cd-title{font:500 21px/1.25 Georgia,serif;margin:0}
+#character-detectives .cd-sub{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--quiet);margin-top:4px}
+#character-detectives .cd-layout{display:grid;grid-template-columns:195px minmax(0,1fr)}
+#character-detectives .cd-side{padding:27px 14px;border-right:1px solid var(--line)}
+#character-detectives .cd-eyebrow{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--quiet);font-weight:500}
+#character-detectives .cd-side .cd-eyebrow{margin:0 10px 15px}
+#character-detectives .cd-chapter{width:100%;display:flex;gap:10px;align-items:center;text-align:left;background:transparent;border:1px solid transparent;padding:12px 10px;margin-bottom:7px;border-radius:9px}
+#character-detectives .cd-chapter[aria-pressed=true]{background:var(--green)}
+#character-detectives .cd-chapter:hover{border-color:var(--line)}
+#character-detectives .cd-chapter-number{font-size:13px;color:var(--quiet);min-width:20px}
+#character-detectives .cd-chapter-name{font-size:13px;font-weight:500;display:block}
+#character-detectives .cd-chapter-detail{font-size:11px;color:var(--quiet);display:block;margin-top:3px}
+#character-detectives .cd-note{font-size:12px;color:var(--quiet);margin:25px 10px 0;padding-top:18px;border-top:1px solid var(--line)}
+#character-detectives .cd-main{padding:25px 30px 24px;min-width:0}
+#character-detectives .cd-status{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--quiet)}
+#character-detectives .cd-progress{height:4px;background:var(--line);margin:12px 0 25px;border-radius:3px;overflow:hidden}
+#character-detectives .cd-progress span{display:block;background:var(--verm);height:100%;transition:width .25s}
+#character-detectives .cd-stage{display:flex;align-items:center;gap:8px;color:var(--verm);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500}
+#character-detectives h2{font:500 23px/1.35 Georgia,serif;margin:11px 0 17px;text-wrap:balance}
+#character-detectives .cd-display{display:flex;justify-content:center;align-items:center;gap:16px;min-height:122px;margin:12px 0 20px;flex-wrap:wrap}
+#character-detectives .cd-glyph{display:inline-flex;align-items:center;justify-content:center;min-width:106px;min-height:106px;font:400 74px/1.3 'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif;background-color:var(--panel);background-image:linear-gradient(to right,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px)),linear-gradient(to bottom,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px));border:1px solid var(--line);border-radius:8px;padding:4px 12px}
+#character-detectives .cd-operator{font-size:24px;color:var(--quiet)}
+#character-detectives .cd-phrase{font:400 clamp(28px,5vw,42px)/1.7 'PingFang SC','Microsoft YaHei',sans-serif;text-align:center;word-break:break-all}
+#character-detectives .cd-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#character-detectives .cd-option{background:var(--panel);border:1px solid var(--line);border-radius:9px;min-height:67px;padding:12px 14px;display:flex;align-items:center;justify-content:center;gap:9px;position:relative;text-align:center}
+#character-detectives .cd-option.zh{font:400 39px/1.5 'PingFang SC','Microsoft YaHei',sans-serif;min-height:82px}
+#character-detectives .cd-option:hover:enabled{border-color:var(--verm);background:var(--wash)}
+#character-detectives .cd-option.selected{border:2px solid var(--verm);background:var(--wash)}
+#character-detectives .cd-option.correct{border:2px solid var(--good);background:var(--green)}
+#character-detectives .cd-option.wrong{border:2px solid var(--verm);background:var(--wash)}
+#character-detectives .cd-option:disabled{opacity:1;cursor:default}
+#character-detectives .cd-marker{position:absolute;right:8px;top:5px;font:500 14px/1.4 system-ui;color:var(--good)}
+#character-detectives .cd-wrongmark{color:var(--verm)}
+#character-detectives .cd-actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:19px;flex-wrap:wrap}
+#character-detectives .cd-button{border:1px solid var(--line);padding:10px 16px;border-radius:7px;background:var(--panel);min-height:44px;font-size:13px;font-weight:500}
+#character-detectives .cd-primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#character-detectives .cd-plain{background:transparent;border:0;padding-left:0;color:var(--quiet)}
+#character-detectives .cd-button:disabled{opacity:.45;cursor:default}
+#character-detectives .cd-hint{background:var(--wash);padding:12px 15px;border-radius:8px;margin-top:14px;font-size:13px}
+#character-detectives .cd-feedback{margin-top:16px;padding:14px 17px;background:var(--green);border-radius:9px;font-size:13px}
+#character-detectives .cd-feedback.missed{background:var(--wash)}
+#character-detectives .cd-feedback strong{display:block;font-weight:500;font-size:15px;margin-bottom:5px}
+#character-detectives .cd-reading{color:var(--quiet);margin:5px 0}
+#character-detectives .cd-bottom{font-size:11px;color:var(--quiet);margin-top:20px;text-align:center}
+#character-detectives .cd-summary{text-align:center;padding:10px 0}
+#character-detectives .cd-stamp{display:inline-block;border:2px solid var(--verm);color:var(--verm);padding:9px 20px;font-size:15px;letter-spacing:2px;transform:rotate(-4deg);margin:15px 0 20px;border-radius:5px}
+#character-detectives .cd-total{font:500 46px/1.2 Georgia,serif;margin:8px 0}
+#character-detectives .cd-wordlist{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:15px 0}
+#character-detectives .cd-word{padding:5px 10px;background:var(--panel);border:1px solid var(--line);border-radius:6px;font:400 20px/1.6 'PingFang SC','Microsoft YaHei',sans-serif}
+#character-detectives button:focus-visible{outline:3px solid var(--verm);outline-offset:3px}
+@media(max-width:620px){#character-detectives .cd-layout{grid-template-columns:1fr}#character-detectives .cd-side{border-right:0;border-bottom:1px solid var(--line);padding:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}#character-detectives .cd-side>.cd-eyebrow,#character-detectives .cd-note,#character-detectives .cd-chapter-number,#character-detectives .cd-chapter-detail{display:none}#character-detectives .cd-chapter{margin:0;padding:10px 4px;justify-content:center;text-align:center}#character-detectives .cd-chapter-name{font-size:12px}#character-detectives .cd-main{padding:20px 17px}#character-detectives .cd-head{padding:18px 95px 18px 17px}#character-detectives .cd-title{font-size:18px}#character-detectives .cd-sub{font-size:10px;letter-spacing:.5px}#character-detectives .cd-option{padding:10px;font-size:13px}#character-detectives .cd-option.zh{font-size:34px}#character-detectives h2{font-size:21px}#character-detectives .cd-glyph{min-width:88px;min-height:88px;font-size:62px}}
+@media(prefers-reduced-motion:reduce){#character-detectives *{transition:none!important}}
+</style>
+<style>
+#character-detectives .cd-setbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;margin-bottom:20px;align-items:end}
+#character-detectives .cd-setbar label{font-size:11px;letter-spacing:1.1px;text-transform:uppercase;color:var(--quiet);grid-column:1/-1}
+#character-detectives .cd-setbar select{font:400 13px/1.5 system-ui,sans-serif;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:7px;max-width:100%;width:100%;min-width:0;min-height:44px;padding:9px 28px 9px 10px;text-overflow:ellipsis}
+#character-detectives .cd-coverage-toggle{font-size:12px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--quiet);padding:10px 0;min-height:44px}
+#character-detectives .cd-description{font-size:15px;color:var(--quiet);margin:0 0 19px}
+#character-detectives .cd-character-list{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}
+#character-detectives .cd-character{position:relative;min-width:45px;padding:5px 9px;text-align:center;border:1px solid var(--line);border-radius:5px;background:var(--panel);font:400 25px/1.4 'PingFang SC','Microsoft YaHei',sans-serif}
+#character-detectives .cd-character.practised{background:var(--green);border-color:var(--good)}
+#character-detectives .cd-character small{position:absolute;right:1px;top:0;font:400 10px/1.3 system-ui;color:var(--good)}
+#character-detectives .cd-coverage-note{font-size:12px;color:var(--quiet);margin:12px 0 20px}
+#character-detectives details{border-top:1px solid var(--line);padding:12px 0}
+#character-detectives summary{font-size:13px;min-height:32px}
+#character-detectives .cd-vocab-list{margin:10px 0 14px}
+#character-detectives .cd-vocab-list>div{display:grid;grid-template-columns:minmax(60px,1fr) minmax(0,3fr);gap:12px;padding:7px 0;font-size:13px}
+#character-detectives .cd-vocab-list>div>span:first-child{font:400 25px/1.5 'PingFang SC','Microsoft YaHei',sans-serif}
+#character-detectives .cd-option{overflow-wrap:anywhere;min-width:0}
+#character-detectives .cd-option.zh.long{font-size:clamp(22px,3.8vw,30px)}
+@media(max-width:760px){#character-detectives .cd-setbar{grid-template-columns:minmax(0,1fr)}#character-detectives .cd-coverage-toggle{justify-self:start;padding:4px 0;min-height:32px}}
+
+#character-detectives .cd-option.zh{white-space:nowrap}
+</style>
+<script>
+(()=>{
+// Vocabulary and visible-shape clues transcribed from Conversations Lessons 1–3.
+// Shape notes are recognition cues, not claims about character origins.
+const packs = [
+  {id:'l1-core',lesson:0,title:'Greetings & replies',type:'Core',items:[
+    ['你','nǐ','you'],['我','wǒ','I / me'],['好','hǎo','good / well'],
+    ['吗','ma','yes/no question particle'],['呢','ne','follow-up particle, as in “and you?”'],
+    ['很','hěn','very'],['也','yě','also / too'],['你好','nǐ hǎo','hello']
+  ]},
+  {id:'l1-intro',lesson:0,title:'Names & introductions',type:'Bonus',items:[
+    ['叫','jiào','to be called'],['什么','shénme','what'],['名字','míngzi','name'],
+    ['高兴','gāoxìng','happy / pleased'],['认识','rènshi','to know / get acquainted with']
+  ]},
+  {id:'l1-names',lesson:0,title:'People in the dialogues',type:'Names',items:[
+    ['力波','Lìbō','Libo'],['林娜','Lín Nà','Lin Na'],['陆雨平','Lù Yǔpíng','Lu Yuping']
+  ]},
+  {id:'l2-family',lesson:1,title:'Family & pronouns',type:'Core',items:[
+    ['爸爸','bàba','dad'],['妈妈','māma','mum'],['哥哥','gēge','older brother'],
+    ['弟弟','dìdi','younger brother'],['男朋友','nánpéngyou','boyfriend'],
+    ['他','tā','he / him'],['他们','tāmen','they / them'],['我们','wǒmen','we / us']
+  ]},
+  {id:'l2-actions',lesson:1,title:'Important little words',type:'Core',items:[
+    ['都','dōu','all / both'],['忙','máng','busy'],['不','bù','not'],
+    ['要','yào','to want'],['喝','hē','to drink'],['也','yě','also / too'],['很','hěn','very']
+  ]},
+  {id:'l2-return',lesson:1,title:'Familiar words in new conversations',type:'Review',items:[
+    ['你','nǐ','you'],['吗','ma','yes/no question particle'],
+    ['呢','ne','follow-up particle, as in “and you?”'],['什么','shénme','what']
+  ]},
+  {id:'l2-greetings',lesson:1,title:'Greetings through the day',type:'Bonus',items:[
+    ['早上好','zǎoshang hǎo','good morning'],['中午好','zhōngwǔ hǎo','good midday'],
+    ['下午好','xiàwǔ hǎo','good afternoon'],['晚上好','wǎnshang hǎo','good evening'],
+    ['晚安','wǎn’ān','good night']
+  ]},
+  {id:'l2-drinks',lesson:1,title:'Drinks & likes',type:'Core + bonus',items:[
+    ['咖啡','kāfēi','coffee'],['喜欢','xǐhuan','to like'],['水','shuǐ','water'],
+    ['茶','chá','tea'],['牛奶','niúnǎi','milk'],['奶茶','nǎichá','milk tea'],
+    ['可乐','kělè','cola'],['果汁','guǒzhī','fruit juice']
+  ]},
+  {id:'l2-names',lesson:1,title:'A fuller name',type:'Names',items:[
+    ['丁力波','Dīng Lìbō','Ding Libo'],['力波','Lìbō','Libo'],
+    ['林娜','Lín Nà','Lin Na'],['陆雨平','Lù Yǔpíng','Lu Yuping']
+  ]},
+  {id:'l3-questions',lesson:2,title:'People & questions',type:'Core',items:[
+    ['那','nà','that'],['这','zhè','this'],['是','shì','to be / am / is / are'],
+    ['谁','shéi','who'],['哪','nǎ','which'],['的','de','possession / association particle'],
+    ['她','tā','she / her'],['您','nín','you (polite)']
+  ]},
+  {id:'l3-people',lesson:2,title:'Jobs, friends & family',type:'Core',items:[
+    ['老师','lǎoshī','teacher'],['外语','wàiyǔ','foreign language'],['朋友','péngyou','friend'],
+    ['医生','yīshēng','doctor'],['奶奶','nǎinai','paternal grandmother'],['外婆','wàipó','maternal grandmother']
+  ]},
+  {id:'l3-country-core',lesson:2,title:'Country & nationality',type:'Core',items:[
+    ['国','guó','country (as in 中国)'],['人','rén','person / people'],
+    ['中国人','Zhōngguó rén','a Chinese person'],['哪国人','nǎ guó rén','of which nationality?']
+  ]},
+  {id:'l3-country-bonus',lesson:2,title:'More nationalities',type:'Bonus',items:[
+    ['英国人','Yīngguó rén','a British person'],['外国人','wàiguó rén','a foreigner'],
+    ['美国人','Měiguó rén','an American person'],['德国人','Déguó rén','a German person'],
+    ['意大利人','Yìdàlì rén','an Italian person'],['法国人','Fǎguó rén','a French person'],
+    ['葡萄牙人','Pútáoyá rén','a Portuguese person'],['西班牙人','Xībānyá rén','a Spanish person']
+  ]},
+  {id:'l3-jobs',lesson:2,title:'More occupations',type:'Bonus',items:[
+    ['学生','xuésheng','student'],['律师','lǜshī','lawyer'],['护士','hùshi','nurse'],
+    ['司机','sījī','driver'],['记者','jìzhě','reporter / journalist']
+  ]},
+  {id:'l3-expressions',lesson:2,title:'Connecting the conversation',type:'Core + bonus',items:[
+    ['对了','duì le','by the way'],['和','hé','and (joining people here)'],
+    ['不是','bú shì','am / is / are not'],['都是','dōu shì','all / both are'],
+    ['您好','nín hǎo','hello (polite)']
+  ]},
+  {id:'l3-return',lesson:2,title:'Familiar words in introductions',type:'Review',items:[
+    ['你','nǐ','you'],['我','wǒ','I / me'],['他','tā','he / him'],
+    ['我们','wǒmen','we / us'],['也','yě','also / too'],
+    ['吗','ma','yes/no question particle'],['哥哥','gēge','older brother'],
+    ['早上好','zǎoshang hǎo','good morning']
+  ]},
+  {id:'l3-names',lesson:2,title:'Teacher Chen',type:'Names',items:[
+    ['陈老师','Chén lǎoshī','Teacher Chen'],['丁力波','Dīng Lìbō','Ding Libo'],
+    ['力波','Lìbō','Libo'],['林娜','Lín Nà','Lin Na']
+  ]}
+];
+
+const shape = {
+  '你':['亻','The narrow 亻 is on the left; 尔 is on the right.'],
+  '我':['戈','Notice the crossing strokes and the long slanting hook.'],
+  '好':['女','女 is on the left and 子 is on the right.'],
+  '吗':['口','口 is on the left and 马 is on the right. Compare 妈, which has 女 on the left.'],
+  '呢':['口','口 is on the left and 尼 is on the right. Compare the right side with 吗.'],
+  '很':['彳','The narrow 彳 is on the left; 艮 is on the right.'],
+  '也':['乚','Notice the long bottom hook and the upright stroke through the top.'],
+  '叫':['口','Look for 口 on the left and the sparse, angular right part.'],
+  '什':['亻','亻 is on the left and 十 is on the right.'],
+  '么':['厶','Look for a short slanting stroke above the small 厶 shape.'],
+  '名':['口','夕 sits above 口. The square is at the bottom.'],
+  '字':['宀','宀 makes a roof above 子. Compare 好, where 子 sits on the right.'],
+  '高':['口','Notice a small 口 above a lower enclosing frame with another 口 inside.'],
+  '兴':['八','Notice the small strokes at the top and the two spreading strokes below.'],
+  '认':['讠','讠 is on the left and 人 is on the right.'],
+  '识':['讠','讠 is on the left; 只, with a 口 above two strokes, is on the right.'],
+  '力':['力','Look for the bending hook and the slanting stroke that crosses it.'],
+  '波':['氵','Three separate water strokes, 氵, are on the left; 皮 is on the right.'],
+  '林':['木','Two 木 shapes sit side by side.'],
+  '娜':['女','女 is on the left and 那 is on the right.'],
+  '陆':['阝','阝 is on the left. Compare 都 and 那, where 阝 is on the right.'],
+  '雨':['雨','Look for the large outer frame and the four short marks inside.'],
+  '平':['干','Notice the two short marks between the horizontal strokes and the central vertical.'],
+  '爸':['父','父 is above 巴. In 爸爸, the whole character repeats.'],
+  '妈':['女','女 is on the left and 马 is on the right. Compare 吗, which has 口 on the left.'],
+  '哥':['可','Two similar 可 shapes stack vertically.'],
+  '弟':['弓','Look for the two top strokes, the bent middle part and the long lower slant.'],
+  '男':['田','田 is above 力.'],
+  '朋':['月','Two 月 shapes sit side by side.'],
+  '友':['又','又 sits beneath the crossing upper strokes.'],
+  '他':['亻','亻 is on the left and 也 is on the right. Compare 她.'],
+  '们':['亻','亻 is on the left and the doorway-shaped 门 is on the right.'],
+  '都':['阝','者 is on the left and 阝 is on the right.'],
+  '忙':['忄','忄 is on the left and 亡 is on the right.'],
+  '不':['不','Look for the long top horizontal and the strokes spreading below it.'],
+  '要':['女','覀 sits above 女. Compare 好 and 妈, where 女 is on the left.'],
+  '喝':['口','口 is on the left; the tall right part starts with 日 above a hooked lower part.'],
+  '早':['日','日 is above 十. Compare 是, which has more strokes below 日.'],
+  '上':['上','A vertical and a short upper horizontal stand on a longer bottom horizontal.'],
+  '中':['口','A vertical stroke passes through the middle of 口.'],
+  '午':['十','Look for the short upper-left slant, two horizontals and the central vertical.'],
+  '下':['下','The long horizontal is at the top, with a vertical and short mark below.'],
+  '晚':['日','日 is on the left and 免 is on the right.'],
+  '安':['宀','宀 makes a roof above 女.'],
+  '咖':['口','口 is on the left; 加, containing 力 and 口, is on the right.'],
+  '啡':['口','口 is on the left and 非, with paired verticals and short horizontals, is on the right.'],
+  '喜':['口','Look for 士 at the top and a 口 at the bottom of the tall stack.'],
+  '欢':['又','又 is on the left and 欠 is on the right.'],
+  '水':['水','Look for the central hooked vertical with strokes spreading to both sides.'],
+  '茶':['艹','艹 is across the top; the lower strokes spread around a central vertical.'],
+  '牛':['牛','Look for two horizontal strokes, a vertical and a short upper-left slant.'],
+  '奶':['女','女 is on the left and the curved 乃 is on the right. Compare 妈 and 她.'],
+  '可':['口','口 sits under the top horizontal, beside a long right hook.'],
+  '乐':['乐','Look for the central hook with two small strokes spreading at the bottom.'],
+  '果':['田','田 is above a tree-like 木 shape.'],
+  '汁':['氵','氵 is on the left and 十 is on the right.'],
+  '丁':['丁','A single long top horizontal meets a vertical hook.'],
+  '那':['阝','阝 is on the right; there is no 口 at the far left. Compare 哪.'],
+  '这':['辶','文 sits above the long sweeping 辶 part.'],
+  '是':['日','日 is at the top, above a long lower part ending in spreading strokes.'],
+  '谁':['讠','讠 is on the left; the right part has a vertical and several short horizontals.'],
+  '哪':['口','An extra 口 sits to the left of 那.'],
+  '的':['白','白 is on the left and 勺 is on the right.'],
+  '她':['女','女 is on the left and 也 is on the right. Compare 他.'],
+  '您':['心','你 is above 心. Compare 你 without the bottom part.'],
+  '老':['匕','Notice the crossing upper strokes and the hooked lower 匕 part.'],
+  '师':['巾','Notice the two narrow strokes on the left and 巾 beneath the top right horizontal.'],
+  '外':['夕','夕 is on the left and 卜 is on the right.'],
+  '语':['讠','讠 is on the left and 吾, with a 口 at its bottom, is on the right.'],
+  '医':['匚','The enclosing frame is open on the right, with 矢 inside.'],
+  '生':['生','Look for three horizontal strokes crossed by a central vertical.'],
+  '婆':['女','波 is above 女. Compare 奶, where 女 is on the left.'],
+  '国':['囗','A large enclosing square surrounds 玉, including its small dot.'],
+  '人':['人','Two strokes spread down to the left and right.'],
+  '英':['艹','艹 is at the top and 央 is underneath.'],
+  '美':['大','A 羊-like top sits above 大.'],
+  '德':['彳','彳 is on the left. On the right, 心 sits beneath the upper stacked parts.'],
+  '意':['心','音 is above 心.'],
+  '大':['大','A horizontal crosses the two spreading strokes. Compare 人, which has no horizontal.'],
+  '利':['刂','禾 is on the left and the narrow 刂 is on the right.'],
+  '法':['氵','氵 is on the left and 去 is on the right.'],
+  '葡':['艹','艹 is at the top; below it, 勹 wraps around 甫.'],
+  '萄':['艹','艹 is at the top; below it, 勹 wraps around 缶. Compare 葡.'],
+  '牙':['牙','Notice the upper angled shape, the long vertical hook and the lower-left slant.'],
+  '西':['西','Look for a wide enclosing shape below the top horizontal, with two inner strokes.'],
+  '班':['王','Two 王-like sides surround the narrow middle strokes.'],
+  '学':['子','Look for the small top strokes, a covering shape and 子 at the bottom.'],
+  '律':['彳','彳 is on the left and 聿, crossed by several horizontals, is on the right.'],
+  '护':['扌','扌 is on the left and 户 is on the right.'],
+  '士':['士','The top horizontal is longer than the bottom one.'],
+  '司':['口','A hooked outer part covers a short horizontal and 口.'],
+  '机':['木','木 is on the left and 几 is on the right.'],
+  '记':['讠','讠 is on the left and 己 is on the right.'],
+  '者':['日','Look for crossing upper strokes above 日.'],
+  '对':['又','又 is on the left and 寸 is on the right.'],
+  '了':['了','Look for the small upper bend and the long vertical hook.'],
+  '和':['禾','禾 is on the left and 口 is on the right.'],
+  '陈':['阝','阝 is on the left and 东 is on the right.']
+};
+
+// Targeted contexts give high-frequency grammar words additional encounters.
+const contexts = {
+  'l1-core':[
+    ['also','也','Complete “I am very well too.”','我 ___ 很好。',['也','呢','吗','你'],'我也很好。 · Wǒ yě hěn hǎo.','也 adds “also / too”. It comes before 很好 here.'],
+    ['very','很','Complete “I am very well.”','我 ___ 好。',['很','吗','呢','你'],'我很好。 · Wǒ hěn hǎo.','很 means “very” here and comes before 好.'],
+    ['question','吗','Complete “How are you?”','你好 ___ ？',['吗','我','也','很'],'你好吗？ · Nǐ hǎo ma?','吗 forms a yes/no question here.'],
+    ['followup','呢','Complete “And you?”','你 ___ ？',['呢','我','很','也'],'你呢？ · Nǐ ne?','呢 forms the short follow-up “And you?” here.']
+  ],
+  'l1-intro':[
+    ['called','叫','Complete “My name is Libo.”','我 ___ 力波。',['叫','很','也','好'],'我叫力波。 · Wǒ jiào Lìbō.','叫 links 我 to the name 力波.']
+  ],
+  'l2-family':[
+    ['they','他们','Complete “They are all very well.”','___ 都很好。',['他们','他','我','你'],'他们都很好。 · Tāmen dōu hěn hǎo.','们 marks the plural pronoun 他们.'],
+    ['mum','妈','Complete the word for “mum”.','___ 妈',['妈','吗','呢','好'],'妈妈 · māma · mum','妈 has 女 on the left; 吗 has 口.']
+  ],
+  'l2-actions':[
+    ['all','都','Complete “They are ALL very well.”','他们 ___ 很好。',['都','也','不','要'],'他们都很好。 · Tāmen dōu hěn hǎo.','都 means “all / both”. 也 would add “also”, which gives a different meaning.'],
+    ['drink','喝','Complete “We all DRINK coffee.”','我们都 ___ 咖啡。',['喝','要','忙','不'],'我们都喝咖啡。 · Wǒmen dōu hē kāfēi.','喝 means “drink”. 要 would mean “want”.'],
+    ['want','要','Complete “I WANT coffee.”','我 ___ 咖啡。',['要','喝','不','都'],'我要咖啡。 · Wǒ yào kāfēi.','要 means “want” in this sentence.'],
+    ['not','不','Complete “I am NOT busy.”','我 ___ 忙。',['不','很','也','都'],'我不忙。 · Wǒ bù máng.','不 makes the statement negative.'],
+    ['busy','忙','Complete “He is very busy.”','他很 ___ 。',['忙','喝','不','都'],'他很忙。 · Tā hěn máng.','忙 means “busy”. Notice 忄 at the left.'],
+    ['alsoagain','也','Complete “I ALSO want coffee.”','我 ___ 要咖啡。',['也','都','不','很'],'我也要咖啡。 · Wǒ yě yào kāfēi.','也 means “also”. It appears before 要.']
+  ],
+  'l2-drinks':[
+    ['milk','奶','Complete “milk tea”.','___ 茶',['奶','牛','咖','果'],'奶茶 · nǎichá · milk tea','奶 is the first character in 奶茶 and the last character in 牛奶.']
+  ],
+  'l3-questions':[
+    ['she','她','Complete “SHE is Chinese.”','___ 是中国人。',['她','他','我','您'],'她是中国人。 · Tā shì Zhōngguó rén.','女 on the left distinguishes 她 from 他.'],
+    ['which','哪','Complete “Which nationality is she?”','她是 ___ 国人？',['哪','那','这','谁'],'她是哪国人？ · Tā shì nǎ guó rén?','哪 has an extra 口 on the left. 那 means “that”.'],
+    ['who','谁','Complete “Who is that?”','那是 ___ ？',['谁','哪','这','的'],'那是谁？ · Nà shì shéi?','谁 means “who”. Notice 讠 on the left.'],
+    ['de','的','Complete “our teacher” with the association particle.','我们 ___ 老师',['的','是','谁','哪'],'我们的老师 · wǒmen de lǎoshī','的 links 我们 and 老师 here. The slides also allow 我们老师.'],
+    ['polite','您','Complete the POLITE greeting.','___ 好！',['您','你','我','她'],'您好！ · Nín hǎo!','您 has 心 beneath 你.']
+  ],
+  'l3-people':[
+    ['doctor','医生','Complete “I am a doctor.”','我是 ___ 。',['医生','老师','朋友','奶奶'],'我是医生。 · Wǒ shì yīshēng.','医生 is the complete word for “doctor”.'],
+    ['maternal','外婆','Choose the MATERNAL grandmother.','她是我 ___ 。',['外婆','奶奶','朋友','老师'],'她是我外婆。 · Tā shì wǒ wàipó.','外婆 means maternal grandmother. 奶奶 means paternal grandmother.']
+  ],
+  'l3-expressions':[
+    ['and','和','Complete “She and I are both teachers.”','我 ___ 她都是老师。',['和','也','都','不'],'我和她都是老师。 · Wǒ hé tā dōu shì lǎoshī.','和 joins 我 and 她. 都 applies to both people.'],
+    ['both','都','Complete “She and I are BOTH teachers.”','我和她 ___ 是老师。',['都','也','不','很'],'我和她都是老师。 · Wǒ hé tā dōu shì lǎoshī.','都 means “both” for these two people.'],
+    ['negative','不','Complete “I am NOT a teacher.”','我 ___ 是老师。',['不','都','也','很'],'我不是老师。 · Wǒ bú shì lǎoshī.','不 makes 是 negative. Before shì, it is pronounced bú.']
+  ]
+};
+
+// Self-contained game engine. Inlined with the content for the conversation demo.
+const root = document.getElementById('character-detectives');
+const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const unique = values => [...new Set(values)];
+const hanzi = value => [...value].filter(c => /[\u4e00-\u9fff]/.test(c));
+function shuffle(values, key) {
+  const a = values.slice(); let seed = [...key].reduce((n,c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
+  for (let i=a.length-1;i>0;i--) { seed=(Math.imul(seed,1664525)+1013904223)>>>0; const j=seed%(i+1); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+const records = packs.flatMap(p => p.items.map(([word,pinyin,meaning]) => ({word,pinyin,meaning,pack:p.id,lesson:p.lesson,names:p.type==='Names'})));
+const allCharacters = unique(records.flatMap(r => hanzi(r.word)));
+function distractors(answer, pool, key) { return shuffle(unique(pool).filter(x=>x!==answer),key).slice(0,3); }
+function makeQuestion(id, stage, prompt, display, options, answer, extra={}) {
+  return {id,stage,prompt,display,options:shuffle(options,id),answer,targets:[],...extra};
+}
+const similar = {'你':['他','们','您'],'我':['也','找','你'],'吗':['呢','妈','叫'],'也':['他','她','我'],'都':['那','哪','陆'],'喝':['咖','啡','叫'],'很':['律','德','忙'],'他':['她','你','们'],'她':['他','妈','奶'],'那':['哪','都','陆'],'哪':['那','吗','呢'],'上':['下','中','午'],'下':['上','丁','不'],'牛':['午','生','平'],'国':['果','西','雨'],'朋':['明','男','友'],'葡':['萄','茶','英'],'萄':['葡','茶','英'],'士':['生','上','午']};
+function characterChoices(char,p) {
+  const pool=unique(records.filter(r=>r.lesson<=p.lesson).flatMap(r=>hanzi(r.word)));
+  const near=(similar[char]||[]).filter(c=>pool.includes(c)&&c!==char);
+  return [char,...unique([...near,...shuffle(pool,p.id+char)]).filter(c=>c!==char).slice(0,3)];
+}
+function buildPack(p) {
+  const local=records.filter(r=>r.pack===p.id);
+  const cumulative=records.filter(r=>r.lesson<=p.lesson&&r.names===(p.type==='Names'));
+  const choicePool=local.length>=3?local:cumulative;
+  const pool=unique(choicePool.map(r=>r.word));
+  const meaningPool=unique(choicePool.map(r=>r.meaning));
+  const first=[], reverse=[], seen=new Set();
+  local.forEach((r,i)=>{
+    const reading=`${r.word} · ${r.pinyin} · ${r.meaning}`;
+    const note=p.type==='Names'?'Recognise this as a person’s name. Keep the whole name together; the individual characters are not a translation of the name.':`${r.word} means “${r.meaning}” here. ${r.word.length>1?'Remember the whole word or expression as you inspect its characters.':shape[r.word][1]}`;
+    first.push(makeQuestion(`${p.id}-${i}-m`,p.type==='Names'?'Recognise a name':'Link the meaning','Choose the meaning.',r.word,[r.meaning,...distractors(r.meaning,meaningPool,p.id+i+'m')],r.meaning,{reading,note,hint:shape[r.word[0]][1],word:r.word}));
+    for(const char of unique(hanzi(r.word))) {
+      if(seen.has(char))continue; seen.add(char);
+      let prompt,display,description='';
+      if(r.word.length>1) {
+        prompt=`Choose the missing character: “${r.meaning}”.`;
+        const at=r.word.indexOf(char); display=r.word.slice(0,at)+'□'+r.word.slice(at+1);
+      } else {
+        prompt='Which character fits this shape clue?'; display=shape[char][0]===char?'':shape[char][0]; description=shape[char][1];
+      }
+      if(char==='好') {prompt='Which character contains these two parts?';display=['女','+','子'];description='';}
+      first.push(makeQuestion(`${p.id}-${i}-s${char}`,r.word.length>1?'Complete the word':'Look closely',prompt,display,characterChoices(char,p),char,{zh:true,reading,note:`${shape[char][1]} ${r.word.length>1?`Here it is part of ${r.word}, “${r.meaning}”.`:''}`,hint:shape[char][1],description,targets:[char],word:r.word}));
+    }
+    reverse.push(makeQuestion(`${p.id}-${i}-r`,p.type==='Names'?'Recognise a name':'Find the word',`Choose “${r.meaning}”.`,'',[r.word,...distractors(r.word,pool,p.id+i+'r')],r.word,{zh:true,reading,note,hint:shape[r.word[0]][1],word:r.word}));
+  });
+  const context=(contexts[p.id]||[]).map(([id,target,prompt,display,opts,reading,note])=>makeQuestion(`${p.id}-c-${id}`,'Read the message',prompt,display,opts,target,{zh:true,reading,note,hint:shape[hanzi(target)[0]][1],word:target}));
+  // Reverse retrieval follows the first visual and meaning encounters.
+  const result=[...first,...reverse];
+  context.forEach((q,i)=>result.splice(Math.min(5+i*7,result.length),0,q));
+  if(p.id==='l1-core') {const at=result.findIndex(q=>q.targets.includes('好'));result.unshift(...result.splice(at,1));}
+  return result;
+}
+packs.forEach(p=>{p.questions=buildPack(p);p.characters=unique(p.items.flatMap(r=>hanzi(r[0])));});
+const byLesson=[0,1,2].map(lesson=>packs.filter(p=>p.lesson===lesson).flatMap(p=>p.questions));
+const mixed=[];
+for(let i=0;i<Math.max(...byLesson.map(q=>q.length));i++)for(let lesson=0;lesson<3;lesson++)if(byLesson[lesson][i])mixed.push(byLesson[lesson][i]);
+const revision={id:'mixed',lesson:3,title:'All lessons, mixed together',type:'Revision',questions:mixed,items:unique(records.map(r=>r.word)).map(w=>{const r=records.find(r=>r.word===w);return[r.word,r.pinyin,r.meaning];}),characters:allCharacters};
+const allPacks=[...packs,revision], packById=Object.fromEntries(allPacks.map(p=>[p.id,p]));
+const chapters=[{title:'Lesson 1',detail:'Greetings & introductions'},{title:'Lesson 2',detail:'Family, drinks & daily words'},{title:'Lesson 3',detail:'People, countries & jobs'},{title:'Revision',detail:'All three lessons'}];
+const version=3;
+function freshState(){return{v:version,chapter:0,pack:'l1-core',last:['l1-core','l2-family','l3-questions','mixed'],runs:{},coverage:false};}
+function freshRun(){return{at:0,marks:'',pending:[],checked:false,selected:'',hint:false,pause:false};}
+function validRun(r,p){return r&&Number.isInteger(r.at)&&r.at>=0&&r.at<=p.questions.length&&typeof r.marks==='string'&&/^[0-4]*$/.test(r.marks)&&r.marks.length<=p.questions.length&&Array.isArray(r.pending)&&r.pending.length<=3&&r.pending.every(i=>Number.isInteger(i)&&i>=0&&i<p.questions.length)&&typeof r.selected==='string'&&typeof r.checked==='boolean';}
+function restore(value){const s=value?.privateContent?.game;if(!s||s.v!==version||!Number.isInteger(s.chapter)||s.chapter<0||s.chapter>3||!packById[s.pack]||packById[s.pack].lesson!==s.chapter||!s.runs||!Array.isArray(s.last))return freshState();for(const id of Object.keys(s.runs))if(!packById[id]||!validRun(s.runs[id],packById[id]))delete s.runs[id];s.last=chapters.map((_,i)=>packById[s.last[i]]?.lesson===i?s.last[i]:allPacks.find(p=>p.lesson===i).id);return s;}
+let state=restore(window.openai?.widgetState);
+function pack(){return packById[state.pack];}
+function run(){return state.runs[state.pack]||(state.runs[state.pack]=freshRun());}
+function current(p=pack(),r=run()) {const review=r.pending.length>0&&(r.at>=p.questions.length||r.pending[0]+3<=r.at);const index=review?r.pending[0]:r.at;return{q:p.questions[index],index,review};}
+function setMark(r,index,value){r.marks=r.marks.padEnd(index+1,'0').slice(0,index)+value+r.marks.padEnd(index+1,'0').slice(index+1);}
+function stars(r){return[...r.marks].filter(x=>x==='1').length;}
+function seenCharacters(lesson=null){const chars=new Set();for(const [id,r]of Object.entries(state.runs)){const p=packById[id];if(!p||(lesson!==null&&p.lesson!==lesson))continue;[...r.marks].forEach((m,i)=>{if(m!=='0')p.questions[i]?.targets.forEach(c=>chars.add(c));});}return chars;}
+function save(){if(!window.openai?.setWidgetState)return;const p=pack(),r=run();const modelContent={game:'Character Detectives',chapter:chapters[state.chapter].title,set:p.title,correct:stars(r),answered:[...r.marks].filter(m=>m!=='0').length,charactersPractised:seenCharacters().size,totalCharacters:allCharacters.length,missed:unique([...r.marks].flatMap((m,i)=>(m==='2'||m==='4')?[p.questions[i].word]:[]))};try{Promise.resolve(window.openai.setWidgetState({modelContent,privateContent:{game:state}})).catch(()=>{});}catch(_){}}
+function glyphs(value){if(Array.isArray(value))return value.map(v=>v==='+'?'<span class="cd-operator" aria-hidden="true">+</span>':`<span class="cd-glyph" lang="zh-Hans">${esc(v)}</span>`).join('');if(!value)return'';return value.length===1?`<span class="cd-glyph" lang="zh-Hans">${esc(value)}</span>`:`<span class="cd-phrase" lang="zh-Hans">${esc(value)}</span>`;}
+function switchPack(id){const p=packById[id];if(!p)return;state.chapter=p.lesson;state.pack=id;state.last[p.lesson]=id;state.coverage=false;render();save();}
+function coverageView(){const lesson=state.chapter, list=lesson===3?allPacks.filter(p=>p.id!=='mixed'):packs.filter(p=>p.lesson===lesson);const expected=unique(list.flatMap(p=>p.characters));const seen=seenCharacters(lesson===3?null:lesson);return `<div class="cd-coverage"><div class="cd-status"><span>Characters practised in a shape question</span><span>${expected.filter(c=>seen.has(c)).length} / ${expected.length}</span></div><div class="cd-character-list">${expected.map(c=>`<span lang="zh-Hans" class="cd-character${seen.has(c)?' practised':''}" aria-label="${c}: ${seen.has(c)?'practised':'not yet practised'}">${c}${seen.has(c)?'<small aria-hidden="true">✓</small>':''}</span>`).join('')}</div><p class="cd-coverage-note">A tick means you have attempted a shape question for this character.</p>${list.map(p=>`<details><summary>${esc(p.type)} · ${esc(p.title)} · ${p.questions.length} clues</summary><div class="cd-vocab-list">${p.items.map(([w,py,m])=>`<div><span lang="zh-Hans">${w}</span><span>${esc(py)}<br>${esc(m)}</span></div>`).join('')}</div><button type="button" class="cd-button cursor-interaction" data-pack="${p.id}">Practise this set</button></details>`).join('')}</div>`;}
+function finished(p,r){const missed=[...r.marks].filter(m=>m==='3'||m==='4').length;const corrected=[...r.marks].filter(m=>m==='3').length;const remaining=unique([...r.marks].flatMap((m,i)=>m==='4'?[p.questions[i].word]:[]));const siblings=allPacks.filter(p2=>p2.lesson===state.chapter);const next=siblings[siblings.findIndex(p2=>p2.id===p.id)+1];return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">SET COMPLETE</div><h2>${esc(p.title)}, explored.</h2><div class="cd-total">${stars(r)} / ${p.questions.length}</div><div>stars on your first answers</div><p>${missed?`${corrected} of ${missed} missed clues recognised on review.`:'Every clue recognised on the first try.'}</p><div class="cd-wordlist">${unique(p.items.map(i=>i[0])).slice(0,15).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div>${remaining.length?`<div class="cd-hint">Keep practising: <span lang="zh-Hans">${remaining.join('、')}</span></div>`:''}<div class="cd-actions"><button type="button" class="cd-button cursor-interaction" data-restart>Play this set again</button><button type="button" class="cd-button cd-primary cursor-interaction" ${next?`data-pack="${next.id}"`:'data-next-chapter'}>${next?'Next practice set →':state.chapter===3?'Back to Lesson 1':'Next lesson →'}</button></div></section>`;}
+function checkpoint(p,r){const seen=unique(p.questions.slice(0,r.at).flatMap(q=>q.targets));return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">ROUND COMPLETE</div><h2>Ten clues. A moment to pause.</h2><div class="cd-total">${r.at} / ${p.questions.length}</div><div>clues explored in this set</div><div class="cd-wordlist">${seen.slice(-12).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div><p>Your place is kept when you switch sets.</p><button type="button" class="cd-button cd-primary cursor-interaction" data-continue>Next short round →</button></section>`;}
+function questionView(p,r,entry){const {q,index,review}=entry;const correct=q.answer===r.selected;return `<div class="cd-stage">${review?'Try it again':esc(q.stage)} / ${review?'Review':`Round ${Math.floor(r.at/10)+1} · clue ${r.at%10+1}`}</div><h2 id="cd-question">${esc(q.prompt)}</h2>${q.description?`<div class="cd-description">${esc(q.description)}</div>`:''}${q.display.length?`<div class="cd-display" aria-label="Character clue">${glyphs(q.display)}</div>`:''}<div class="cd-options" role="group" aria-labelledby="cd-question">${q.options.map(o=>{const chosen=r.selected===o,right=q.answer===o;const status=r.checked?(right?' correct':chosen?' wrong':''):'';return `<button type="button" data-answer="${esc(o)}" class="cd-option cursor-interaction${q.zh?' zh'+(o.length>2?' long':''):''}${status}" ${q.zh?'lang="zh-Hans"':''} ${r.checked?'disabled':''}>${esc(o)}${r.checked&&right?'<span class="cd-marker" aria-label="Correct answer">✓</span>':r.checked&&chosen?'<span class="cd-marker cd-wrongmark" aria-label="Incorrect answer">×</span>':''}</button>`;}).join('')}</div><div aria-live="polite">${r.checked?`<div class="cd-feedback${correct?'':' missed'}" role="status"><strong>${correct?(review?'Recognised this time.':'You found it. +1 star'):'Look at the difference.'}</strong><div class="cd-reading">${esc(q.reading)}</div><div>${esc(q.note)}</div>${!correct&&!review?'<div class="cd-reading">This clue will return after a short gap.</div>':''}</div>`:r.hint?`<div class="cd-hint"><strong>Shape clue:</strong> ${esc(q.hint)}</div>`:''}</div><div class="cd-actions">${r.checked?`<span class="cd-eyebrow">${review?'Review practice':'First answer earns a star'}</span><button type="button" class="cd-button cd-primary cursor-interaction" data-next>Next clue →</button>`:`<button type="button" class="cd-button cd-plain cursor-interaction" data-hint aria-expanded="${r.hint}">${r.hint?'Hide shape clue':'Need a shape clue?'}</button><span class="cd-eyebrow">Choose one answer</span>`}</div><div class="cd-bottom">Pinyin appears after your answer · Missed clues return for practice</div>`;}
+function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=allPacks.filter(p=>p.lesson===state.chapter);const total=chapterPacks.reduce((n,p)=>n+p.questions.length,0);const expected=unique(chapterPacks.flatMap(p=>p.characters));const seen=seenCharacters(state.chapter===3?null:state.chapter);const attempted=[...r.marks].filter(m=>m!=='0').length;
+  root.innerHTML=`<header class="cd-head"><div class="cd-seal" lang="zh-Hans" aria-hidden="true">字</div><div><h1 class="cd-title">Character Detectives</h1><div class="cd-sub">汉字侦探 · ${allCharacters.length} characters · Lessons 1–3</div></div></header><div class="cd-layout"><nav class="cd-side" aria-label="Choose a chapter"><div class="cd-eyebrow">Your case files</div>${chapters.map((ch,i)=>{const ps=allPacks.filter(p=>p.lesson===i),chars=unique(ps.flatMap(p=>p.characters));return `<button type="button" class="cd-chapter cursor-interaction" data-chapter="${i}" aria-pressed="${state.chapter===i}"><span class="cd-chapter-number">${String(i+1).padStart(2,'0')}</span><span><span class="cd-chapter-name">${ch.title}</span><span class="cd-chapter-detail">${chars.length} characters · ${ps.reduce((n,p)=>n+p.questions.length,0)} clues</span></span></button>`;}).join('')}<div class="cd-note">Short rounds.<br>Every character included.<br><br>Core, bonus and names.<br>No timer.</div></nav><main class="cd-main"><div class="cd-setbar"><label for="cd-pack">Practice set</label><select id="cd-pack" class="cursor-interaction">${chapterPacks.map(p2=>`<option value="${p2.id}" ${p2.id===p.id?'selected':''}>${esc(p2.type)} · ${esc(p2.title)} (${p2.questions.length} clues)</option>`).join('')}</select><button type="button" class="cd-coverage-toggle cursor-interaction" data-coverage aria-expanded="${state.coverage}">${state.coverage?'Back to practice':'Vocabulary & coverage'}</button></div><div class="cd-status"><span>${state.coverage?`${expected.filter(c=>seen.has(c)).length} / ${expected.length} characters practised`:`${attempted} / ${p.questions.length} clues explored`}</span><span>${stars(r)} ${stars(r)===1?'star':'stars'}</span></div><div class="cd-progress" role="progressbar" aria-label="Practice set progress" aria-valuenow="${attempted}" aria-valuemin="0" aria-valuemax="${p.questions.length}"><span style="width:${attempted/p.questions.length*100}%"></span></div>${state.coverage?coverageView():!entry.q?finished(p,r):r.pause?checkpoint(p,r):questionView(p,r,entry)}</main></div>`;
+  root.querySelectorAll('[data-chapter]').forEach(b=>b.onclick=()=>{const i=+b.dataset.chapter;switchPack(state.last[i]);});
+  root.querySelector('#cd-pack').onchange=e=>switchPack(e.target.value);
+  root.querySelectorAll('[data-pack]').forEach(b=>b.onclick=()=>switchPack(b.dataset.pack));
+  root.querySelector('[data-coverage]').onclick=()=>{state.coverage=!state.coverage;render();save();};
+  root.querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{if(r.checked)return;r.selected=b.dataset.answer;r.checked=true;const ok=r.selected===entry.q.answer;setMark(r,entry.index,entry.review?(ok?'3':'4'):(ok?'1':'2'));if(!ok&&!entry.review)r.pending.push(entry.index);render();save();root.querySelector('[data-next]')?.focus({preventScroll:true});});
+  root.querySelector('[data-hint]')?.addEventListener('click',()=>{r.hint=!r.hint;render();save();root.querySelector('[data-hint]')?.focus({preventScroll:true});});
+  root.querySelector('[data-next]')?.addEventListener('click',()=>{if(entry.review)r.pending.shift();else r.at++;r.selected='';r.checked=false;r.hint=false;if(!entry.review&&r.at>0&&r.at%10===0&&r.at<p.questions.length)r.pause=true;render();save();});
+  root.querySelector('[data-continue]')?.addEventListener('click',()=>{r.pause=false;render();save();});
+  root.querySelector('[data-restart]')?.addEventListener('click',()=>{state.runs[p.id]=freshRun();render();save();});
+  root.querySelector('[data-next-chapter]')?.addEventListener('click',()=>switchPack(state.last[(state.chapter+1)%4]));
+}
+window.addEventListener('openai:set_globals',event=>{const incoming=event.detail?.globals?.widgetState;if(incoming?.privateContent?.game?.v===version&&JSON.stringify(incoming.privateContent.game)!==JSON.stringify(state)){state=restore(incoming);render();}});
+render();
+
+})();
+</script>
+</body>
+</html>
