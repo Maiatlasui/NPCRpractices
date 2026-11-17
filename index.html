@@ -1592,10 +1592,12 @@ html>body{padding:0}</style>
 @media(max-width:760px){#character-detectives .cd-setbar{grid-template-columns:minmax(0,1fr)}#character-detectives .cd-coverage-toggle{justify-self:start;padding:4px 0;min-height:32px}}
 
 #character-detectives .cd-option.zh{white-space:nowrap}
+@media(max-width:620px){#character-detectives .cd-side{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:480px){#character-detectives .cd-options.cd-long-words{grid-template-columns:minmax(0,1fr)}}
 </style>
 <script>
 (()=>{
-// Vocabulary and visible-shape clues transcribed from Conversations Lessons 1–3.
+// Vocabulary and visible-shape clues from the course conversations, Lessons 1–5.
 // Shape notes are recognition cues, not claims about character origins.
 const packs = [
   {id:'l1-core',lesson:0,title:'Greetings & replies',type:'Core',items:[
@@ -1674,6 +1676,65 @@ const packs = [
   {id:'l3-names',lesson:2,title:'Teacher Chen',type:'Names',items:[
     ['陈老师','Chén lǎoshī','Teacher Chen'],['丁力波','Dīng Lìbō','Ding Libo'],
     ['力波','Lìbō','Libo'],['林娜','Lín Nà','Lin Na']
+  ]},
+  {id:'l4-intro',lesson:3,title:'Visiting and introducing yourself',type:'Core',items:[
+    ['可以','kěyǐ','may / can'],['进来','jìnlái','to come in'],['请进','qǐng jìn','please come in'],
+    ['请问','qǐngwèn','excuse me (before a question)'],['贵姓','guìxìng','your surname (polite)'],
+    ['姓','xìng','to have the surname'],['叫','jiào','to be called'],['很高兴认识你','hěn gāoxìng rènshi nǐ','nice to meet you']
+  ]},
+  {id:'l4-address',lesson:3,title:'Titles and forms of address',type:'Bonus',items:[
+    ['老师','lǎoshī','teacher'],['先生','xiānsheng','Mr / sir'],['女士','nǚshì','Ms / madam'],
+    ['帅哥','shuàigē','handsome guy (informal)'],['美女','měinǚ','beautiful woman (informal)'],
+    ['您好','nín hǎo','hello (polite)']
+  ]},
+  {id:'l4-study',lesson:3,title:'Languages, study and nationality',type:'Core',items:[
+    ['语言','yǔyán','language'],['学院','xuéyuàn','college / institute'],['语言学院','yǔyán xuéyuàn','language institute'],
+    ['学生','xuésheng','student'],['学习','xuéxí','to study / learn'],['汉语','Hànyǔ','Chinese language'],
+    ['加拿大人','Jiānádà rén','a Canadian person'],['英国人','Yīngguó rén','a British person'],['美国人','Měiguó rén','an American person']
+  ]},
+  {id:'l4-time',lesson:3,title:'How long? Years, months and days',type:'Bonus',items:[
+    ['多久','duōjiǔ','how long?'],['半年','bàn nián','half a year'],['一年','yì nián','one year'],
+    ['两年','liǎng nián','two years'],['三年','sān nián','three years'],['一个月','yí ge yuè','one month'],
+    ['二个月','èr ge yuè','two months (slide form)'],['三个月','sān ge yuè','three months'],
+    ['日','rì','day (as a written unit)'],['一天','yì tiān','one day'],['两天','liǎng tiān','two days'],['三天','sān tiān','three days']
+  ]},
+  {id:'l4-return',lesson:3,title:'Familiar words in new introductions',type:'Review',items:[
+    ['这','zhè','this'],['是','shì','to be / am / is / are'],['不是','bú shì','am / is / are not'],
+    ['的','de','possession / association particle'],['也','yě','also / too'],['他','tā','he / him'],['我','wǒ','I / me'],
+    ['吗','ma','yes/no question particle'],['了','le','sentence particle for a current situation here'],
+    ['我的朋友','wǒ de péngyou','my friend'],['记者','jìzhě','reporter / journalist'],['什么','shénme','what']
+  ]},
+  {id:'l4-names',lesson:3,title:'People in Lesson 4',type:'Names',items:[
+    ['杨老师','Yáng lǎoshī','Teacher Yang'],['林娜','Lín Nà','Lin Na'],['陆雨平','Lù Yǔpíng','Lu Yuping'],
+    ['陆先生','Lù xiānsheng','Mr Lu'],['王医生','Wáng yīshēng','Doctor Wang'],['马大为','Mǎ Dàwéi','Ma Dawei']
+  ]},
+  {id:'l5-phrases',lesson:4,title:'Polite replies and farewells',type:'Core',items:[
+    ['请坐','qǐng zuò','please sit down'],['谢谢','xièxie','thank you'],['对不起','duìbuqǐ','sorry'],
+    ['不知道','bù zhīdào','do not know'],['没关系','méi guānxi','it doesn’t matter'],['再见','zàijiàn','goodbye'],
+    ['不用谢','bú yòng xiè','you’re welcome'],['小姐','xiǎojiě','Miss (form of address in the dialogue)'],
+    ['哦','ò','oh (realising something)'],['好的','hǎo de','okay'],['来晚了','lái wǎn le','arrived late']
+  ]},
+  {id:'l5-where',lesson:4,title:'Asking where someone is',type:'Core',items:[
+    ['在','zài','to be at / be in'],['不在','bú zài','not here / not in'],['哪儿','nǎr','where?'],
+    ['这儿','zhèr','here'],['去','qù','to go'],['请问','qǐngwèn','excuse me (before a question)'],
+    ['请进','qǐng jìn','please come in'],['女学生','nǚ xuésheng','female student']
+  ]},
+  {id:'l5-places',lesson:4,title:'Places on and off campus',type:'Core + bonus',items:[
+    ['宿舍','sùshè','dormitory'],['餐厅','cāntīng','dining hall / restaurant'],['教室','jiàoshì','classroom'],
+    ['车站','chēzhàn','station'],['机场','jīchǎng','airport'],['学校','xuéxiào','school'],['饭堂','fàntáng','canteen']
+  ]},
+  {id:'l5-rooms',lesson:4,title:'Floors and room numbers',type:'Core',items:[
+    ['二层','èr céng','second floor'],['二〇四号','èr líng sì hào','room 204 (as written in the dialogue)'],
+    ['〇','líng','zero (round digit form)'],['零','líng','zero (full character form)'],
+    ['号','hào','number (after a room number)']
+  ]},
+  {id:'l5-return',lesson:4,title:'Familiar words in new exchanges',type:'Review',items:[
+    ['你','nǐ','you'],['我','wǒ','I / me'],['她','tā','she / her'],['我们','wǒmen','we / us'],
+    ['你好','nǐ hǎo','hello'],['是','shì','to be / am / is / are'],['吗','ma','yes/no question particle']
+  ]},
+  {id:'l5-names',lesson:4,title:'People in Lesson 5',type:'Names',items:[
+    ['王小云','Wáng Xiǎoyún','Wang Xiaoyun'],['马大为','Mǎ Dàwéi','Ma Dawei'],
+    ['大为','Dàwéi','Dawei'],['宋华','Sòng Huá','Song Hua']
   ]}
 ];
 
@@ -1775,7 +1836,76 @@ const shape = {
   '对':['又','又 is on the left and 寸 is on the right.'],
   '了':['了','Look for the small upper bend and the long vertical hook.'],
   '和':['禾','禾 is on the left and 口 is on the right.'],
-  '陈':['阝','阝 is on the left and 东 is on the right.']
+  '陈':['阝','阝 is on the left and 东 is on the right.'],
+  '杨':['木','木 sits on the left of the hooked right part.'],
+  '以':['人','The right side looks like 人. Look for a short dot to its left.'],
+  '进':['辶','A long 辶 stroke sweeps under 井.'],
+  '来':['来','Look for a tall central vertical, with short marks above and spreading strokes below.'],
+  '请':['讠','讠 is on the left and 青 is on the right.'],
+  '问':['门','门 surrounds a small 口. Compare 们, with 亻 outside 门.'],
+  '贵':['贝','贝 sits at the bottom, below a horizontal stroke.'],
+  '姓':['女','女 is on the left and 生 is on the right.'],
+  '先':['儿','The bottom has the two legs of 儿.'],
+  '女':['女','Notice the crossed strokes and the long horizontal.'],
+  '王':['王','A vertical joins three horizontal strokes. Compare 主, which has an extra dot on top.'],
+  '帅':['巾','巾 is on the right, without the extra upper horizontal of 师.'],
+  '言':['口','Look for stacked horizontal strokes with 口 at the bottom.'],
+  '院':['阝','The left side is 阝. On the right, a roof sits over 元.'],
+  '马':['马','Notice the hooked outline and the long horizontal stroke inside the bottom.'],
+  '为':['为','Look for two dots around the hooked and slanting strokes.'],
+  '加':['力','力 is on the left and 口 is on the right, as in the right part of 咖.'],
+  '拿':['手','合 sits above 手. Look for the lower hooked vertical crossing horizontals.'],
+  '习':['习','A hooked outline surrounds two short strokes.'],
+  '汉':['氵','氵 is on the left and 又 is on the right.'],
+  '多':['夕','Two 夕 shapes are stacked vertically.'],
+  '久':['久','Look for a short slant at the top and the long right-falling stroke below.'],
+  '半':['半','A vertical crosses two horizontals beneath two short upper strokes.'],
+  '年':['年','Look for a short left slant above several horizontals and a long bottom vertical.'],
+  '一':['一','A single horizontal stroke.'],
+  '两':['两','Look for the outer frame with two pairs of slanting strokes inside.'],
+  '三':['三','Three horizontal strokes, with the longest at the bottom.'],
+  '月':['月','A tall, narrow outline holds two short horizontals; the right side ends in a hook.'],
+  '个':['人','A 人-shaped top sits above one vertical line.'],
+  '二':['二','Two horizontal strokes, with the longer one at the bottom.'],
+  '日':['日','A rectangular outline has one horizontal stroke inside.'],
+  '天':['大','Look for 大 with an extra horizontal stroke above it.'],
+  '小':['小','A central hooked vertical sits between two shorter strokes.'],
+  '云':['厶','Two horizontal strokes sit above 厶.'],
+  '宿':['宀','The roof 宀 covers a narrow 亻 and 百.'],
+  '舍':['口','A 人-shaped roof sits over the middle strokes and 口.'],
+  '坐':['土','Two 人-like shapes sit above the long baseline of 土.'],
+  '谢':['讠','Look for 讠 on the left, 身 in the middle and 寸 on the right.'],
+  '在':['土','Look for 土 beneath the crossing upper strokes, alongside the vertical on the left.'],
+  '儿':['儿','Two legs sit side by side. The right leg bends into a hook.'],
+  '起':['走','走 extends along the bottom, with 己 on the right.'],
+  '知':['口','矢 is on the left and 口 is on the right.'],
+  '道':['辶','辶 sweeps under 首, which contains a 目 shape.'],
+  '没':['氵','氵 is on the left. The bottom of the right part is 又.'],
+  '关':['关','Two small strokes sit above two horizontals and spreading lower strokes.'],
+  '系':['糸','Look for the short slant at the top and the small spreading strokes below.'],
+  '再':['再','The vertical in the centre crosses horizontal strokes inside a hooked frame.'],
+  '见':['儿','An enclosing upper frame sits above two spreading lower strokes, one hooked.'],
+  '去':['厶','土 sits above the small 厶 shape.'],
+  '教':['攵','孝 is on the left, with 子 below the crossing strokes, and 攵 is on the right.'],
+  '室':['宀','The roof 宀 covers 至, with a 土 shape at the bottom.'],
+  '哦':['口','口 is on the left and 我 is on the right.'],
+  '车':['车','Look for the long vertical running through the lower horizontal.'],
+  '站':['立','立 is on the left and 占 is on the right, with 口 at the bottom.'],
+  '场':['土','土 is on the left, beside the hooked right part with two slanting strokes.'],
+  '校':['木','木 is on the left and 交 is on the right.'],
+  '饭':['饣','饣 is on the left and 反 is on the right.'],
+  '堂':['土','Look for 土 beneath a 口 shape and the upper covering strokes.'],
+  '姐':['女','女 is on the left and 且, with stacked horizontals, is on the right.'],
+  '餐':['食','食 forms the lower half beneath the two upper parts.'],
+  '厅':['厂','厂 covers 丁, a horizontal joined to a hooked vertical.'],
+  '层':['尸','The upper 尸 part covers 云.'],
+  '〇':['〇','One round outline, with no marks inside.'],
+  '零':['雨','雨 covers 令. Look for the small rain marks at the top.'],
+  '四':['四','Two bent strokes sit inside a wide enclosing square.'],
+  '号':['口','The small 口 sits above a long horizontal and a hooked lower stroke.'],
+  '用':['用','The central vertical runs through the horizontals inside a tall hooked frame.'],
+  '宋':['宀','The roof 宀 covers 木. Compare 字, which has 子 below its roof.'],
+  '华':['十','化 is at the top and 十 is at the bottom.']
 };
 
 // Targeted contexts give high-frequency grammar words additional encounters.
@@ -1819,6 +1949,34 @@ const contexts = {
     ['and','和','Complete “She and I are both teachers.”','我 ___ 她都是老师。',['和','也','都','不'],'我和她都是老师。 · Wǒ hé tā dōu shì lǎoshī.','和 joins 我 and 她. 都 applies to both people.'],
     ['both','都','Complete “She and I are BOTH teachers.”','我和她 ___ 是老师。',['都','也','不','很'],'我和她都是老师。 · Wǒ hé tā dōu shì lǎoshī.','都 means “both” for these two people.'],
     ['negative','不','Complete “I am NOT a teacher.”','我 ___ 是老师。',['不','都','也','很'],'我不是老师。 · Wǒ bú shì lǎoshī.','不 makes 是 negative. Before shì, it is pronounced bú.']
+  ],
+  'l4-intro':[
+    ['surname','姓','Complete “My surname is Lu.”','我 ___ 陆。',['姓','叫','进','是'],'我姓陆。 · Wǒ xìng Lù.','姓 goes before the surname; 叫 can introduce a full name.'],
+    ['enter','进来','Complete “May I come in?”','可以 ___ 吗？',['进来','认识','学习','请问'],'可以进来吗？ · Kěyǐ jìnlái ma?','进来 means “come in”. Look for 辶 in 进.'],
+    ['polite','贵姓','Complete the polite question “What is your surname?”','请问，您 ___ ？',['贵姓','姓陆','进来','您好'],'请问，您贵姓？ · Qǐngwèn, nín guìxìng?','贵姓 is a polite way to ask for someone’s surname.']
+  ],
+  'l4-study':[
+    ['study','学习','Complete “I study Chinese.”','我 ___ 汉语。',['学习','认识','进来','叫'],'我学习汉语。 · Wǒ xuéxí Hànyǔ.','学习 means “study”; 汉语 names the language.']
+  ],
+  'l4-time':[
+    ['duration','多久','Complete “How long have you been studying Chinese?”','你学习汉语 ___ 了？',['多久','半年','两天','一年'],'你学习汉语多久了？ · Nǐ xuéxí Hànyǔ duōjiǔ le?','多久 asks for a length of time.'],
+    ['half','半年','Complete “I’ve been studying Chinese for half a year.”','我学习汉语 ___ 了。',['半年','一年','两年','三天'],'我学习汉语半年了。 · Wǒ xuéxí Hànyǔ bàn nián le.','半 means “half” in 半年.']
+  ],
+  'l5-phrases':[
+    ['sorry','对不起','Choose what Dawei says when he arrives late.','___，我来晚了。',['对不起','没关系','再见','不用谢'],'对不起，我来晚了。 · Duìbuqǐ, wǒ lái wǎn le.','对不起 is the apology; 没关系 is a possible reply.'],
+    ['reply','不用谢','Choose the reply “You’re welcome.”','谢谢！ → ___',['不用谢','对不起','再见','不知道'],'不用谢。 · Bú yòng xiè.','不用谢 is a reply to 谢谢. The last character is the same as in 谢谢.']
+  ],
+  'l5-where':[
+    ['where','哪儿','Complete “Where is she?”','她在 ___ ？',['哪儿','这儿','宿舍','教室'],'她在哪儿？ · Tā zài nǎr?','哪儿 asks “where?”; 这儿 means “here”.'],
+    ['absent','不在','Complete “She isn’t here.”','她 ___ 。',['不在','在','去','来晚了'],'她不在。 · Tā bú zài.','不 negates 在 in this exchange.'],
+    ['here','这儿','Complete “Dawei, we’re here.”','大为，我们在 ___ 。',['这儿','哪儿','学校','餐厅'],'大为，我们在这儿。 · Dàwéi, wǒmen zài zhèr.','这儿 means “here”. 这 starts with a sweeping 辶 below 文.']
+  ],
+  'l5-places':[
+    ['classroom','教室','Complete “She has gone to the classroom.”','她去 ___ 了。',['教室','宿舍','学校','餐厅'],'她去教室了。 · Tā qù jiàoshì le.','教室 means “classroom”. 室 has a roof at the top.'],
+    ['dining','餐厅','Complete “Excuse me, where is the dining hall?”','请问 ___ 在哪儿？',['餐厅','教室','车站','机场'],'请问餐厅在哪儿？ · Qǐngwèn cāntīng zài nǎr?','餐厅 is the dining hall in this conversation.']
+  ],
+  'l5-rooms':[
+    ['floor','二层','Complete “It’s on the second floor, in room 204.”','在 ___ 二〇四号。',['二层','餐厅','宿舍','学校'],'在二层二〇四号。 · Zài èr céng èr líng sì hào.','二层 gives the floor; 二〇四号 gives the room number.']
   ]
 };
 
@@ -1826,7 +1984,7 @@ const contexts = {
 const root = document.getElementById('character-detectives');
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const unique = values => [...new Set(values)];
-const hanzi = value => [...value].filter(c => /[\u4e00-\u9fff]/.test(c));
+const hanzi = value => [...value].filter(c => /[\u3007\u4e00-\u9fff]/.test(c));
 function shuffle(values, key) {
   const a = values.slice(); let seed = [...key].reduce((n,c) => (n * 31 + c.charCodeAt(0)) >>> 0, 7);
   for (let i=a.length-1;i>0;i--) { seed=(Math.imul(seed,1664525)+1013904223)>>>0; const j=seed%(i+1); [a[i],a[j]]=[a[j],a[i]]; }
@@ -1877,17 +2035,33 @@ function buildPack(p) {
   return result;
 }
 packs.forEach(p=>{p.questions=buildPack(p);p.characters=unique(p.items.flatMap(r=>hanzi(r[0])));});
-const byLesson=[0,1,2].map(lesson=>packs.filter(p=>p.lesson===lesson).flatMap(p=>p.questions));
-const mixed=[];
-for(let i=0;i<Math.max(...byLesson.map(q=>q.length));i++)for(let lesson=0;lesson<3;lesson++)if(byLesson[lesson][i])mixed.push(byLesson[lesson][i]);
-const revision={id:'mixed',lesson:3,title:'All lessons, mixed together',type:'Revision',questions:mixed,items:unique(records.map(r=>r.word)).map(w=>{const r=records.find(r=>r.word===w);return[r.word,r.pinyin,r.meaning];}),characters:allCharacters};
-const allPacks=[...packs,revision], packById=Object.fromEntries(allPacks.map(p=>[p.id,p]));
-const chapters=[{title:'Lesson 1',detail:'Greetings & introductions'},{title:'Lesson 2',detail:'Family, drinks & daily words'},{title:'Lesson 3',detail:'People, countries & jobs'},{title:'Revision',detail:'All three lessons'}];
+const lessonDetails=['Greetings & introductions','Family, drinks & daily words','People, countries & jobs','Introductions, study & time','Places, directions & polite replies'];
+const revisionChapter=lessonDetails.length;
+const chapters=[...lessonDetails.map((detail,i)=>({title:`Lesson ${i+1}`,detail})),{title:'Revision',detail:'Mixed practice'}];
+function makeRevision(id,title,lessonPacks) {
+  const lists=lessonDetails.map((_,i)=>lessonPacks.filter(p=>p.lesson===i).flatMap(p=>p.questions));
+  const questions=[];
+  for(let i=0;i<Math.max(...lists.map(q=>q.length));i++)for(const list of lists)if(list[i])questions.push(list[i]);
+  const items=[...new Map(lessonPacks.flatMap(p=>p.items).map(item=>[item[0],item])).values()];
+  return {id,lesson:revisionChapter,title,type:'Revision',questions,items,characters:unique(items.flatMap(item=>hanzi(item[0])))};
+}
+// Keep the original mixed sequence under its existing ID so saved positions still match.
+const allPacks=[...packs,makeRevision('mixed-all','Lessons 1–5',packs),makeRevision('mixed','Lessons 1–3',packs.filter(p=>p.lesson<3))];
+const packById=Object.fromEntries(allPacks.map(p=>[p.id,p]));
 const version=3;
-function freshState(){return{v:version,chapter:0,pack:'l1-core',last:['l1-core','l2-family','l3-questions','mixed'],runs:{},coverage:false};}
+const defaultPack=chapter=>allPacks.find(p=>p.lesson===chapter).id;
+function freshState(){return{v:version,chapter:0,pack:defaultPack(0),last:chapters.map((_,i)=>defaultPack(i)),runs:{},coverage:false};}
 function freshRun(){return{at:0,marks:'',pending:[],checked:false,selected:'',hint:false,pause:false};}
 function validRun(r,p){return r&&Number.isInteger(r.at)&&r.at>=0&&r.at<=p.questions.length&&typeof r.marks==='string'&&/^[0-4]*$/.test(r.marks)&&r.marks.length<=p.questions.length&&Array.isArray(r.pending)&&r.pending.length<=3&&r.pending.every(i=>Number.isInteger(i)&&i>=0&&i<p.questions.length)&&typeof r.selected==='string'&&typeof r.checked==='boolean';}
-function restore(value){const s=value?.privateContent?.game;if(!s||s.v!==version||!Number.isInteger(s.chapter)||s.chapter<0||s.chapter>3||!packById[s.pack]||packById[s.pack].lesson!==s.chapter||!s.runs||!Array.isArray(s.last))return freshState();for(const id of Object.keys(s.runs))if(!packById[id]||!validRun(s.runs[id],packById[id]))delete s.runs[id];s.last=chapters.map((_,i)=>packById[s.last[i]]?.lesson===i?s.last[i]:allPacks.find(p=>p.lesson===i).id);return s;}
+function restore(value){
+  const s=value?.privateContent?.game;
+  if(!s||s.v!==version||!Object.hasOwn(packById,s.pack)||!s.runs||!Array.isArray(s.last))return freshState();
+  const chapter=packById[s.pack].lesson;
+  const last=chapters.map((_,i)=>packById[s.last[i]]?.lesson===i?s.last[i]:defaultPack(i));
+  last[chapter]=s.pack;
+  const runs=Object.fromEntries(Object.entries(s.runs).filter(([id,r])=>Object.hasOwn(packById,id)&&validRun(r,packById[id])));
+  return {...s,chapter,last,runs};
+}
 let state=restore(window.openai?.widgetState);
 function pack(){return packById[state.pack];}
 function run(){return state.runs[state.pack]||(state.runs[state.pack]=freshRun());}
@@ -1898,12 +2072,12 @@ function seenCharacters(lesson=null){const chars=new Set();for(const [id,r]of Ob
 function save(){if(!window.openai?.setWidgetState)return;const p=pack(),r=run();const modelContent={game:'Character Detectives',chapter:chapters[state.chapter].title,set:p.title,correct:stars(r),answered:[...r.marks].filter(m=>m!=='0').length,charactersPractised:seenCharacters().size,totalCharacters:allCharacters.length,missed:unique([...r.marks].flatMap((m,i)=>(m==='2'||m==='4')?[p.questions[i].word]:[]))};try{Promise.resolve(window.openai.setWidgetState({modelContent,privateContent:{game:state}})).catch(()=>{});}catch(_){}}
 function glyphs(value){if(Array.isArray(value))return value.map(v=>v==='+'?'<span class="cd-operator" aria-hidden="true">+</span>':`<span class="cd-glyph" lang="zh-Hans">${esc(v)}</span>`).join('');if(!value)return'';return value.length===1?`<span class="cd-glyph" lang="zh-Hans">${esc(value)}</span>`:`<span class="cd-phrase" lang="zh-Hans">${esc(value)}</span>`;}
 function switchPack(id){const p=packById[id];if(!p)return;state.chapter=p.lesson;state.pack=id;state.last[p.lesson]=id;state.coverage=false;render();save();}
-function coverageView(){const lesson=state.chapter, list=lesson===3?allPacks.filter(p=>p.id!=='mixed'):packs.filter(p=>p.lesson===lesson);const expected=unique(list.flatMap(p=>p.characters));const seen=seenCharacters(lesson===3?null:lesson);return `<div class="cd-coverage"><div class="cd-status"><span>Characters practised in a shape question</span><span>${expected.filter(c=>seen.has(c)).length} / ${expected.length}</span></div><div class="cd-character-list">${expected.map(c=>`<span lang="zh-Hans" class="cd-character${seen.has(c)?' practised':''}" aria-label="${c}: ${seen.has(c)?'practised':'not yet practised'}">${c}${seen.has(c)?'<small aria-hidden="true">✓</small>':''}</span>`).join('')}</div><p class="cd-coverage-note">A tick means you have attempted a shape question for this character.</p>${list.map(p=>`<details><summary>${esc(p.type)} · ${esc(p.title)} · ${p.questions.length} clues</summary><div class="cd-vocab-list">${p.items.map(([w,py,m])=>`<div><span lang="zh-Hans">${w}</span><span>${esc(py)}<br>${esc(m)}</span></div>`).join('')}</div><button type="button" class="cd-button cursor-interaction" data-pack="${p.id}">Practise this set</button></details>`).join('')}</div>`;}
-function finished(p,r){const missed=[...r.marks].filter(m=>m==='3'||m==='4').length;const corrected=[...r.marks].filter(m=>m==='3').length;const remaining=unique([...r.marks].flatMap((m,i)=>m==='4'?[p.questions[i].word]:[]));const siblings=allPacks.filter(p2=>p2.lesson===state.chapter);const next=siblings[siblings.findIndex(p2=>p2.id===p.id)+1];return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">SET COMPLETE</div><h2>${esc(p.title)}, explored.</h2><div class="cd-total">${stars(r)} / ${p.questions.length}</div><div>stars on your first answers</div><p>${missed?`${corrected} of ${missed} missed clues recognised on review.`:'Every clue recognised on the first try.'}</p><div class="cd-wordlist">${unique(p.items.map(i=>i[0])).slice(0,15).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div>${remaining.length?`<div class="cd-hint">Keep practising: <span lang="zh-Hans">${remaining.join('、')}</span></div>`:''}<div class="cd-actions"><button type="button" class="cd-button cursor-interaction" data-restart>Play this set again</button><button type="button" class="cd-button cd-primary cursor-interaction" ${next?`data-pack="${next.id}"`:'data-next-chapter'}>${next?'Next practice set →':state.chapter===3?'Back to Lesson 1':'Next lesson →'}</button></div></section>`;}
+function coverageView(){const lesson=state.chapter, list=lesson===revisionChapter?packs.filter(p=>pack().id!=='mixed'||p.lesson<3):packs.filter(p=>p.lesson===lesson);const expected=unique(list.flatMap(p=>p.characters));const seen=seenCharacters(lesson===revisionChapter?null:lesson);return `<div class="cd-coverage"><div class="cd-status"><span>Characters practised in a shape question</span><span>${expected.filter(c=>seen.has(c)).length} / ${expected.length}</span></div><div class="cd-character-list">${expected.map(c=>`<span lang="zh-Hans" class="cd-character${seen.has(c)?' practised':''}" aria-label="${c}: ${seen.has(c)?'practised':'not yet practised'}">${c}${seen.has(c)?'<small aria-hidden="true">✓</small>':''}</span>`).join('')}</div><p class="cd-coverage-note">A tick means you have attempted a shape question for this character.</p>${list.map(p=>`<details><summary>${esc(p.type)} · ${esc(p.title)} · ${p.questions.length} clues</summary><div class="cd-vocab-list">${p.items.map(([w,py,m])=>`<div><span lang="zh-Hans">${w}</span><span>${esc(py)}<br>${esc(m)}</span></div>`).join('')}</div><button type="button" class="cd-button cursor-interaction" data-pack="${p.id}">Practise this set</button></details>`).join('')}</div>`;}
+function finished(p,r){const missed=[...r.marks].filter(m=>m==='3'||m==='4').length;const corrected=[...r.marks].filter(m=>m==='3').length;const remaining=unique([...r.marks].flatMap((m,i)=>m==='4'?[p.questions[i].word]:[]));const siblings=allPacks.filter(p2=>p2.lesson===state.chapter);const next=siblings[siblings.findIndex(p2=>p2.id===p.id)+1];return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">SET COMPLETE</div><h2>${esc(p.title)}, explored.</h2><div class="cd-total">${stars(r)} / ${p.questions.length}</div><div>stars on your first answers</div><p>${missed?`${corrected} of ${missed} missed clues recognised on review.`:'Every clue recognised on the first try.'}</p><div class="cd-wordlist">${unique(p.items.map(i=>i[0])).slice(0,15).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div>${remaining.length?`<div class="cd-hint">Keep practising: <span lang="zh-Hans">${remaining.join('、')}</span></div>`:''}<div class="cd-actions"><button type="button" class="cd-button cursor-interaction" data-restart>Play this set again</button><button type="button" class="cd-button cd-primary cursor-interaction" ${next?`data-pack="${next.id}"`:'data-next-chapter'}>${next?'Next practice set →':state.chapter===revisionChapter?'Back to Lesson 1':'Next lesson →'}</button></div></section>`;}
 function checkpoint(p,r){const seen=unique(p.questions.slice(0,r.at).flatMap(q=>q.targets));return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">ROUND COMPLETE</div><h2>Ten clues. A moment to pause.</h2><div class="cd-total">${r.at} / ${p.questions.length}</div><div>clues explored in this set</div><div class="cd-wordlist">${seen.slice(-12).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div><p>Your place is kept when you switch sets.</p><button type="button" class="cd-button cd-primary cursor-interaction" data-continue>Next short round →</button></section>`;}
-function questionView(p,r,entry){const {q,index,review}=entry;const correct=q.answer===r.selected;return `<div class="cd-stage">${review?'Try it again':esc(q.stage)} / ${review?'Review':`Round ${Math.floor(r.at/10)+1} · clue ${r.at%10+1}`}</div><h2 id="cd-question">${esc(q.prompt)}</h2>${q.description?`<div class="cd-description">${esc(q.description)}</div>`:''}${q.display.length?`<div class="cd-display" aria-label="Character clue">${glyphs(q.display)}</div>`:''}<div class="cd-options" role="group" aria-labelledby="cd-question">${q.options.map(o=>{const chosen=r.selected===o,right=q.answer===o;const status=r.checked?(right?' correct':chosen?' wrong':''):'';return `<button type="button" data-answer="${esc(o)}" class="cd-option cursor-interaction${q.zh?' zh'+(o.length>2?' long':''):''}${status}" ${q.zh?'lang="zh-Hans"':''} ${r.checked?'disabled':''}>${esc(o)}${r.checked&&right?'<span class="cd-marker" aria-label="Correct answer">✓</span>':r.checked&&chosen?'<span class="cd-marker cd-wrongmark" aria-label="Incorrect answer">×</span>':''}</button>`;}).join('')}</div><div aria-live="polite">${r.checked?`<div class="cd-feedback${correct?'':' missed'}" role="status"><strong>${correct?(review?'Recognised this time.':'You found it. +1 star'):'Look at the difference.'}</strong><div class="cd-reading">${esc(q.reading)}</div><div>${esc(q.note)}</div>${!correct&&!review?'<div class="cd-reading">This clue will return after a short gap.</div>':''}</div>`:r.hint?`<div class="cd-hint"><strong>Shape clue:</strong> ${esc(q.hint)}</div>`:''}</div><div class="cd-actions">${r.checked?`<span class="cd-eyebrow">${review?'Review practice':'First answer earns a star'}</span><button type="button" class="cd-button cd-primary cursor-interaction" data-next>Next clue →</button>`:`<button type="button" class="cd-button cd-plain cursor-interaction" data-hint aria-expanded="${r.hint}">${r.hint?'Hide shape clue':'Need a shape clue?'}</button><span class="cd-eyebrow">Choose one answer</span>`}</div><div class="cd-bottom">Pinyin appears after your answer · Missed clues return for practice</div>`;}
-function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=allPacks.filter(p=>p.lesson===state.chapter);const total=chapterPacks.reduce((n,p)=>n+p.questions.length,0);const expected=unique(chapterPacks.flatMap(p=>p.characters));const seen=seenCharacters(state.chapter===3?null:state.chapter);const attempted=[...r.marks].filter(m=>m!=='0').length;
-  root.innerHTML=`<header class="cd-head"><div class="cd-seal" lang="zh-Hans" aria-hidden="true">字</div><div><h1 class="cd-title">Character Detectives</h1><div class="cd-sub">汉字侦探 · ${allCharacters.length} characters · Lessons 1–3</div></div></header><div class="cd-layout"><nav class="cd-side" aria-label="Choose a chapter"><div class="cd-eyebrow">Your case files</div>${chapters.map((ch,i)=>{const ps=allPacks.filter(p=>p.lesson===i),chars=unique(ps.flatMap(p=>p.characters));return `<button type="button" class="cd-chapter cursor-interaction" data-chapter="${i}" aria-pressed="${state.chapter===i}"><span class="cd-chapter-number">${String(i+1).padStart(2,'0')}</span><span><span class="cd-chapter-name">${ch.title}</span><span class="cd-chapter-detail">${chars.length} characters · ${ps.reduce((n,p)=>n+p.questions.length,0)} clues</span></span></button>`;}).join('')}<div class="cd-note">Short rounds.<br>Every character included.<br><br>Core, bonus and names.<br>No timer.</div></nav><main class="cd-main"><div class="cd-setbar"><label for="cd-pack">Practice set</label><select id="cd-pack" class="cursor-interaction">${chapterPacks.map(p2=>`<option value="${p2.id}" ${p2.id===p.id?'selected':''}>${esc(p2.type)} · ${esc(p2.title)} (${p2.questions.length} clues)</option>`).join('')}</select><button type="button" class="cd-coverage-toggle cursor-interaction" data-coverage aria-expanded="${state.coverage}">${state.coverage?'Back to practice':'Vocabulary & coverage'}</button></div><div class="cd-status"><span>${state.coverage?`${expected.filter(c=>seen.has(c)).length} / ${expected.length} characters practised`:`${attempted} / ${p.questions.length} clues explored`}</span><span>${stars(r)} ${stars(r)===1?'star':'stars'}</span></div><div class="cd-progress" role="progressbar" aria-label="Practice set progress" aria-valuenow="${attempted}" aria-valuemin="0" aria-valuemax="${p.questions.length}"><span style="width:${attempted/p.questions.length*100}%"></span></div>${state.coverage?coverageView():!entry.q?finished(p,r):r.pause?checkpoint(p,r):questionView(p,r,entry)}</main></div>`;
+function questionView(p,r,entry){const {q,index,review}=entry;const correct=q.answer===r.selected;return `<div class="cd-stage">${review?'Try it again':esc(q.stage)} / ${review?'Review':`Round ${Math.floor(r.at/10)+1} · clue ${r.at%10+1}`}</div><h2 id="cd-question">${esc(q.prompt)}</h2>${q.description?`<div class="cd-description">${esc(q.description)}</div>`:''}${q.display.length?`<div class="cd-display" aria-label="Character clue">${glyphs(q.display)}</div>`:''}<div class="cd-options${q.zh&&q.options.some(o=>o.length>4)?' cd-long-words':''}" role="group" aria-labelledby="cd-question">${q.options.map(o=>{const chosen=r.selected===o,right=q.answer===o;const status=r.checked?(right?' correct':chosen?' wrong':''):'';return `<button type="button" data-answer="${esc(o)}" class="cd-option cursor-interaction${q.zh?' zh'+(o.length>2?' long':''):''}${status}" ${q.zh?'lang="zh-Hans"':''} ${r.checked?'disabled':''}>${esc(o)}${r.checked&&right?'<span class="cd-marker" aria-label="Correct answer">✓</span>':r.checked&&chosen?'<span class="cd-marker cd-wrongmark" aria-label="Incorrect answer">×</span>':''}</button>`;}).join('')}</div><div aria-live="polite">${r.checked?`<div class="cd-feedback${correct?'':' missed'}" role="status"><strong>${correct?(review?'Recognised this time.':'You found it. +1 star'):'Look at the difference.'}</strong><div class="cd-reading">${esc(q.reading)}</div><div>${esc(q.note)}</div>${!correct&&!review?'<div class="cd-reading">This clue will return after a short gap.</div>':''}</div>`:r.hint?`<div class="cd-hint"><strong>Shape clue:</strong> ${esc(q.hint)}</div>`:''}</div><div class="cd-actions">${r.checked?`<span class="cd-eyebrow">${review?'Review practice':'First answer earns a star'}</span><button type="button" class="cd-button cd-primary cursor-interaction" data-next>Next clue →</button>`:`<button type="button" class="cd-button cd-plain cursor-interaction" data-hint aria-expanded="${r.hint}">${r.hint?'Hide shape clue':'Need a shape clue?'}</button><span class="cd-eyebrow">Choose one answer</span>`}</div><div class="cd-bottom">Pinyin appears after your answer · Missed clues return for practice</div>`;}
+function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=allPacks.filter(p=>p.lesson===state.chapter);const expected=state.chapter===revisionChapter?p.characters:unique(chapterPacks.flatMap(p=>p.characters));const seen=seenCharacters(state.chapter===revisionChapter?null:state.chapter);const attempted=[...r.marks].filter(m=>m!=='0').length;
+  root.innerHTML=`<header class="cd-head"><div class="cd-seal" lang="zh-Hans" aria-hidden="true">字</div><div><h1 class="cd-title">Character Detectives</h1><div class="cd-sub">汉字侦探 · ${allCharacters.length} characters · Lessons 1–${revisionChapter}</div></div></header><div class="cd-layout"><nav class="cd-side" aria-label="Choose a chapter"><div class="cd-eyebrow">Your case files</div>${chapters.map((ch,i)=>{const ps=i===revisionChapter?[packById['mixed-all']]:allPacks.filter(p=>p.lesson===i),chars=unique(ps.flatMap(p=>p.characters));return `<button type="button" class="cd-chapter cursor-interaction" data-chapter="${i}" aria-pressed="${state.chapter===i}"><span class="cd-chapter-number">${String(i+1).padStart(2,'0')}</span><span><span class="cd-chapter-name">${ch.title}</span><span class="cd-chapter-detail">${chars.length} characters · ${ps.reduce((n,p)=>n+p.questions.length,0)} clues</span></span></button>`;}).join('')}<div class="cd-note">Short rounds.<br>Every character included.<br><br>Core, bonus and names.<br>No timer.</div></nav><main class="cd-main"><div class="cd-setbar"><label for="cd-pack">Practice set</label><select id="cd-pack" class="cursor-interaction">${chapterPacks.map(p2=>`<option value="${p2.id}" ${p2.id===p.id?'selected':''}>${esc(p2.type)} · ${esc(p2.title)} (${p2.questions.length} clues)</option>`).join('')}</select><button type="button" class="cd-coverage-toggle cursor-interaction" data-coverage aria-expanded="${state.coverage}">${state.coverage?'Back to practice':'Vocabulary & coverage'}</button></div><div class="cd-status"><span>${state.coverage?`${expected.filter(c=>seen.has(c)).length} / ${expected.length} characters practised`:`${attempted} / ${p.questions.length} clues explored`}</span><span>${stars(r)} ${stars(r)===1?'star':'stars'}</span></div><div class="cd-progress" role="progressbar" aria-label="Practice set progress" aria-valuenow="${attempted}" aria-valuemin="0" aria-valuemax="${p.questions.length}"><span style="width:${attempted/p.questions.length*100}%"></span></div>${state.coverage?coverageView():!entry.q?finished(p,r):r.pause?checkpoint(p,r):questionView(p,r,entry)}</main></div>`;
   root.querySelectorAll('[data-chapter]').forEach(b=>b.onclick=()=>{const i=+b.dataset.chapter;switchPack(state.last[i]);});
   root.querySelector('#cd-pack').onchange=e=>switchPack(e.target.value);
   root.querySelectorAll('[data-pack]').forEach(b=>b.onclick=()=>switchPack(b.dataset.pack));
@@ -1913,7 +2087,7 @@ function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=allPack
   root.querySelector('[data-next]')?.addEventListener('click',()=>{if(entry.review)r.pending.shift();else r.at++;r.selected='';r.checked=false;r.hint=false;if(!entry.review&&r.at>0&&r.at%10===0&&r.at<p.questions.length)r.pause=true;render();save();});
   root.querySelector('[data-continue]')?.addEventListener('click',()=>{r.pause=false;render();save();});
   root.querySelector('[data-restart]')?.addEventListener('click',()=>{state.runs[p.id]=freshRun();render();save();});
-  root.querySelector('[data-next-chapter]')?.addEventListener('click',()=>switchPack(state.last[(state.chapter+1)%4]));
+  root.querySelector('[data-next-chapter]')?.addEventListener('click',()=>switchPack(state.last[(state.chapter+1)%chapters.length]));
 }
 window.addEventListener('openai:set_globals',event=>{const incoming=event.detail?.globals?.widgetState;if(incoming?.privateContent?.game?.v===version&&JSON.stringify(incoming.privateContent.game)!==JSON.stringify(state)){state=restore(incoming);render();}});
 render();

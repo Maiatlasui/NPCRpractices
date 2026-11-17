@@ -3,7 +3,7 @@ Practices for New Practical Chinese Reader vol.1 – Textbook, by Liu Xun, 2010,
 
 # Character Detectives · 汉字侦探
 
-A character-recognition game for beginning Chinese students, based on the conversations and vocabulary in Lessons 1–3 (updated 31 Oct 2026, more lessons to be added). Practise noticing character shapes and connecting complete words to their meanings.
+A character-recognition game for beginning Chinese students, based on the conversations and vocabulary in Lessons 1–5. Practise noticing character shapes and connecting complete words to their meanings.
 
 ## Included content
 
@@ -12,15 +12,18 @@ A character-recognition game for beginning Chinese students, based on the conver
 | Lesson 1 | 23 | 60 |
 | Lesson 2 | 50 | 131 |
 | Lesson 3 | 62 | 179 |
-| Mixed revision | 98 across all lessons | 370 |
+| Lesson 4 | 75 | 194 |
+| Lesson 5 | 64 | 161 |
+| Mixed revision (Lessons 1–5) | 167 across all lessons | 725 |
+| Mixed revision (Lessons 1–3) | 98 across the original lessons | 370 |
 
-There are **98 distinct characters overall**, including characters in the dialogue names, and 17 lesson practice sets. Lesson character counts overlap. Every character has a dedicated shape question. Each word or expression also gets meaning recognition and reverse retrieval practice. Frequent words such as 也、都 and 喝 receive additional sentence questions.
+There are **167 distinct characters overall**, including characters in the dialogue names, and 29 lesson practice sets. Lesson character counts overlap. Every character has a dedicated shape question. Each word or expression also gets meaning recognition and reverse retrieval practice. Frequent words such as 也、都 and 喝 receive additional sentence questions.
 
-The source is the supplied *Conversations Lessons 1–3* course slides. Slide headings and lesson numbers are excluded from the character inventory. The original presentation is not included in this package. Visible component notes are recognition cues. Words such as 咖啡 and 葡萄牙人 keep their complete-word meanings when students inspect individual characters. Dialogue names appear in separate sets.
+The vocabulary is based on the course conversation slides for Lessons 1–5. Slide headings and lesson numbers are excluded from the character inventory. The original presentation is not included in this package. Visible component notes are recognition cues. Words such as 咖啡 and 葡萄牙人 keep their complete-word meanings when students inspect individual characters. Dialogue names appear in separate sets.
 
 ## Start playing
 
-Open the game link. Alternatively, if you have downloaded the game, double-click `index.html` to open it in your browser.
+[Open Character Detectives](https://maiatlasui.github.io/NPCRpractices/). Choose a lesson or select **Revision** for a mix of Lessons 1–5. The original Lessons 1–3 revision is also available. Alternatively, if you have downloaded the game, double-click `index.html` to open it in your browser.
 
 ## How to play
 
