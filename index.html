@@ -1594,6 +1594,10 @@ html>body{padding:0}</style>
 #character-detectives .cd-option.zh{white-space:nowrap}
 @media(max-width:620px){#character-detectives .cd-side{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:480px){#character-detectives .cd-options.cd-long-words{grid-template-columns:minmax(0,1fr)}}
+#character-detectives .cd-course-picker{grid-column:1/-1;margin:0 8px 20px}
+#character-detectives .cd-course-picker label{display:block;font-size:13px;margin-bottom:6px;color:var(--quiet)}
+#character-detectives .cd-course-picker select{font:400 14px/1.5 system-ui,sans-serif;width:100%;min-width:0;min-height:44px;padding:8px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:7px}
+@media(max-width:620px){#character-detectives .cd-course-picker{margin:0 0 8px}}
 </style>
 <script>
 (()=>{
@@ -1980,6 +1984,4003 @@ const contexts = {
   ]
 };
 
+// New course materials: Beginner 2 first, then Intermediate 1.
+const lessonNumbers=[1,2,3,4,5,6,7,8,9,10,11,12,15,16,17,18];
+const courseUnits=[
+ {id:'beginner1',title:'Beginner 1',numbers:[1,2,3,4,5],revision:'mixed-all'},
+ {id:'beginner2',title:'Beginner 2',numbers:[6,7,8,9,10],revision:'mixed-beginner2'},
+ {id:'intermediate1',title:'Intermediate 1',numbers:[11,12,15,16,17,18],revision:'mixed-intermediate1'}
+];
+function addCoursePack(number,key,title,type,rows){
+ packs.push({id:`l${number}-${key}`,lesson:lessonNumbers.indexOf(number),title,type,items:rows.trim().split('\n').map(s=>s.trim().split('|'))});
+}
+addCoursePack(6,'time','Days, time and weather','Core',`
+昨天|zuótiān|yesterday
+今天|jīntiān|today
+明天|míngtiān|tomorrow
+天气|tiānqì|weather
+现在|xiànzài|now
+时间|shíjiān|time
+什么时候|shénme shíhou|when?
+怎么样|zěnmeyàng|how is it?
+有|yǒu|to have / there is
+`);
+addCoursePack(6,'plans','Plans, invitations and replies','Core',`
+京剧|jīngjù|Beijing opera
+有意思|yǒu yìsi|interesting
+游泳|yóuyǒng|to swim
+太好了|tài hǎo le|great!
+打球|dǎqiú|to play a ball game
+再说一遍|zài shuō yí biàn|say it once again
+抱歉|bàoqiàn|sorry / apologetic
+恐怕|kǒngpà|I’m afraid (expressing concern)
+不行|bù xíng|not possible / won’t do
+你们|nǐmen|you (plural)
+`);
+addCoursePack(6,'sport','Ball games','Bonus',`
+球|qiú|ball
+篮球|lánqiú|basketball
+足球|zúqiú|football
+乒乓球|pīngpāngqiú|table tennis
+羽毛球|yǔmáoqiú|badminton
+网球|wǎngqiú|tennis
+没有时间|méiyǒu shíjiān|have no time
+`);
+addCoursePack(7,'introductions','Meeting a professor','Core',`
+开学|kāixué|school starts / term begins
+看|kàn|to look / watch
+问一下|wèn yíxià|ask briefly
+是不是|shì bu shì|is it or isn’t it?
+教授|jiàoshòu|professor
+名片|míngpiàn|business card
+介绍|jièshào|to introduce
+一下|yíxià|briefly / a little (after a verb)
+中文|Zhōngwén|Chinese (language / writing)
+啊|a|ah! (exclamation particle)
+`);
+addCoursePack(7,'subjects','Subjects and departments','Core',`
+专业|zhuānyè|subject / major
+美术|měishù|fine arts
+文学|wénxué|literature
+汉语系|Hànyǔ xì|Chinese language department
+认识不认识|rènshi bu rènshi|know or not know?
+忙不忙|máng bu máng|busy or not busy?
+`);
+addCoursePack(7,'bonus','Business studies and WeChat','Bonus',`
+商学院|shāngxuéyuàn|business school
+商务管理|shāngwù guǎnlǐ|business management
+微信|Wēixìn|WeChat
+加一下微信|jiā yíxià Wēixìn|add each other on WeChat
+`);
+addCoursePack(7,'people','Professor Zhang','Names',`
+张教授|Zhāng jiàoshòu|Professor Zhang
+丁力波|Dīng Lìbō|Ding Libo
+林娜|Lín Nà|Lin Na
+马大为|Mǎ Dàwéi|Ma Dawei
+`);
+addCoursePack(8,'family','Family photos and pets','Core',`
+家|jiā|family / home
+照片|zhàopiàn|photograph
+几口人|jǐ kǒu rén|how many family members?
+口|kǒu|measure word for family members here
+姐姐|jiějie|older sister
+妹妹|mèimei|younger sister
+一共|yígòng|altogether
+还有|hái yǒu|there is also / in addition
+小狗|xiǎo gǒu|puppy / little dog
+当然|dāngrán|of course
+可爱|kě’ài|cute / lovable
+张|zhāng|measure word for flat objects here
+`);
+addCoursePack(8,'numbers','Counting people and departments','Core',`
+六|liù|six
+五|wǔ|five
+八|bā|eight
+十二|shí’èr|twelve
+二十八|èrshíbā|twenty-eight
+十一|shíyī|eleven
+一百|yì bǎi|one hundred
+多少|duōshao|how many / how much?
+大不大|dà bu dà|big or not big?
+不太大|bú tài dà|not very big
+外语系|wàiyǔ xì|foreign languages department
+工作|gōngzuò|work / job
+做|zuò|to do / make
+`);
+addCoursePack(8,'people','Beibei in the family photo','Names',`
+贝贝|Bèibei|Beibei (the dog’s name)
+王小云|Wáng Xiǎoyún|Wang Xiaoyun
+林娜|Lín Nà|Lin Na
+`);
+addCoursePack(9,'calendar','Weekdays and dates','Core',`
+上午|shàngwǔ|morning (time of day)
+下午|xiàwǔ|afternoon
+课|kè|class / lesson
+星期几|xīngqī jǐ|which day of the week?
+星期四|xīngqīsì|Thursday
+星期日|xīngqīrì|Sunday
+几号|jǐ hào|what date?
+七|qī|seven
+九|jiǔ|nine
+十月二十七号|shí yuè èrshíqī hào|27 October
+十一月十二号|shíyī yuè shí’èr hào|12 November
+`);
+addCoursePack(9,'birthday','Birthdays, age and invitations','Core',`
+生日|shēngrì|birthday
+今年|jīnnián|this year
+多大|duō dà|how old?
+出生|chūshēng|to be born
+属狗|shǔ gǒu|born in the Year of the Dog
+岁|suì|years old
+北京人|Běijīng rén|a person from Beijing
+聚会|jùhuì|party / get-together
+祝贺|zhùhè|to congratulate
+参加|cānjiā|to take part / attend
+过生日|guò shēngrì|to celebrate a birthday
+`);
+addCoursePack(9,'food','Birthday food and wishes','Core',`
+吃|chī|to eat
+蛋糕|dàngāo|cake
+买|mǎi|to buy
+瓶|píng|bottle / measure word for bottles
+红葡萄酒|hóng pútaojiǔ|red wine
+生日快乐|shēngrì kuàilè|happy birthday
+漂亮|piàoliang|beautiful / pretty
+北京烤鸭|Běijīng kǎoyā|Beijing roast duck
+长寿面|chángshòumiàn|longevity noodles
+`);
+addCoursePack(9,'people','Names in the birthday dialogue','Names',`
+宋华|Sòng Huá|Song Hua
+大卫|Dàwèi|Dawei (卫 spelling in these slides)
+马大为|Mǎ Dàwéi|Ma Dawei
+王小云|Wáng Xiǎoyún|Wang Xiaoyun
+`);
+addCoursePack(10,'shopping','Music, shops and stationery','Core',`
+音乐|yīnyuè|music
+唱片|chàngpiàn|record / music disc
+常常|chángcháng|often
+跟|gēn|with / to follow
+商场|shāngchǎng|shopping centre
+有名|yǒumíng|famous
+书|shū|book
+报纸|bàozhǐ|newspaper
+本子|běnzi|notebook
+那儿|nàr|there
+星期天|xīngqītiān|Sunday
+`);
+addCoursePack(10,'market','Fruit and learning words','Core',`
+师傅|shīfu|sir / skilled worker (form of address)
+香蕉|xiāngjiāo|banana
+苹果|píngguǒ|apple
+葡萄|pútao|grapes
+怎么说|zěnme shuō|how do you say it?
+容易|róngyì|easy
+斤|jīn|jin (a weight unit, 500 grams)
+钱|qián|money
+贵|guì|expensive
+`);
+addCoursePack(10,'paying','Prices, payment and change','Core',`
+块|kuài|yuan (colloquial money unit)
+毛|máo|one tenth of a yuan (money unit)
+分|fēn|one hundredth of a yuan (money unit)
+三块二毛|sān kuài èr máo|3 yuan 20 (price in the dialogue)
+两块七毛五分|liǎng kuài qī máo wǔ fēn|2 yuan 75 (price in the dialogue)
+送|sòng|to give as a gift
+给|gěi|to give
+找|zhǎo|give change / look for (context decides)
+不要了|bú yào le|I don’t want any more
+`);
+addCoursePack(10,'title','The recording title','Names',`
+梁祝|Liáng Zhù|The Butterfly Lovers (recording title)
+丁力波|Dīng Lìbō|Ding Libo
+马大为|Mǎ Dàwéi|Ma Dawei
+`);
+addCoursePack(11,'clock','Telling the time','Core',`
+几点|jǐ diǎn|what time?
+刻|kè|quarter of an hour
+差一刻八点|chà yí kè bā diǎn|a quarter to eight
+差五分八点|chà wǔ fēn bā diǎn|five to eight
+点钟|diǎnzhōng|o’clock
+分钟|fēnzhōng|minute (duration)
+十一点半|shíyī diǎn bàn|half past eleven
+`);
+addCoursePack(11,'abilities','Ability, arrival and language','Core',`
+会|huì|can (a learned skill)
+能|néng|can / be able to (circumstances)
+到|dào|to arrive / reach
+回|huí|to return
+上课|shàngkè|to attend / start class
+一点儿|yìdiǎnr|a little
+英语|Yīngyǔ|English language
+哪里|nǎli|not at all (modest reply here)
+教|jiāo|to teach
+孙女儿|sūnnǚr|granddaughter
+岁数|suìshu|age
+拜拜|báibái|bye-bye
+`);
+addCoursePack(11,'routine','Daily actions and reasons','Core',`
+为什么|wèishénme|why?
+东西|dōngxi|things
+玩儿|wánr|to play / have fun
+写汉字|xiě Hànzì|to write Chinese characters
+睡觉|shuìjiào|to sleep
+起床|qǐchuáng|to get up
+应该|yīnggāi|should / ought to
+问题|wèntí|question / problem
+还没有|hái méiyǒu|not yet
+`);
+addCoursePack(11,'people','Libo’s written name','Names',`
+丁立波|Dīng Lìbō|Ding Libo (立 spelling in these slides)
+马大为|Mǎ Dàwéi|Ma Dawei
+陈老师|Chén lǎoshī|Teacher Chen
+林娜|Lín Nà|Lin Na
+`);
+addCoursePack(12,'health','Feeling unwell (dialogue vocabulary)','Core',`
+每天|měitiān|every day
+锻炼|duànliàn|to exercise
+头疼|tóuténg|headache / head hurts
+嗓子|sǎngzi|throat
+想|xiǎng|to want / think
+身体|shēntǐ|body / health
+医院|yīyuàn|hospital
+看病|kànbìng|to see a doctor
+舒服|shūfu|comfortable / well
+全身|quánshēn|the whole body
+`);
+addCoursePack(12,'visit','A visit to the hospital','Core',`
+休息|xiūxi|to rest
+挂号|guàhào|to register (at the hospital)
+有点儿|yǒudiǎnr|a little / somewhat
+发炎|fāyán|to be inflamed
+发烧|fāshāo|to have a fever
+感冒|gǎnmào|a cold / to catch a cold
+住院|zhùyuàn|to be hospitalised
+药|yào|medicine
+愿意|yuànyì|to be willing / would like
+中药|zhōngyào|Chinese medicine
+西药|xīyào|Western medicine
+`);
+addCoursePack(12,'choices','Choices, clothing and weather','Core',`
+还是|háishi|or (in a choice question)
+一起|yìqǐ|together
+冷|lěng|cold (temperature)
+穿|chuān|to wear / put on
+衣服|yīfu|clothes
+吧|ba|suggestion / softening particle
+下星期一|xià xīngqīyī|next Monday
+`);
+addCoursePack(15,'bank','Banking and currency words','Core',`
+银行|yínháng|bank
+刚才|gāngcái|just now
+排队|páiduì|to queue
+换钱|huàn qián|to exchange money
+英镑|yīngbàng|British pound
+人民币|rénmínbì|renminbi / Chinese currency
+工作人员|gōngzuò rényuán|staff member
+数一数|shǔ yi shǔ|count it / count them
+千|qiān|thousand
+该你了|gāi nǐ le|it’s your turn
+`);
+addCoursePack(15,'travel','Travel and sightseeing','Core',`
+旅行|lǚxíng|to travel
+刚|gāng|just (recently)
+从|cóng|from
+非常|fēicháng|very / extremely
+这次|zhè cì|this time
+住|zhù|to stay / live
+参观|cānguān|to visit / look around
+明信片|míngxìnpiàn|postcard
+得用|děi yòng|must use
+玩儿得好|wánr de hǎo|have a good time
+`);
+addCoursePack(15,'messages','Messages and descriptions','Core',`
+好久不见|hǎojiǔ bú jiàn|long time no see
+写信|xiě xìn|to write a letter
+发消息|fā xiāoxi|to send a message
+听说|tīngshuō|to hear that
+发展|fāzhǎn|to develop
+快|kuài|fast
+件|jiàn|measure word for garments here
+普通话|Pǔtōnghuà|Standard Mandarin
+年轻人|niánqīng rén|young people
+流利|liúlì|fluent
+不懂|bù dǒng|do not understand
+就|jiù|precisely / just (identifying something here)
+`);
+addCoursePack(15,'places','Places and the written dialect example','Core',`
+王府井|Wángfǔjǐng|Wangfujing (Beijing shopping area)
+上海|Shànghǎi|Shanghai
+西安|Xī’ān|Xi’an
+兵马俑|bīngmǎyǒng|Terracotta Warriors
+上海话|Shànghǎihuà|Shanghainese
+阿拉勿懂|ā lā wù dǒng (Mandarin character readings)|“I don’t understand” (written dialect quote in the slides)
+`);
+addCoursePack(16,'library','Getting a library card','Core',`
+图书馆|túshūguǎn|library
+进去|jìnqu|to go in
+办公室|bàngōngshì|office
+楼|lóu|storey / building
+上楼|shànglóu|to go upstairs
+先|xiān|first / beforehand
+把|bǎ|particle placing an object before its action
+借书证|jièshūzhèng|library card
+办|bàn|to handle / arrange
+一会儿|yíhuìr|a little while
+下来|xiàlai|to come down
+带|dài|to bring / take along
+`);
+addCoursePack(16,'forms','Filling in a form','Core',`
+填表|tián biǎo|to fill in a form
+告诉|gàosu|to tell
+慢|màn|slow
+生活|shēnghuó|to live / life
+自己|zìjǐ|oneself
+姓名|xìngmíng|full name
+性别|xìngbié|gender / sex (form field)
+职业|zhíyè|occupation
+交|jiāo|to hand in / pay
+位|wèi|polite measure word for people
+`);
+addCoursePack(16,'study','Exams and textbooks','Core',`
+多长时间|duō cháng shíjiān|how long?
+上星期|shàng xīngqī|last week
+考试|kǎoshì|exam / to take an exam
+口语|kǒuyǔ|spoken language
+不错|búcuò|quite good / not bad
+可是|kěshì|but
+翻译|fānyì|to translate / translation
+语法|yǔfǎ|grammar
+新|xīn|new
+课本|kèběn|textbook
+出去|chūqu|to go out
+上次|shàng cì|last time
+`);
+addCoursePack(16,'return','Returning books and searching','Core',`
+还书|huán shū|to return books
+过期|guòqī|overdue / expired
+得交|děi jiāo|must pay / must hand in
+罚款|fákuǎn|fine / penalty payment
+事儿|shìr|matter / thing to do
+忘|wàng|to forget
+电脑|diànnǎo|computer
+查|chá|to look up / check
+新实用汉语课本|Xīn Shíyòng Hànyǔ Kèběn|New Practical Chinese Reader (textbook title)
+`);
+addCoursePack(17,'clothes','Shopping for clothes','Core',`
+卖|mài|to sell
+中式衣服|zhōngshì yīfu|Chinese-style clothes
+已经|yǐjīng|already
+比|bǐ|than (comparison)
+商店|shāngdiàn|shop
+多极了|duō jí le|extremely numerous
+不一定|bù yídìng|not necessarily
+开始|kāishǐ|to begin
+太极拳|tàijíquán|tai chi
+一套|yí tào|one set / suit
+一定|yídìng|certainly / definitely
+帅|shuài|handsome
+`);
+addCoursePack(17,'colours','Colours and choosing a price','Core',`
+颜色|yánsè|colour
+黑|hēi|black
+红|hóng|red
+白|bái|white
+绿|lǜ|green
+便宜|piányi|cheap / inexpensive
+可能|kěnéng|possibly / may
+公园|gōngyuán|park
+走走|zǒuzou|to take a walk
+小时|xiǎoshí|hour (duration)
+过去|guòqu|to pass (time here)
+`);
+addCoursePack(17,'fitting','Trying clothes on','Core',`
+衬衫|chènshān|shirt
+旗袍|qípáo|qipao / cheongsam
+样子|yàngzi|style / appearance
+售货员|shòuhuòyuán|shop assistant
+试一试|shì yi shì|to try it on / give it a try
+觉得|juéde|to feel / think
+换一件|huàn yí jiàn|to change for another garment
+合适|héshì|suitable / a good fit
+公分|gōngfēn|centimetre
+麻烦|máfan|to trouble / troublesome
+不好意思|bù hǎoyìsi|sorry to trouble you / embarrassed
+丝绸|sīchóu|silk
+西服|xīfú|Western-style suit
+`);
+addCoursePack(18,'post','Sending a parcel','Core',`
+寄|jì|to send by post
+包裹|bāoguǒ|parcel
+这些|zhèxiē|these
+英文|Yīngwén|English (language / writing)
+词典|cídiǎn|dictionary
+旧|jiù|old (not new)
+包好|bāo hǎo|to wrap properly
+课文|kèwén|lesson text
+练习|liànxí|to practise / exercise
+往|wǎng|towards
+航空|hángkōng|airmail / aviation
+海运|hǎiyùn|sea transport / surface mail
+`);
+addCoursePack(18,'customs','Collecting a parcel','Core',`
+邮费|yóufèi|postage
+写上|xiě shàng|to write on / add in writing
+取|qǔ|to collect / pick up
+通知单|tōngzhīdān|notification slip
+邮局|yóujú|post office
+海关|hǎiguān|customs
+建国门|Jiànguómén|Jianguomen
+别忘了|bié wàng le|don’t forget
+护照|hùzhào|passport
+不客气|bú kèqi|you’re welcome
+`);
+addCoursePack(18,'bus','Taking the bus','Core',`
+想想|xiǎngxiang|to think it over
+路|lù|route (bus number)
+公交车|gōngjiāochē|public bus
+经过|jīngguò|to pass through
+前门|Qiánmén|Qianmen
+好像|hǎoxiàng|seem / as if
+咱们|zánmen|we / us (including the listener)
+售票员|shòupiàoyuán|ticket seller / conductor
+大家|dàjiā|everyone
+里|lǐ|inside
+走|zǒu|to walk / go
+下一站|xià yí zhàn|next stop
+下车|xià chē|to get off a vehicle
+`);
+addCoursePack(18,'journey','Tickets, transfers and mistakes','Core',`
+乘客|chéngkè|passenger
+拿好|ná hǎo|to hold / keep safely
+上车|shàng chē|to get on a vehicle
+刷卡|shuā kǎ|to tap / swipe a card
+买票|mǎi piào|to buy a ticket
+坐错车|zuò cuò chē|to take the wrong bus / vehicle
+地铁|dìtiě|underground / metro
+听懂|tīng dǒng|to understand what one hears
+记错|jì cuò|to remember incorrectly
+放心|fàngxīn|to feel reassured / don’t worry
+糟糕|zāogāo|oh no / what a mess
+`);
+
+// Specific readings and sentence meanings remain tied to their dialogue contexts.
+const reviewLexicon=`
+请|qǐng|please
+问|wèn|to ask
+高|gāo|tall / high
+来|lái|to come
+四|sì|four
+个|ge|general measure word
+两|liǎng|two (before a measure word)
+真|zhēn|really
+没|méi|not have / did not
+时候|shíhou|time / moment
+还|hái|still / also
+再|zài|again
+中国|Zhōngguó|China
+十|shí|ten
+说|shuō|to speak / say
+太|tài|too / extremely
+晚|wǎn|late
+用|yòng|to use
+早|zǎo|early / morning greeting
+北京|Běijīng|Beijing
+百|bǎi|hundred
+学|xué|to study / learn
+大|dà|big
+三|sān|three
+拿|ná|to take / hold
+汉字|Hànzì|Chinese characters
+写|xiě|to write
+男|nán|male
+二|èr|two (counting)
+对|duì|right / correct
+差|chà|poor / inferior (quality)
+星期|xīngqī|week
+该|gāi|should / be someone’s turn
+本|běn|measure word for books
+美国|Měiguó|United States
+多|duō|many / much
+怎么|zěnme|how?
+换|huàn|to change / exchange
+极|jí|extremely
+了|le|particle for completion or a changed situation
+得|de|complement particle (as in 办得真快)
+`.trim().split('\n').map(s=>s.split('|'));
+
+Object.assign(contexts,{
+ 'l6-time':[['when','什么时候','Complete “When shall we go?”','___ 去？',['什么时候','怎么样','昨天','天气'],'什么时候去？ · Shénme shíhou qù?','什么时候 asks for the time of an action.']],
+ 'l6-plans':[['again','再说一遍','Complete “Sorry, please say it again.”','对不起，请 ___ 。',['再说一遍','游泳','打球','恐怕'],'请再说一遍。 · Qǐng zài shuō yí biàn.','再 means “again”; 一遍 means one time through.']],
+ 'l7-subjects':[['major','专业','Complete “What is your subject / major?”','你学习什么 ___ ？',['专业','名片','中文','教授'],'你学习什么专业？ · Nǐ xuéxí shénme zhuānyè?','专业 names a subject of study.']],
+ 'l8-family':[['howmany','几口人','Complete “How many people are in your family?”','你们家有 ___ ？',['几口人','照片','可爱','一共'],'你们家有几口人？ · Nǐmen jiā yǒu jǐ kǒu rén?','口 counts family members in this question.']],
+ 'l9-food':[['wish','生日快乐','Choose the birthday wish.','祝你 ___ ！',['生日快乐','漂亮','北京烤鸭','长寿面'],'祝你生日快乐！ · Zhù nǐ shēngrì kuàilè!','祝 introduces the wish “happy birthday”.']],
+ 'l10-paying':[['change','找','Complete “You give me twenty; I give you six in change.”','您给我二十块钱，我 ___ 您六块。',['找','买','送','说'],'我找您六块。 · Wǒ zhǎo nín liù kuài.','找 means to give change in this payment exchange.']],
+ 'l11-clock':[['quarter','差一刻八点','Choose the expression for 7:45.','',['差一刻八点','差五分八点','八点','十一点半'],'差一刻八点 · chà yí kè bā diǎn · a quarter to eight','差 marks the time remaining before eight.']],
+ 'l11-abilities':[['can','会','Complete “I can speak a little Chinese” using learned ability.','我 ___ 说一点儿汉语。',['会','到','回','教'],'我会说一点儿汉语。 · Wǒ huì shuō yìdiǎnr Hànyǔ.','会 introduces a learned skill here.']],
+ 'l12-choices':[['or','还是','Complete “Now or this afternoon?”','现在去 ___ 下午去？',['还是','一起','吧','衣服'],'现在去还是下午去？ · Xiànzài qù háishi xiàwǔ qù?','还是 links the alternatives in a choice question.']],
+ 'l15-bank':[['count','数一数','Choose the request to count the money.','请 ___ 。',['数一数','排队','换钱','刚才'],'请数一数。 · Qǐng shǔ yi shǔ.','数 is shǔ when it means “count”.']],
+ 'l16-return':[['return','还书','Choose the expression meaning “return books”.','',['还书','借书证','课本','填表'],'还书 · huán shū · return books','还 is huán in 还书. It is hái when it means “still / also”.']],
+ 'l17-colours':[['cheap','便宜','Complete “Do you want good ones or inexpensive ones?”','你想买好的还是买 ___ 的？',['便宜','可能','公园','颜色'],'你想买好的还是买便宜的？ · Nǐ xiǎng mǎi hǎo de háishi mǎi piányi de?','便宜 means inexpensive; its first character is read pián here.']],
+ 'l18-journey':[['mistake','记错','Complete “I understood, but remembered it incorrectly.”','我听懂了，可是 ___ 了。',['记错','放心','买票','拿好'],'我听懂了，可是记错了。 · Wǒ tīng dǒng le, kěshì jì cuò le.','错 after 记 shows that remembering went wrong.']]
+});
+
+// Visible structure cues. These describe modern printed shapes, not etymologies.
+const previousShapeKeys=new Set(Object.keys(shape));
+const componentGroups=[
+ ['氵','游泳消流海','on the left; compare the strokes on the right'],
+ ['扌','打抱授挂排换拉把找','on the left; compare the different right-hand parts'],
+ ['口','啊吃唱嗓听吧咱','on the left; inspect the larger right-hand part'],
+ ['讠','说课话译诉词该证','on the left; inspect the part on the right'],
+ ['纟','绍纸给红经练绿绸','on the left; compare the different right-hand parts'],
+ ['亻','作做件住体俑借位像','on the left; inspect the rest of the character'],
+ ['彳','微得往','on the left; compare the stacked strokes on the right'],
+ ['木','样极楼棵','on the left; compare the larger right-hand part'],
+ ['忄','怕快懂慢性','on the left; compare the different right-hand parts'],
+ ['钅','钱钟银镑铁锻错','on the left; compare the strokes on the right'],
+ ['犭','狗','on the left, with 句 on the right'],
+ ['疒','病疼','around the top and left of the inner part'],
+ ['衤','衬衫袍','on the left; look carefully at the right-hand part'],
+ ['饣','馆','on the left, with 官 on the right'],
+ ['足','跟','on the left, with 艮 on the right'],
+ ['火','炼烧','on the left; inspect the different right-hand parts'],
+ ['日','昨明时','on the left; compare the different right-hand parts'],
+ ['土','块地','on the left; inspect the right-hand part'],
+ ['广','床府店','around the top and left of the inner part'],
+ ['辶','遍还过送通运','sweeping beneath the upper part'],
+ ['艹','药苹蕉','across the top; inspect the shapes underneath'],
+ ['宀','家容宜定客实','across the top like a roof; inspect the lower part'],
+ ['雨','需','across the top'],
+ ['贝','财','on the left'],
+ ['目','睛','on the left'],
+ ['山','岁','at the top, with 夕 underneath'],
+ ['月','服','on the left; the lower right contains 又'],
+ ['女','妹始','on the left; inspect the right-hand part'],
+ ['阝','阿队','on the left; compare the right-hand part'],
+ ['车','轻','on the left; the lower right has 工'],
+ ['米','糕','on the left; the right-hand lower part has four dots'],
+ ['衤','裤','on the left']
+];
+for(const [part,chars,position] of componentGroups)for(const char of chars)if(!shape[char])shape[char]=[part,`Look for ${part} ${position}.`];
+const specificClues=`
+今|人|The 人-shaped top sits above a small bend; compare 令, which has an extra lower stroke.
+啊|口|口 is on the left and 阿 is on the right.
+课|讠|讠 is on the left and 果 is on the right.
+吃|口|口 is on the left; 乞 on the right ends with a large bent hook.
+钱|钅|钅 is on the left; 戋 on the right has crossing horizontals and a long slanting hook.
+块|土|土 is on the left; the right part is 夬, ending in two spreading strokes.
+送|辶|辶 sweeps beneath 关, which starts with two dots.
+给|纟|纟 is on the left and 合, with a small 口 underneath, is on the right.
+找|扌|扌 is on the left and 戈 is on the right. Compare 我, which joins its strokes differently.
+吧|口|口 is on the left and 巴 is on the right.
+快|忄|忄 is on the left and 夬, with spreading lower strokes, is on the right.
+件|亻|亻 is on the left and 牛 is on the right.
+楼|木|木 is on the left; on the right, 米 sits above 女.
+把|扌|扌 is on the left and 巴 is on the right.
+慢|忄|忄 is on the left; the right part stacks 曰 above 罒 and 又.
+位|亻|亻 is on the left and 立 is on the right.
+红|纟|纟 is on the left and 工 is on the right.
+绿|纟|纟 is on the left and 录 is on the right, with spreading strokes underneath.
+往|彳|彳 is on the left and 主 is on the right. 主 has a dot above three horizontal strokes.
+说|讠|讠 is on the left and 兑 is on the right, with two lower legs beneath 口.
+换|扌|扌 is on the left; 奂 on the right has a hooked top and spreading lower strokes.
+得|彳|彳 is on the left; the right side stacks 日 above a horizontal and 寸.
+还|辶|辶 sweeps beneath 不. Compare 过, which has 寸 instead.
+昨|日|日 is on the left; the right side has a short upper slant and stacked horizontals.
+气|气|Look for the short upper slant above the long hooked lower stroke.
+现|王|王 is on the left and 见 is on the right.
+间|门|门 encloses a 日 shape.
+候|亻|亻 is at the far left, beside a narrow vertical and the larger right part.
+怎|心|乍 sits above 心.
+有|月|Look for 月 beneath the crossing upper strokes.
+京|口|A small 口 sits between the top covering strokes and 小 below.
+剧|刂|The narrow 刂 is on the right of 居.
+思|心|田 is above 心.
+太|大|Compare 大: 太 adds a dot underneath the crossing strokes.
+球|王|王 is on the left and 求 is on the right.
+歉|欠|兼 is on the left; 欠 is on the right.
+恐|心|Look for 心 below the two upper parts.
+行|彳|彳 is on the left, beside two horizontals and a vertical hook.
+篮|竹|The bamboo top sits above a lower 皿 shape.
+足|口|Look for 口 above a long lower part ending in spreading strokes.
+乒|乒|The final lower stroke falls to the left. Compare 乓, which ends with a dot.
+乓|乓|The final lower mark is a dot on the right. Compare 乒.
+羽|羽|Two matching hooked shapes sit side by side, each with two short inner marks.
+毛|毛|Look for the long bent bottom hook below the upper horizontals.
+网|冂|The outer frame surrounds two crossing pairs of strokes.
+开|开|Two horizontals cross two vertical-like lower strokes.
+看|目|Look for 目 beneath the slanted upper strokes.
+片|片|The left vertical is tall; the middle horizontal turns down on the right.
+介|人|A 人-shaped top sits above two narrow lower strokes.
+文|文|A dot and horizontal sit above crossing strokes.
+专|专|Notice the central bend under two horizontals and the final lower-right dot.
+业|业|Two tall central strokes sit above the long baseline, with shorter outer marks.
+术|木|Compare 木: 术 adds a dot at the upper right.
+商|口|Look for 口 inside the lower enclosing frame, below the top dot and horizontal.
+务|力|The lower part is 力, below the crossed upper strokes.
+管|竹|The bamboo top sits above 官.
+理|王|王 is on the left and 里 is on the right.
+信|亻|亻 is on the left and 言, with 口 at the bottom, is on the right.
+张|弓|弓 is on the left and 长 is on the right.
+照|日|Look for 日 and 召 above four separate bottom dots.
+几|几|Two legs enclose an open space; the right leg ends in a hook.
+口|口|A simple square with no mark inside. Compare 日 and 中.
+共|八|Look for two spreading lower strokes beneath the upper horizontals and verticals.
+当|彐|Three small upper strokes sit above a lower shape with stacked horizontals.
+然|灬|Four separate dots spread across the bottom.
+爱|爫|Look for 爫 above a covering stroke and 友 below.
+六|六|A dot and horizontal sit above two spreading lower strokes.
+五|五|Notice the bent middle stroke between the top horizontal and the long baseline.
+八|八|Two strokes spread away from each other without touching at the top.
+十|十|One horizontal crosses one vertical.
+百|白|白 sits beneath an extra top horizontal.
+少|小|Compare 小: 少 adds a long lower slant.
+工|工|A vertical joins two horizontal strokes, like a capital I.
+贝|贝|An upper frame sits above two spreading lower strokes.
+星|日|日 sits above 生.
+期|月|其 is on the left and 月 is on the right.
+七|七|The bent hook crosses a horizontal stroke.
+九|九|A long bent hook crosses the left slant. Compare 力.
+出|山|Two 山-like outlines stack around one central vertical.
+属|尸|尸 covers the more detailed lower part, which includes an enclosed shape and a dot.
+北|匕|Two parts face away from each other; the right side resembles 匕.
+聚|耳|Look for 耳 in the upper left, with many spreading strokes below.
+会|人|A 人-shaped top sits above 云.
+祝|礻|礻 is on the left and 兄, with 口 above two legs, is on the right.
+贺|贝|加 is above 贝.
+参|厶|Look for 厶 at the top and three slanting strokes at the lower right.
+蛋|虫|虫 is below the spreading upper strokes.
+买|头|Look for 头 underneath the short hooked top stroke. Compare 卖, which adds 十 on top.
+瓶|瓦|并 is on the left and the hooked 瓦 shape is on the right.
+酒|氵|氵 is on the left; 酉 on the right contains a small inner horizontal.
+漂|氵|氵 is on the left; the right part stacks 覀 above 示.
+亮|亠|The upper part includes 口; two legs spread below a covering stroke.
+烤|火|火 is on the left; the right-hand bottom ends in a bent hook.
+鸭|鸟|甲 is on the left and 鸟 is on the right.
+长|长|Look for the upper slant crossing the long lower bent stroke.
+寿|寸|Several horizontals sit above 寸, which has a vertical hook and a dot.
+面|面|The large outline contains a narrower inner frame and two horizontals.
+卫|卫|A bent upper stroke stands on a long horizontal baseline.
+音|日|立 sits above 日.
+常|巾|Look for 巾 below a 口 and the upper covering strokes.
+书|书|A long vertical crosses the bent horizontal strokes; a short dot sits at the upper right.
+报|扌|扌 is on the left; the lower right ends in 又.
+本|木|Compare 木: 本 adds a short horizontal across the lower vertical.
+子|子|A bent upper stroke meets the hooked vertical, crossed by a long horizontal.
+傅|亻|亻 is on the left; the lower right includes 寸.
+香|日|禾 sits above 日.
+易|日|日 sits above the hooked lower part and its slanting strokes.
+斤|斤|Look for the upper slants, a horizontal and the long right vertical.
+分|八|八 sits above 刀.
+梁|木|The bottom is 木; the upper left has 氵.
+点|灬|占, with 口 below a vertical, sits above four dots.
+刻|刂|亥 is on the left and the narrow 刂 is on the right.
+差|工|A 羊-like upper part sits above 工 at the bottom.
+能|月|The left has 厶 above 月; two 匕 shapes stack on the right.
+到|刂|至 is on the left and 刂 is on the right.
+回|口|A small square sits inside a larger square.
+里|田|田 sits above 土, crossed by one central vertical.
+孙|子|子 is on the left and 小 is on the right.
+数|攵|米 above 女 is on the left; 攵 is on the right.
+拜|手|A hand-like left part faces several short horizontals crossed by a long vertical on the right.
+东|东|Look for the central hooked vertical with two small strokes spreading at the bottom.
+玩|王|王 is on the left and 元 is on the right.
+写|冖|A covering 冖 sits above 与.
+睡|目|目 is on the left; the right side has several horizontals crossed by a long vertical.
+觉|见|Look for 见 underneath the small upper strokes and covering part.
+应|广|广 covers three short strokes above a long bottom horizontal.
+题|页|是 is on the left and 页 is on the right.
+立|立|A dot and horizontal sit above two inner strokes and a long baseline.
+每|母|Look for 母 beneath the short upper slant and horizontal.
+头|头|Two dots sit above a large spreading lower part.
+想|心|木 beside 目 sits above 心.
+身|身|A tall narrow shape has several internal horizontals and a long slant through its lower part.
+舒|予|舍 is on the left and 予 is on the right.
+全|人|A 人-shaped roof sits above 王.
+休|亻|亻 is on the left and 木 is on the right.
+息|心|自 is above 心.
+发|发|Look for the crossing central strokes, the long lower-right stroke and the separate dot.
+炎|火|Two 火 shapes stack vertically.
+感|心|Look for 心 at the bottom, beneath the enclosing upper part.
+冒|目|A wide upper rectangle sits above 目.
+愿|心|原 is above 心.
+冷|冫|Two separate 冫 strokes are on the left and 令 is on the right.
+穿|穴|穴 is on top of 牙.
+衣|衣|A dot and horizontal sit above spreading lower strokes and a long bent stroke.
+刚|刂|冈 is on the left and 刂 is on the right.
+才|才|Notice the long horizontal crossed by a hooked vertical and a left slant.
+民|民|Look for the enclosed upper part joined to a long lower bent stroke.
+币|巾|A short upper slant sits above the 巾-shaped lower part.
+员|口|口 sits above 贝.
+千|十|Compare 十: 千 has an extra short slant at the top.
+旅|方|方 sits on the left beneath the short upper strokes; the lower right spreads downwards.
+从|人|Two 人 shapes stand side by side.
+非|非|Two verticals stand side by side with short horizontal strokes facing outwards.
+次|冫|Two 冫 marks are on the left and 欠 is on the right.
+观|又|又 is on the left and 见 is on the right.
+展|尸|尸 covers the middle horizontals and the spreading lower strokes.
+普|日|The upper part has two dots and several verticals above 日.
+就|尤|京 is on the left and 尤 is on the right.
+井|井|Two horizontals cross two long vertical strokes.
+兵|八|丘 sits above two spreading lower strokes.
+勿|勿|A hooked outer stroke covers two slanting strokes.
+图|囗|A large enclosing square surrounds 冬, with two dots below its upper part.
+公|八|八 sits above 厶.
+办|力|Two dots flank 力.
+带|巾|巾 sits below a covering stroke and several short upper verticals.
+填|土|土 is on the left and 真 is on the right.
+表|衣|Several upper horizontals sit above a spreading, 衣-like bottom.
+告|口|The bottom is 口 beneath a 牛-like upper part.
+活|氵|氵 is on the left and 舌, ending in 口, is on the right.
+自|目|Compare 目: 自 has an extra short slant on top.
+己|己|A bent outline is open at the upper left; the lower stroke curves into a hook.
+已|已|The left end of the lower bent stroke rises partway up. Compare 己, where it stays lower, and 巳, where it closes the upper opening.
+别|刂|口 above 力 is on the left and 刂 is on the right.
+职|耳|耳 is on the left and 只 is on the right.
+交|父|A dot and horizontal sit above crossed lower strokes.
+考|耂|Crossing upper strokes sit above a bent lower stroke. Compare 老.
+试|讠|讠 is on the left and 式 is on the right.
+翻|羽|番 is on the left and 羽 is on the right.
+新|斤|The right side is 斤; the left has 立 above 木.
+罚|罒|罒 sits above 讠 beside 刂.
+款|欠|The left part has 士 above 示; 欠 is on the right.
+事|事|A long central vertical hook crosses the stacked middle horizontal strokes.
+忘|心|亡 is above 心.
+电|电|A central vertical runs through the enclosed upper part and bends to the right at the bottom.
+脑|月|月 is on the left; the right part has a dot above a crossed enclosed shape.
+查|旦|木 sits above 旦, a 日 over a bottom horizontal.
+卖|十|十 sits above 买.
+式|工|工 sits under a long slanting hooked stroke with a dot above it.
+比|匕|Two similar bent parts sit side by side; compare 北, whose parts face away.
+拳|手|Look for 手 beneath the spreading upper strokes.
+套|大|大 is above a long lower part with several horizontals and 厶 at the bottom.
+颜|页|The right side is 页; the lower left has three slanting strokes.
+色|巴|A short hooked top sits above 巴.
+黑|灬|A dense upper shape sits above 土-like strokes and four bottom dots.
+白|白|A short slant sits above a rectangular outline with one inner horizontal.
+便|亻|亻 is on the left and 更 is on the right.
+园|囗|A large enclosing square surrounds 元.
+走|土|Look for 土 at the top and a long lower-right sweeping stroke.
+旗|方|方 is on the left; the lower right has 其.
+售|口|隹 is above 口.
+货|贝|化 sits above 贝.
+合|口|A 人-shaped roof and a horizontal sit above 口.
+适|辶|辶 sweeps under 舌, which ends in 口.
+麻|广|广 covers two 木-like shapes side by side.
+烦|火|火 is on the left and 页 is on the right.
+丝|丝|Two small bent upper shapes sit above a long horizontal.
+寄|宀|宀 covers 奇, whose bottom contains 可.
+包|勹|The hooked 勹 covers 巳.
+裹|衣|果 sits between the upper dot-and-horizontal and the spreading bottom of 衣.
+些|止|此 sits above two horizontal strokes.
+典|八|Notice the wide upper enclosed shape and two spreading strokes below.
+旧|日|A single vertical sits to the left of 日.
+航|舟|舟 is on the left and 亢 is on the right.
+空|穴|穴 sits above 工.
+邮|阝|由 is on the left and 阝 is on the right.
+费|贝|弗 sits above 贝.
+取|耳|耳 is on the left and 又 is on the right.
+单|十|Look for two short top strokes and a central vertical through the lower horizontals.
+局|尸|尸 covers a hooked lower outline containing 口.
+建|廴|廴 sweeps beneath 聿, a vertical crossed by several horizontals.
+门|门|A dot and left vertical face a tall hooked right side, open at the bottom.
+路|足|足 is on the left and 各 is on the right.
+前|刂|The top has two dots above a horizontal; 月 and 刂 sit below.
+票|示|覀 is above 示.
+乘|禾|A long central vertical and spreading lower strokes cross the two narrow middle parts.
+刷|刂|尸 above 巾 is on the left and 刂 is on the right.
+卡|上|上 sits above 卜.
+放|方|方 is on the left and 攵 is on the right.
+心|心|Look for the curved central hook with separate short dots around it.
+糟|米|米 is on the left and 曹, ending in 日, is on the right.
+真|十|十 sits above a framed middle part and two spreading bottom strokes.
+`;
+for(const line of specificClues.trim().split('\n')){const [char,part,note]=line.split('|');if(!previousShapeKeys.has(char))shape[char]=[part,note];}
+
+packs.push(...[
+ {
+  "id": "l6-return-1",
+  "lesson": 5,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "丁力波",
+    "Dīng Lìbō",
+    "Ding Libo"
+   ],
+   [
+    "杨老师",
+    "Yáng lǎoshī",
+    "Teacher Yang"
+   ],
+   [
+    "王小云",
+    "Wáng Xiǎoyún",
+    "Wang Xiaoyun"
+   ],
+   [
+    "林娜",
+    "Lín Nà",
+    "Lin Na"
+   ],
+   [
+    "可以",
+    "kěyǐ",
+    "may / can"
+   ],
+   [
+    "对不起",
+    "duìbuqǐ",
+    "sorry"
+   ],
+   [
+    "请",
+    "qǐng",
+    "please"
+   ],
+   [
+    "我",
+    "wǒ",
+    "I / me"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ]
+  ]
+ },
+ {
+  "id": "l6-return-2",
+  "lesson": 5,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "忙",
+    "máng",
+    "busy"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "谢谢",
+    "xièxie",
+    "thank you"
+   ]
+  ]
+ },
+ {
+  "id": "l7-return-1",
+  "lesson": 6,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "哪国人",
+    "nǎ guó rén",
+    "of which nationality?"
+   ],
+   [
+    "你好",
+    "nǐ hǎo",
+    "hello"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ],
+   [
+    "高兴",
+    "gāoxìng",
+    "happy / pleased"
+   ],
+   [
+    "我们",
+    "wǒmen",
+    "we / us"
+   ],
+   [
+    "老师",
+    "lǎoshī",
+    "teacher"
+   ],
+   [
+    "朋友",
+    "péngyou",
+    "friend"
+   ],
+   [
+    "贵姓",
+    "guìxìng",
+    "your surname (polite)"
+   ],
+   [
+    "请坐",
+    "qǐng zuò",
+    "please sit down"
+   ],
+   [
+    "再见",
+    "zàijiàn",
+    "goodbye"
+   ]
+  ]
+ },
+ {
+  "id": "l7-return-2",
+  "lesson": 6,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "明天",
+    "míngtiān",
+    "tomorrow"
+   ],
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "拿",
+    "ná",
+    "to take / hold"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "呢",
+    "ne",
+    "follow-up particle, as in “and you?”"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "叫",
+    "jiào",
+    "to be called"
+   ],
+   [
+    "他",
+    "tā",
+    "he / him"
+   ]
+  ]
+ },
+ {
+  "id": "l7-return-3",
+  "lesson": 6,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "都",
+    "dōu",
+    "all / both"
+   ],
+   [
+    "那",
+    "nà",
+    "that"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ],
+   [
+    "谁",
+    "shéi",
+    "who"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "她",
+    "tā",
+    "she / her"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ],
+   [
+    "名字",
+    "míngzi",
+    "name"
+   ],
+   [
+    "爸爸",
+    "bàba",
+    "dad"
+   ],
+   [
+    "妈妈",
+    "māma",
+    "mum"
+   ]
+  ]
+ },
+ {
+  "id": "l7-return-4",
+  "lesson": 6,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "学生",
+    "xuésheng",
+    "student"
+   ],
+   [
+    "语言",
+    "yǔyán",
+    "language"
+   ],
+   [
+    "学习",
+    "xuéxí",
+    "to study / learn"
+   ],
+   [
+    "谢谢",
+    "xièxie",
+    "thank you"
+   ]
+  ]
+ },
+ {
+  "id": "l8-return-1",
+  "lesson": 7,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "男朋友",
+    "nánpéngyou",
+    "boyfriend"
+   ],
+   [
+    "语言学院",
+    "yǔyán xuéyuàn",
+    "language institute"
+   ],
+   [
+    "中国",
+    "Zhōngguó",
+    "China"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ],
+   [
+    "他们",
+    "tāmen",
+    "they / them"
+   ],
+   [
+    "喜欢",
+    "xǐhuan",
+    "to like"
+   ],
+   [
+    "老师",
+    "lǎoshī",
+    "teacher"
+   ],
+   [
+    "医生",
+    "yīshēng",
+    "doctor"
+   ],
+   [
+    "都是",
+    "dōu shì",
+    "all / both are"
+   ],
+   [
+    "四",
+    "sì",
+    "four"
+   ]
+  ]
+ },
+ {
+  "id": "l8-return-2",
+  "lesson": 7,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "个",
+    "ge",
+    "general measure word"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ],
+   [
+    "没",
+    "méi",
+    "not have / did not"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "我",
+    "wǒ",
+    "I / me"
+   ],
+   [
+    "好",
+    "hǎo",
+    "good / well"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "呢",
+    "ne",
+    "follow-up particle, as in “and you?”"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ]
+  ]
+ },
+ {
+  "id": "l8-return-3",
+  "lesson": 7,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ],
+   [
+    "谁",
+    "shéi",
+    "who"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "和",
+    "hé",
+    "and (joining people here)"
+   ],
+   [
+    "看",
+    "kàn",
+    "to look / watch"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ],
+   [
+    "爸爸",
+    "bàba",
+    "dad"
+   ],
+   [
+    "妈妈",
+    "māma",
+    "mum"
+   ],
+   [
+    "哥哥",
+    "gēge",
+    "older brother"
+   ]
+  ]
+ },
+ {
+  "id": "l8-return-4",
+  "lesson": 7,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "弟弟",
+    "dìdi",
+    "younger brother"
+   ],
+   [
+    "汉语",
+    "Hànyǔ",
+    "Chinese language"
+   ],
+   [
+    "一下",
+    "yíxià",
+    "briefly / a little (after a verb)"
+   ]
+  ]
+ },
+ {
+  "id": "l9-return-1",
+  "lesson": 8,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "丁力波",
+    "Dīng Lìbō",
+    "Ding Libo"
+   ],
+   [
+    "怎么样",
+    "zěnmeyàng",
+    "how is it?"
+   ],
+   [
+    "有意思",
+    "yǒu yìsi",
+    "interesting"
+   ],
+   [
+    "太好了",
+    "tài hǎo le",
+    "great!"
+   ],
+   [
+    "时候",
+    "shíhou",
+    "time / moment"
+   ],
+   [
+    "中国",
+    "Zhōngguó",
+    "China"
+   ],
+   [
+    "高兴",
+    "gāoxìng",
+    "happy / pleased"
+   ],
+   [
+    "林娜",
+    "Lín Nà",
+    "Lin Na"
+   ],
+   [
+    "我们",
+    "wǒmen",
+    "we / us"
+   ],
+   [
+    "喜欢",
+    "xǐhuan",
+    "to like"
+   ]
+  ]
+ },
+ {
+  "id": "l9-return-2",
+  "lesson": 8,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "哪儿",
+    "nǎr",
+    "where?"
+   ],
+   [
+    "明天",
+    "míngtiān",
+    "tomorrow"
+   ],
+   [
+    "当然",
+    "dāngrán",
+    "of course"
+   ],
+   [
+    "忙不忙",
+    "máng bu máng",
+    "busy or not busy?"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "个",
+    "ge",
+    "general measure word"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ],
+   [
+    "没",
+    "méi",
+    "not have / did not"
+   ],
+   [
+    "还",
+    "hái",
+    "still / also"
+   ]
+  ]
+ },
+ {
+  "id": "l9-return-3",
+  "lesson": 8,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "再",
+    "zài",
+    "again"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "他",
+    "tā",
+    "he / him"
+   ],
+   [
+    "都",
+    "dōu",
+    "all / both"
+   ],
+   [
+    "喝",
+    "hē",
+    "to drink"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ],
+   [
+    "是",
+    "shì",
+    "to be / am / is / are"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ]
+  ]
+ },
+ {
+  "id": "l9-return-4",
+  "lesson": 8,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "在",
+    "zài",
+    "to be at / be in"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ],
+   [
+    "八",
+    "bā",
+    "eight"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ],
+   [
+    "爸爸",
+    "bàba",
+    "dad"
+   ],
+   [
+    "妈妈",
+    "māma",
+    "mum"
+   ],
+   [
+    "谢谢",
+    "xièxie",
+    "thank you"
+   ],
+   [
+    "时间",
+    "shíjiān",
+    "time"
+   ]
+  ]
+ },
+ {
+  "id": "l10-return-1",
+  "lesson": 9,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "语言学院",
+    "yǔyán xuéyuàn",
+    "language institute"
+   ],
+   [
+    "外国人",
+    "wàiguó rén",
+    "a foreigner"
+   ],
+   [
+    "王小云",
+    "Wáng Xiǎoyún",
+    "Wang Xiaoyun"
+   ],
+   [
+    "认识",
+    "rènshi",
+    "to know / get acquainted with"
+   ],
+   [
+    "林娜",
+    "Lín Nà",
+    "Lin Na"
+   ],
+   [
+    "喜欢",
+    "xǐhuan",
+    "to like"
+   ],
+   [
+    "朋友",
+    "péngyou",
+    "friend"
+   ],
+   [
+    "您好",
+    "nín hǎo",
+    "hello (polite)"
+   ],
+   [
+    "请问",
+    "qǐngwèn",
+    "excuse me (before a question)"
+   ],
+   [
+    "先生",
+    "xiānsheng",
+    "Mr / sir"
+   ]
+  ]
+ },
+ {
+  "id": "l10-return-2",
+  "lesson": 9,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "再见",
+    "zàijiàn",
+    "goodbye"
+   ],
+   [
+    "一共",
+    "yígòng",
+    "altogether"
+   ],
+   [
+    "多少",
+    "duōshao",
+    "how many / how much?"
+   ],
+   [
+    "工作",
+    "gōngzuò",
+    "work / job"
+   ],
+   [
+    "对不起",
+    "duìbuqǐ",
+    "sorry"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "四",
+    "sì",
+    "four"
+   ],
+   [
+    "个",
+    "ge",
+    "general measure word"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ],
+   [
+    "没",
+    "méi",
+    "not have / did not"
+   ]
+  ]
+ },
+ {
+  "id": "l10-return-3",
+  "lesson": 9,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "还",
+    "hái",
+    "still / also"
+   ],
+   [
+    "十",
+    "shí",
+    "ten"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "我",
+    "wǒ",
+    "I / me"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "呢",
+    "ne",
+    "follow-up particle, as in “and you?”"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "叫",
+    "jiào",
+    "to be called"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ]
+  ]
+ },
+ {
+  "id": "l10-return-4",
+  "lesson": 9,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "是",
+    "shì",
+    "to be / am / is / are"
+   ],
+   [
+    "哪",
+    "nǎ",
+    "which"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "和",
+    "hé",
+    "and (joining people here)"
+   ],
+   [
+    "在",
+    "zài",
+    "to be at / be in"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "看",
+    "kàn",
+    "to look / watch"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ],
+   [
+    "张",
+    "zhāng",
+    "measure word for flat objects here"
+   ],
+   [
+    "六",
+    "liù",
+    "six"
+   ]
+  ]
+ },
+ {
+  "id": "l10-return-5",
+  "lesson": 9,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "做",
+    "zuò",
+    "to do / make"
+   ],
+   [
+    "买",
+    "mǎi",
+    "to buy"
+   ],
+   [
+    "中国",
+    "Zhōngguó",
+    "China"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ],
+   [
+    "学习",
+    "xuéxí",
+    "to study / learn"
+   ],
+   [
+    "汉语",
+    "Hànyǔ",
+    "Chinese language"
+   ],
+   [
+    "谢谢",
+    "xièxie",
+    "thank you"
+   ],
+   [
+    "大卫",
+    "Dàwèi",
+    "Dawei (卫 spelling in these slides)"
+   ],
+   [
+    "怎么样",
+    "zěnmeyàng",
+    "how is it?"
+   ]
+  ]
+ },
+ {
+  "id": "l11-return-1",
+  "lesson": 10,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "星期日",
+    "xīngqīrì",
+    "Sunday"
+   ],
+   [
+    "语言学院",
+    "yǔyán xuéyuàn",
+    "language institute"
+   ],
+   [
+    "我们",
+    "wǒmen",
+    "we / us"
+   ],
+   [
+    "喜欢",
+    "xǐhuan",
+    "to like"
+   ],
+   [
+    "朋友",
+    "péngyou",
+    "friend"
+   ],
+   [
+    "司机",
+    "sījī",
+    "driver"
+   ],
+   [
+    "可以",
+    "kěyǐ",
+    "may / can"
+   ],
+   [
+    "昨天",
+    "zuótiān",
+    "yesterday"
+   ],
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ],
+   [
+    "下午",
+    "xiàwǔ",
+    "afternoon"
+   ]
+  ]
+ },
+ {
+  "id": "l11-return-2",
+  "lesson": 10,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "今年",
+    "jīnnián",
+    "this year"
+   ],
+   [
+    "商场",
+    "shāngchǎng",
+    "shopping centre"
+   ],
+   [
+    "容易",
+    "róngyì",
+    "easy"
+   ],
+   [
+    "有意思",
+    "yǒu yìsi",
+    "interesting"
+   ],
+   [
+    "请",
+    "qǐng",
+    "please"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "四",
+    "sì",
+    "four"
+   ],
+   [
+    "个",
+    "ge",
+    "general measure word"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ]
+  ]
+ },
+ {
+  "id": "l11-return-3",
+  "lesson": 10,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "说",
+    "shuō",
+    "to speak / say"
+   ],
+   [
+    "太",
+    "tài",
+    "too / extremely"
+   ],
+   [
+    "晚",
+    "wǎn",
+    "late"
+   ],
+   [
+    "二",
+    "èr",
+    "two (counting)"
+   ],
+   [
+    "多",
+    "duō",
+    "many / much"
+   ],
+   [
+    "了",
+    "le",
+    "particle for completion or a changed situation"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "好",
+    "hǎo",
+    "good / well"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ]
+  ]
+ },
+ {
+  "id": "l11-return-4",
+  "lesson": 10,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "他",
+    "tā",
+    "he / him"
+   ],
+   [
+    "不",
+    "bù",
+    "not"
+   ],
+   [
+    "是",
+    "shì",
+    "to be / am / is / are"
+   ],
+   [
+    "谁",
+    "shéi",
+    "who"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "她",
+    "tā",
+    "she / her"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ]
+  ]
+ },
+ {
+  "id": "l11-return-5",
+  "lesson": 10,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "家",
+    "jiā",
+    "family / home"
+   ],
+   [
+    "六",
+    "liù",
+    "six"
+   ],
+   [
+    "买",
+    "mǎi",
+    "to buy"
+   ],
+   [
+    "钱",
+    "qián",
+    "money"
+   ],
+   [
+    "块",
+    "kuài",
+    "yuan (colloquial money unit)"
+   ],
+   [
+    "给",
+    "gěi",
+    "to give"
+   ],
+   [
+    "找",
+    "zhǎo",
+    "give change / look for (context decides)"
+   ],
+   [
+    "外语",
+    "wàiyǔ",
+    "foreign language"
+   ],
+   [
+    "学生",
+    "xuésheng",
+    "student"
+   ],
+   [
+    "谢谢",
+    "xièxie",
+    "thank you"
+   ]
+  ]
+ },
+ {
+  "id": "l11-return-6",
+  "lesson": 10,
+  "title": "Familiar words 6",
+  "type": "Review",
+  "items": [
+   [
+    "常常",
+    "chángcháng",
+    "often"
+   ],
+   [
+    "师傅",
+    "shīfu",
+    "sir / skilled worker (form of address)"
+   ]
+  ]
+ },
+ {
+  "id": "l12-return-1",
+  "lesson": 11,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "马大为",
+    "Mǎ Dàwéi",
+    "Ma Dawei"
+   ],
+   [
+    "怎么样",
+    "zěnmeyàng",
+    "how is it?"
+   ],
+   [
+    "丁立波",
+    "Dīng Lìbō",
+    "Ding Libo (立 spelling in these slides)"
+   ],
+   [
+    "请坐",
+    "qǐng zuò",
+    "please sit down"
+   ],
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ],
+   [
+    "当然",
+    "dāngrán",
+    "of course"
+   ],
+   [
+    "十二",
+    "shí’èr",
+    "twelve"
+   ],
+   [
+    "今年",
+    "jīnnián",
+    "this year"
+   ],
+   [
+    "上课",
+    "shàngkè",
+    "to attend / start class"
+   ],
+   [
+    "睡觉",
+    "shuìjiào",
+    "to sleep"
+   ]
+  ]
+ },
+ {
+  "id": "l12-return-2",
+  "lesson": 11,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "应该",
+    "yīnggāi",
+    "should / ought to"
+   ],
+   [
+    "问题",
+    "wèntí",
+    "question / problem"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "没",
+    "méi",
+    "not have / did not"
+   ],
+   [
+    "再",
+    "zài",
+    "again"
+   ],
+   [
+    "用",
+    "yòng",
+    "to use"
+   ],
+   [
+    "多",
+    "duō",
+    "many / much"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "我",
+    "wǒ",
+    "I / me"
+   ],
+   [
+    "好",
+    "hǎo",
+    "good / well"
+   ]
+  ]
+ },
+ {
+  "id": "l12-return-3",
+  "lesson": 11,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "叫",
+    "jiào",
+    "to be called"
+   ],
+   [
+    "他",
+    "tā",
+    "he / him"
+   ],
+   [
+    "都",
+    "dōu",
+    "all / both"
+   ],
+   [
+    "不",
+    "bù",
+    "not"
+   ],
+   [
+    "要",
+    "yào",
+    "to want"
+   ],
+   [
+    "喝",
+    "hē",
+    "to drink"
+   ],
+   [
+    "水",
+    "shuǐ",
+    "water"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ]
+  ]
+ },
+ {
+  "id": "l12-return-4",
+  "lesson": 11,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "谁",
+    "shéi",
+    "who"
+   ],
+   [
+    "哪",
+    "nǎ",
+    "which"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "六",
+    "liù",
+    "six"
+   ],
+   [
+    "九",
+    "jiǔ",
+    "nine"
+   ],
+   [
+    "岁",
+    "suì",
+    "years old"
+   ],
+   [
+    "吃",
+    "chī",
+    "to eat"
+   ],
+   [
+    "跟",
+    "gēn",
+    "with / to follow"
+   ],
+   [
+    "给",
+    "gěi",
+    "to give"
+   ],
+   [
+    "刻",
+    "kè",
+    "quarter of an hour"
+   ]
+  ]
+ },
+ {
+  "id": "l12-return-5",
+  "lesson": 11,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "能",
+    "néng",
+    "can / be able to (circumstances)"
+   ],
+   [
+    "医生",
+    "yīshēng",
+    "doctor"
+   ],
+   [
+    "明天",
+    "míngtiān",
+    "tomorrow"
+   ],
+   [
+    "天气",
+    "tiānqì",
+    "weather"
+   ],
+   [
+    "下午",
+    "xiàwǔ",
+    "afternoon"
+   ],
+   [
+    "起床",
+    "qǐchuáng",
+    "to get up"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-1",
+  "lesson": 12,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "丁力波",
+    "Dīng Lìbō",
+    "Ding Libo"
+   ],
+   [
+    "怎么样",
+    "zěnmeyàng",
+    "how is it?"
+   ],
+   [
+    "北京",
+    "Běijīng",
+    "Beijing"
+   ],
+   [
+    "林娜",
+    "Lín Nà",
+    "Lin Na"
+   ],
+   [
+    "他们",
+    "tāmen",
+    "they / them"
+   ],
+   [
+    "喜欢",
+    "xǐhuan",
+    "to like"
+   ],
+   [
+    "可以",
+    "kěyǐ",
+    "may / can"
+   ],
+   [
+    "宿舍",
+    "sùshè",
+    "dormitory"
+   ],
+   [
+    "大为",
+    "Dàwéi",
+    "Dawei"
+   ],
+   [
+    "宋华",
+    "Sòng Huá",
+    "Song Hua"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-2",
+  "lesson": 12,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "昨天",
+    "zuótiān",
+    "yesterday"
+   ],
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ],
+   [
+    "介绍",
+    "jièshào",
+    "to introduce"
+   ],
+   [
+    "多少",
+    "duōshao",
+    "how many / how much?"
+   ],
+   [
+    "下午",
+    "xiàwǔ",
+    "afternoon"
+   ],
+   [
+    "漂亮",
+    "piàoliang",
+    "beautiful / pretty"
+   ],
+   [
+    "商场",
+    "shāngchǎng",
+    "shopping centre"
+   ],
+   [
+    "衣服",
+    "yīfu",
+    "clothes"
+   ],
+   [
+    "不知道",
+    "bù zhīdào",
+    "do not know"
+   ],
+   [
+    "请",
+    "qǐng",
+    "please"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-3",
+  "lesson": 12,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "问",
+    "wèn",
+    "to ask"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "四",
+    "sì",
+    "four"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ],
+   [
+    "没",
+    "méi",
+    "not have / did not"
+   ],
+   [
+    "还",
+    "hái",
+    "still / also"
+   ],
+   [
+    "十",
+    "shí",
+    "ten"
+   ],
+   [
+    "太",
+    "tài",
+    "too / extremely"
+   ],
+   [
+    "早",
+    "zǎo",
+    "early / morning greeting"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-4",
+  "lesson": 12,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "百",
+    "bǎi",
+    "hundred"
+   ],
+   [
+    "学",
+    "xué",
+    "to study / learn"
+   ],
+   [
+    "我",
+    "wǒ",
+    "I / me"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "要",
+    "yào",
+    "to want"
+   ],
+   [
+    "那",
+    "nà",
+    "that"
+   ],
+   [
+    "是",
+    "shì",
+    "to be / am / is / are"
+   ],
+   [
+    "哪",
+    "nǎ",
+    "which"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-5",
+  "lesson": 12,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ],
+   [
+    "国",
+    "guó",
+    "country (as in 中国)"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "有",
+    "yǒu",
+    "to have / there is"
+   ],
+   [
+    "看",
+    "kàn",
+    "to look / watch"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ],
+   [
+    "五",
+    "wǔ",
+    "five"
+   ],
+   [
+    "八",
+    "bā",
+    "eight"
+   ],
+   [
+    "做",
+    "zuò",
+    "to do / make"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-6",
+  "lesson": 12,
+  "title": "Familiar words 6",
+  "type": "Review",
+  "items": [
+   [
+    "七",
+    "qī",
+    "seven"
+   ],
+   [
+    "九",
+    "jiǔ",
+    "nine"
+   ],
+   [
+    "吃",
+    "chī",
+    "to eat"
+   ],
+   [
+    "买",
+    "mǎi",
+    "to buy"
+   ],
+   [
+    "贵",
+    "guì",
+    "expensive"
+   ],
+   [
+    "块",
+    "kuài",
+    "yuan (colloquial money unit)"
+   ],
+   [
+    "毛",
+    "máo",
+    "one tenth of a yuan (money unit)"
+   ],
+   [
+    "分",
+    "fēn",
+    "one hundredth of a yuan (money unit)"
+   ],
+   [
+    "给",
+    "gěi",
+    "to give"
+   ],
+   [
+    "会",
+    "huì",
+    "can (a learned skill)"
+   ]
+  ]
+ },
+ {
+  "id": "l15-return-7",
+  "lesson": 12,
+  "title": "Familiar words 7",
+  "type": "Review",
+  "items": [
+   [
+    "到",
+    "dào",
+    "to arrive / reach"
+   ],
+   [
+    "回",
+    "huí",
+    "to return"
+   ],
+   [
+    "想",
+    "xiǎng",
+    "to want / think"
+   ],
+   [
+    "穿",
+    "chuān",
+    "to wear / put on"
+   ],
+   [
+    "吧",
+    "ba",
+    "suggestion / softening particle"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ],
+   [
+    "今天",
+    "jīntiān",
+    "today"
+   ],
+   [
+    "英语",
+    "Yīngyǔ",
+    "English language"
+   ],
+   [
+    "东西",
+    "dōngxi",
+    "things"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-1",
+  "lesson": 13,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "工作人员",
+    "gōngzuò rényuán",
+    "staff member"
+   ],
+   [
+    "丁力波",
+    "Dīng Lìbō",
+    "Ding Libo"
+   ],
+   [
+    "怎么样",
+    "zěnmeyàng",
+    "how is it?"
+   ],
+   [
+    "中国",
+    "Zhōngguó",
+    "China"
+   ],
+   [
+    "北京",
+    "Běijīng",
+    "Beijing"
+   ],
+   [
+    "我们",
+    "wǒmen",
+    "we / us"
+   ],
+   [
+    "请问",
+    "qǐngwèn",
+    "excuse me (before a question)"
+   ],
+   [
+    "宋华",
+    "Sòng Huá",
+    "Song Hua"
+   ],
+   [
+    "今天",
+    "jīntiān",
+    "today"
+   ],
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-2",
+  "lesson": 13,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "照片",
+    "zhàopiàn",
+    "photograph"
+   ],
+   [
+    "分钟",
+    "fēnzhōng",
+    "minute (duration)"
+   ],
+   [
+    "应该",
+    "yīnggāi",
+    "should / ought to"
+   ],
+   [
+    "听说",
+    "tīngshuō",
+    "to hear that"
+   ],
+   [
+    "一个月",
+    "yí ge yuè",
+    "one month"
+   ],
+   [
+    "对不起",
+    "duìbuqǐ",
+    "sorry"
+   ],
+   [
+    "四",
+    "sì",
+    "four"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ],
+   [
+    "十",
+    "shí",
+    "ten"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-3",
+  "lesson": 13,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "太",
+    "tài",
+    "too / extremely"
+   ],
+   [
+    "学",
+    "xué",
+    "to study / learn"
+   ],
+   [
+    "大",
+    "dà",
+    "big"
+   ],
+   [
+    "三",
+    "sān",
+    "three"
+   ],
+   [
+    "拿",
+    "ná",
+    "to take / hold"
+   ],
+   [
+    "写",
+    "xiě",
+    "to write"
+   ],
+   [
+    "男",
+    "nán",
+    "male"
+   ],
+   [
+    "了",
+    "le",
+    "particle for completion or a changed situation"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "好",
+    "hǎo",
+    "good / well"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-4",
+  "lesson": 13,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "呢",
+    "ne",
+    "follow-up particle, as in “and you?”"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "忙",
+    "máng",
+    "busy"
+   ],
+   [
+    "那",
+    "nà",
+    "that"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ],
+   [
+    "哪",
+    "nǎ",
+    "which"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-5",
+  "lesson": 13,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "和",
+    "hé",
+    "and (joining people here)"
+   ],
+   [
+    "有",
+    "yǒu",
+    "to have / there is"
+   ],
+   [
+    "看",
+    "kàn",
+    "to look / watch"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ],
+   [
+    "张",
+    "zhāng",
+    "measure word for flat objects here"
+   ],
+   [
+    "五",
+    "wǔ",
+    "five"
+   ],
+   [
+    "八",
+    "bā",
+    "eight"
+   ],
+   [
+    "钱",
+    "qián",
+    "money"
+   ],
+   [
+    "块",
+    "kuài",
+    "yuan (colloquial money unit)"
+   ],
+   [
+    "毛",
+    "máo",
+    "one tenth of a yuan (money unit)"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-6",
+  "lesson": 13,
+  "title": "Familiar words 6",
+  "type": "Review",
+  "items": [
+   [
+    "给",
+    "gěi",
+    "to give"
+   ],
+   [
+    "找",
+    "zhǎo",
+    "give change / look for (context decides)"
+   ],
+   [
+    "到",
+    "dào",
+    "to arrive / reach"
+   ],
+   [
+    "想",
+    "xiǎng",
+    "to want / think"
+   ],
+   [
+    "吧",
+    "ba",
+    "suggestion / softening particle"
+   ],
+   [
+    "从",
+    "cóng",
+    "from"
+   ],
+   [
+    "快",
+    "kuài",
+    "fast"
+   ],
+   [
+    "就",
+    "jiù",
+    "precisely / just (identifying something here)"
+   ],
+   [
+    "汉字",
+    "Hànzì",
+    "Chinese characters"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ]
+  ]
+ },
+ {
+  "id": "l16-return-7",
+  "lesson": 13,
+  "title": "Familiar words 7",
+  "type": "Review",
+  "items": [
+   [
+    "可以",
+    "kěyǐ",
+    "may / can"
+   ],
+   [
+    "不行",
+    "bù xíng",
+    "not possible / won’t do"
+   ],
+   [
+    "多少",
+    "duōshao",
+    "how many / how much?"
+   ],
+   [
+    "问题",
+    "wèntí",
+    "question / problem"
+   ],
+   [
+    "外国人",
+    "wàiguó rén",
+    "a foreigner"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-1",
+  "lesson": 14,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "丁力波",
+    "Dīng Lìbō",
+    "Ding Libo"
+   ],
+   [
+    "没关系",
+    "méi guānxi",
+    "it doesn’t matter"
+   ],
+   [
+    "北京人",
+    "Běijīng rén",
+    "a person from Beijing"
+   ],
+   [
+    "为什么",
+    "wèishénme",
+    "why?"
+   ],
+   [
+    "王府井",
+    "Wángfǔjǐng",
+    "Wangfujing (Beijing shopping area)"
+   ],
+   [
+    "星期",
+    "xīngqī",
+    "week"
+   ],
+   [
+    "林娜",
+    "Lín Nà",
+    "Lin Na"
+   ],
+   [
+    "我们",
+    "wǒmen",
+    "we / us"
+   ],
+   [
+    "喜欢",
+    "xǐhuan",
+    "to like"
+   ],
+   [
+    "半年",
+    "bàn nián",
+    "half a year"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-2",
+  "lesson": 14,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "哪儿",
+    "nǎr",
+    "where?"
+   ],
+   [
+    "宋华",
+    "Sòng Huá",
+    "Song Hua"
+   ],
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ],
+   [
+    "还有",
+    "hái yǒu",
+    "there is also / in addition"
+   ],
+   [
+    "当然",
+    "dāngrán",
+    "of course"
+   ],
+   [
+    "下午",
+    "xiàwǔ",
+    "afternoon"
+   ],
+   [
+    "漂亮",
+    "piàoliang",
+    "beautiful / pretty"
+   ],
+   [
+    "刚才",
+    "gāngcái",
+    "just now"
+   ],
+   [
+    "不知道",
+    "bù zhīdào",
+    "do not know"
+   ],
+   [
+    "多长时间",
+    "duō cháng shíjiān",
+    "how long?"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-3",
+  "lesson": 14,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "高",
+    "gāo",
+    "tall / high"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ],
+   [
+    "个",
+    "ge",
+    "general measure word"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "真",
+    "zhēn",
+    "really"
+   ],
+   [
+    "再",
+    "zài",
+    "again"
+   ],
+   [
+    "十",
+    "shí",
+    "ten"
+   ],
+   [
+    "说",
+    "shuō",
+    "to speak / say"
+   ],
+   [
+    "学",
+    "xué",
+    "to study / learn"
+   ],
+   [
+    "大",
+    "dà",
+    "big"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-4",
+  "lesson": 14,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "三",
+    "sān",
+    "three"
+   ],
+   [
+    "拿",
+    "ná",
+    "to take / hold"
+   ],
+   [
+    "二",
+    "èr",
+    "two (counting)"
+   ],
+   [
+    "对",
+    "duì",
+    "right / correct"
+   ],
+   [
+    "差",
+    "chà",
+    "poor / inferior (quality)"
+   ],
+   [
+    "该",
+    "gāi",
+    "should / be someone’s turn"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "呢",
+    "ne",
+    "follow-up particle, as in “and you?”"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-5",
+  "lesson": 14,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "也",
+    "yě",
+    "also / too"
+   ],
+   [
+    "都",
+    "dōu",
+    "all / both"
+   ],
+   [
+    "要",
+    "yào",
+    "to want"
+   ],
+   [
+    "那",
+    "nà",
+    "that"
+   ],
+   [
+    "这",
+    "zhè",
+    "this"
+   ],
+   [
+    "是",
+    "shì",
+    "to be / am / is / are"
+   ],
+   [
+    "谁",
+    "shéi",
+    "who"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ],
+   [
+    "和",
+    "hé",
+    "and (joining people here)"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-6",
+  "lesson": 14,
+  "title": "Familiar words 6",
+  "type": "Review",
+  "items": [
+   [
+    "号",
+    "hào",
+    "number (after a room number)"
+   ],
+   [
+    "看",
+    "kàn",
+    "to look / watch"
+   ],
+   [
+    "啊",
+    "a",
+    "ah! (exclamation particle)"
+   ],
+   [
+    "八",
+    "bā",
+    "eight"
+   ],
+   [
+    "九",
+    "jiǔ",
+    "nine"
+   ],
+   [
+    "买",
+    "mǎi",
+    "to buy"
+   ],
+   [
+    "钱",
+    "qián",
+    "money"
+   ],
+   [
+    "贵",
+    "guì",
+    "expensive"
+   ],
+   [
+    "块",
+    "kuài",
+    "yuan (colloquial money unit)"
+   ],
+   [
+    "给",
+    "gěi",
+    "to give"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-7",
+  "lesson": 14,
+  "title": "Familiar words 7",
+  "type": "Review",
+  "items": [
+   [
+    "找",
+    "zhǎo",
+    "give change / look for (context decides)"
+   ],
+   [
+    "想",
+    "xiǎng",
+    "to want / think"
+   ],
+   [
+    "穿",
+    "chuān",
+    "to wear / put on"
+   ],
+   [
+    "吧",
+    "ba",
+    "suggestion / softening particle"
+   ],
+   [
+    "从",
+    "cóng",
+    "from"
+   ],
+   [
+    "就",
+    "jiù",
+    "precisely / just (identifying something here)"
+   ],
+   [
+    "怎么",
+    "zěnme",
+    "how?"
+   ],
+   [
+    "可以",
+    "kěyǐ",
+    "may / can"
+   ],
+   [
+    "多少",
+    "duōshao",
+    "how many / how much?"
+   ],
+   [
+    "商场",
+    "shāngchǎng",
+    "shopping centre"
+   ]
+  ]
+ },
+ {
+  "id": "l17-return-8",
+  "lesson": 14,
+  "title": "Familiar words 8",
+  "type": "Review",
+  "items": [
+   [
+    "东西",
+    "dōngxi",
+    "things"
+   ],
+   [
+    "不错",
+    "búcuò",
+    "quite good / not bad"
+   ],
+   [
+    "王小云",
+    "Wáng Xiǎoyún",
+    "Wang Xiaoyun"
+   ],
+   [
+    "一点儿",
+    "yìdiǎnr",
+    "a little"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-1",
+  "lesson": 15,
+  "title": "Familiar words 1",
+  "type": "Review",
+  "items": [
+   [
+    "丁力波",
+    "Dīng Lìbō",
+    "Ding Libo"
+   ],
+   [
+    "工作人员",
+    "gōngzuò rényuán",
+    "staff member"
+   ],
+   [
+    "怎么",
+    "zěnme",
+    "how?"
+   ],
+   [
+    "名字",
+    "míngzi",
+    "name"
+   ],
+   [
+    "都是",
+    "dōu shì",
+    "all / both are"
+   ],
+   [
+    "可以",
+    "kěyǐ",
+    "may / can"
+   ],
+   [
+    "请问",
+    "qǐngwèn",
+    "excuse me (before a question)"
+   ],
+   [
+    "汉语",
+    "Hànyǔ",
+    "Chinese language"
+   ],
+   [
+    "哪儿",
+    "nǎr",
+    "where?"
+   ],
+   [
+    "昨天",
+    "zuótiān",
+    "yesterday"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-2",
+  "lesson": 15,
+  "title": "Familiar words 2",
+  "type": "Review",
+  "items": [
+   [
+    "现在",
+    "xiànzài",
+    "now"
+   ],
+   [
+    "当然",
+    "dāngrán",
+    "of course"
+   ],
+   [
+    "东西",
+    "dōngxi",
+    "things"
+   ],
+   [
+    "流利",
+    "liúlì",
+    "fluent"
+   ],
+   [
+    "告诉",
+    "gàosu",
+    "to tell"
+   ],
+   [
+    "自己",
+    "zìjǐ",
+    "oneself"
+   ],
+   [
+    "马大为",
+    "Mǎ Dàwéi",
+    "Ma Dawei"
+   ],
+   [
+    "对不起",
+    "duìbuqǐ",
+    "sorry"
+   ],
+   [
+    "没关系",
+    "méi guānxi",
+    "it doesn’t matter"
+   ],
+   [
+    "来",
+    "lái",
+    "to come"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-3",
+  "lesson": 15,
+  "title": "Familiar words 3",
+  "type": "Review",
+  "items": [
+   [
+    "四",
+    "sì",
+    "four"
+   ],
+   [
+    "个",
+    "ge",
+    "general measure word"
+   ],
+   [
+    "两",
+    "liǎng",
+    "two (before a measure word)"
+   ],
+   [
+    "还",
+    "hái",
+    "still / also"
+   ],
+   [
+    "说",
+    "shuō",
+    "to speak / say"
+   ],
+   [
+    "学",
+    "xué",
+    "to study / learn"
+   ],
+   [
+    "三",
+    "sān",
+    "three"
+   ],
+   [
+    "该",
+    "gāi",
+    "should / be someone’s turn"
+   ],
+   [
+    "本",
+    "běn",
+    "measure word for books"
+   ],
+   [
+    "多",
+    "duō",
+    "many / much"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-4",
+  "lesson": 15,
+  "title": "Familiar words 4",
+  "type": "Review",
+  "items": [
+   [
+    "换",
+    "huàn",
+    "to change / exchange"
+   ],
+   [
+    "极",
+    "jí",
+    "extremely"
+   ],
+   [
+    "得",
+    "de",
+    "complement particle (as in 办得真快)"
+   ],
+   [
+    "你",
+    "nǐ",
+    "you"
+   ],
+   [
+    "我",
+    "wǒ",
+    "I / me"
+   ],
+   [
+    "吗",
+    "ma",
+    "yes/no question particle"
+   ],
+   [
+    "呢",
+    "ne",
+    "follow-up particle, as in “and you?”"
+   ],
+   [
+    "很",
+    "hěn",
+    "very"
+   ],
+   [
+    "叫",
+    "jiào",
+    "to be called"
+   ],
+   [
+    "要",
+    "yào",
+    "to want"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-5",
+  "lesson": 15,
+  "title": "Familiar words 5",
+  "type": "Review",
+  "items": [
+   [
+    "那",
+    "nà",
+    "that"
+   ],
+   [
+    "的",
+    "de",
+    "possession / association particle"
+   ],
+   [
+    "您",
+    "nín",
+    "you (polite)"
+   ],
+   [
+    "去",
+    "qù",
+    "to go"
+   ],
+   [
+    "有",
+    "yǒu",
+    "to have / there is"
+   ],
+   [
+    "看",
+    "kàn",
+    "to look / watch"
+   ],
+   [
+    "张",
+    "zhāng",
+    "measure word for flat objects here"
+   ],
+   [
+    "五",
+    "wǔ",
+    "five"
+   ],
+   [
+    "书",
+    "shū",
+    "book"
+   ],
+   [
+    "贵",
+    "guì",
+    "expensive"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-6",
+  "lesson": 15,
+  "title": "Familiar words 6",
+  "type": "Review",
+  "items": [
+   [
+    "块",
+    "kuài",
+    "yuan (colloquial money unit)"
+   ],
+   [
+    "给",
+    "gěi",
+    "to give"
+   ],
+   [
+    "找",
+    "zhǎo",
+    "give change / look for (context decides)"
+   ],
+   [
+    "到",
+    "dào",
+    "to arrive / reach"
+   ],
+   [
+    "吧",
+    "ba",
+    "suggestion / softening particle"
+   ],
+   [
+    "刚",
+    "gāng",
+    "just (recently)"
+   ],
+   [
+    "从",
+    "cóng",
+    "from"
+   ],
+   [
+    "快",
+    "kuài",
+    "fast"
+   ],
+   [
+    "先",
+    "xiān",
+    "first / beforehand"
+   ],
+   [
+    "把",
+    "bǎ",
+    "particle placing an object before its action"
+   ]
+  ]
+ },
+ {
+  "id": "l18-return-7",
+  "lesson": 15,
+  "title": "Familiar words 7",
+  "type": "Review",
+  "items": [
+   [
+    "办",
+    "bàn",
+    "to handle / arrange"
+   ],
+   [
+    "带",
+    "dài",
+    "to bring / take along"
+   ],
+   [
+    "新",
+    "xīn",
+    "new"
+   ],
+   [
+    "查",
+    "chá",
+    "to look up / check"
+   ],
+   [
+    "比",
+    "bǐ",
+    "than (comparison)"
+   ],
+   [
+    "美国",
+    "Měiguó",
+    "United States"
+   ],
+   [
+    "什么",
+    "shénme",
+    "what"
+   ],
+   [
+    "谢谢",
+    "xièxie",
+    "thank you"
+   ],
+   [
+    "中文",
+    "Zhōngwén",
+    "Chinese (language / writing)"
+   ],
+   [
+    "事儿",
+    "shìr",
+    "matter / thing to do"
+   ]
+  ]
+ }
+]);
+
 // Self-contained game engine. Inlined with the content for the conversation demo.
 const root = document.getElementById('character-detectives');
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -2020,7 +6021,7 @@ function buildPack(p) {
         prompt=`Choose the missing character: “${r.meaning}”.`;
         const at=r.word.indexOf(char); display=r.word.slice(0,at)+'□'+r.word.slice(at+1);
       } else {
-        prompt='Which character fits this shape clue?'; display=shape[char][0]===char?'':shape[char][0]; description=shape[char][1];
+        prompt=p.lesson>=5?`Which character means “${r.meaning}”? Use the shape clue.`:'Which character fits this shape clue?'; display=shape[char][0]===char?'':shape[char][0]; description=shape[char][1];
       }
       if(char==='好') {prompt='Which character contains these two parts?';display=['女','+','子'];description='';}
       first.push(makeQuestion(`${p.id}-${i}-s${char}`,r.word.length>1?'Complete the word':'Look closely',prompt,display,characterChoices(char,p),char,{zh:true,reading,note:`${shape[char][1]} ${r.word.length>1?`Here it is part of ${r.word}, “${r.meaning}”.`:''}`,hint:shape[char][1],description,targets:[char],word:r.word}));
@@ -2035,22 +6036,32 @@ function buildPack(p) {
   return result;
 }
 packs.forEach(p=>{p.questions=buildPack(p);p.characters=unique(p.items.flatMap(r=>hanzi(r[0])));});
-const lessonDetails=['Greetings & introductions','Family, drinks & daily words','People, countries & jobs','Introductions, study & time','Places, directions & polite replies'];
+const lessonDetails=['Greetings & introductions','Family, drinks & daily words','People, countries & jobs','Introductions, study & time','Places, directions & polite replies','Time, weather and invitations','Introductions and subjects','Family, photos and numbers','Dates and birthdays','Shopping and prices','Time, ability and routines','Health and choices','Banking, travel and messages','The library and forms','Clothes and comparisons','Parcels and transport'];
 const revisionChapter=lessonDetails.length;
-const chapters=[...lessonDetails.map((detail,i)=>({title:`Lesson ${i+1}`,detail})),{title:'Revision',detail:'Mixed practice'}];
+const chapters=[...lessonDetails.map((detail,i)=>({title:`Lesson ${lessonNumbers[i]}`,detail})),{title:'Revision',detail:'Mixed practice'}];
 function makeRevision(id,title,lessonPacks) {
   const lists=lessonDetails.map((_,i)=>lessonPacks.filter(p=>p.lesson===i).flatMap(p=>p.questions));
   const questions=[];
   for(let i=0;i<Math.max(...lists.map(q=>q.length));i++)for(const list of lists)if(list[i])questions.push(list[i]);
   const items=[...new Map(lessonPacks.flatMap(p=>p.items).map(item=>[item[0],item])).values()];
-  return {id,lesson:revisionChapter,title,type:'Revision',questions,items,characters:unique(items.flatMap(item=>hanzi(item[0])))};
+  return {id,lesson:revisionChapter,title,type:'Revision',questions,items,characters:unique(items.flatMap(item=>hanzi(item[0]))),packIds:lessonPacks.map(p=>p.id)};
 }
 // Keep the original mixed sequence under its existing ID so saved positions still match.
-const allPacks=[...packs,makeRevision('mixed-all','Lessons 1–5',packs),makeRevision('mixed','Lessons 1–3',packs.filter(p=>p.lesson<3))];
+const allPacks=[...packs,
+ {...makeRevision('mixed-all','Beginner 1 · Lessons 1–5',packs.filter(p=>p.lesson<5)),course:'beginner1'},
+ {...makeRevision('mixed','Beginner 1 · Lessons 1–3',packs.filter(p=>p.lesson<3)),course:'beginner1'},
+ {...makeRevision('mixed-beginner2','Beginner 2 · Lessons 6–10',packs.filter(p=>p.lesson>=5&&p.lesson<10)),course:'beginner2'},
+ {...makeRevision('mixed-intermediate1','Intermediate 1 · Lessons 11, 12, 15–18',packs.filter(p=>p.lesson>=10)),course:'intermediate1'},
+ makeRevision('mixed-complete','All courses',packs)
+];
 const packById=Object.fromEntries(allPacks.map(p=>[p.id,p]));
 const version=3;
-const defaultPack=chapter=>allPacks.find(p=>p.lesson===chapter).id;
-function freshState(){return{v:version,chapter:0,pack:defaultPack(0),last:chapters.map((_,i)=>defaultPack(i)),runs:{},coverage:false};}
+const defaultPack=chapter=>chapter===revisionChapter?'mixed-all':allPacks.find(p=>p.lesson===chapter).id;
+function courseForPack(p,fallback='beginner1'){return p.course||courseUnits.find(c=>c.numbers.includes(lessonNumbers[p.lesson]))?.id||fallback;}
+function course(){return courseUnits.find(c=>c.id===state.course)||courseUnits[0];}
+function visiblePacks(){return allPacks.filter(p=>p.lesson===state.chapter&&(state.chapter!==revisionChapter||!p.course||p.course===state.course));}
+
+function freshState(){return{v:version,course:'beginner1',chapter:0,pack:defaultPack(0),last:chapters.map((_,i)=>defaultPack(i)),runs:{},coverage:false};}
 function freshRun(){return{at:0,marks:'',pending:[],checked:false,selected:'',hint:false,pause:false};}
 function validRun(r,p){return r&&Number.isInteger(r.at)&&r.at>=0&&r.at<=p.questions.length&&typeof r.marks==='string'&&/^[0-4]*$/.test(r.marks)&&r.marks.length<=p.questions.length&&Array.isArray(r.pending)&&r.pending.length<=3&&r.pending.every(i=>Number.isInteger(i)&&i>=0&&i<p.questions.length)&&typeof r.selected==='string'&&typeof r.checked==='boolean';}
 function restore(value){
@@ -2060,7 +6071,7 @@ function restore(value){
   const last=chapters.map((_,i)=>packById[s.last[i]]?.lesson===i?s.last[i]:defaultPack(i));
   last[chapter]=s.pack;
   const runs=Object.fromEntries(Object.entries(s.runs).filter(([id,r])=>Object.hasOwn(packById,id)&&validRun(r,packById[id])));
-  return {...s,chapter,last,runs};
+  return {...s,chapter,last,runs,course:courseForPack(packById[s.pack],courseUnits.some(c=>c.id===s.course)?s.course:'beginner1')};
 }
 let state=restore(window.openai?.widgetState);
 function pack(){return packById[state.pack];}
@@ -2071,14 +6082,15 @@ function stars(r){return[...r.marks].filter(x=>x==='1').length;}
 function seenCharacters(lesson=null){const chars=new Set();for(const [id,r]of Object.entries(state.runs)){const p=packById[id];if(!p||(lesson!==null&&p.lesson!==lesson))continue;[...r.marks].forEach((m,i)=>{if(m!=='0')p.questions[i]?.targets.forEach(c=>chars.add(c));});}return chars;}
 function save(){if(!window.openai?.setWidgetState)return;const p=pack(),r=run();const modelContent={game:'Character Detectives',chapter:chapters[state.chapter].title,set:p.title,correct:stars(r),answered:[...r.marks].filter(m=>m!=='0').length,charactersPractised:seenCharacters().size,totalCharacters:allCharacters.length,missed:unique([...r.marks].flatMap((m,i)=>(m==='2'||m==='4')?[p.questions[i].word]:[]))};try{Promise.resolve(window.openai.setWidgetState({modelContent,privateContent:{game:state}})).catch(()=>{});}catch(_){}}
 function glyphs(value){if(Array.isArray(value))return value.map(v=>v==='+'?'<span class="cd-operator" aria-hidden="true">+</span>':`<span class="cd-glyph" lang="zh-Hans">${esc(v)}</span>`).join('');if(!value)return'';return value.length===1?`<span class="cd-glyph" lang="zh-Hans">${esc(value)}</span>`:`<span class="cd-phrase" lang="zh-Hans">${esc(value)}</span>`;}
-function switchPack(id){const p=packById[id];if(!p)return;state.chapter=p.lesson;state.pack=id;state.last[p.lesson]=id;state.coverage=false;render();save();}
-function coverageView(){const lesson=state.chapter, list=lesson===revisionChapter?packs.filter(p=>pack().id!=='mixed'||p.lesson<3):packs.filter(p=>p.lesson===lesson);const expected=unique(list.flatMap(p=>p.characters));const seen=seenCharacters(lesson===revisionChapter?null:lesson);return `<div class="cd-coverage"><div class="cd-status"><span>Characters practised in a shape question</span><span>${expected.filter(c=>seen.has(c)).length} / ${expected.length}</span></div><div class="cd-character-list">${expected.map(c=>`<span lang="zh-Hans" class="cd-character${seen.has(c)?' practised':''}" aria-label="${c}: ${seen.has(c)?'practised':'not yet practised'}">${c}${seen.has(c)?'<small aria-hidden="true">✓</small>':''}</span>`).join('')}</div><p class="cd-coverage-note">A tick means you have attempted a shape question for this character.</p>${list.map(p=>`<details><summary>${esc(p.type)} · ${esc(p.title)} · ${p.questions.length} clues</summary><div class="cd-vocab-list">${p.items.map(([w,py,m])=>`<div><span lang="zh-Hans">${w}</span><span>${esc(py)}<br>${esc(m)}</span></div>`).join('')}</div><button type="button" class="cd-button cursor-interaction" data-pack="${p.id}">Practise this set</button></details>`).join('')}</div>`;}
-function finished(p,r){const missed=[...r.marks].filter(m=>m==='3'||m==='4').length;const corrected=[...r.marks].filter(m=>m==='3').length;const remaining=unique([...r.marks].flatMap((m,i)=>m==='4'?[p.questions[i].word]:[]));const siblings=allPacks.filter(p2=>p2.lesson===state.chapter);const next=siblings[siblings.findIndex(p2=>p2.id===p.id)+1];return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">SET COMPLETE</div><h2>${esc(p.title)}, explored.</h2><div class="cd-total">${stars(r)} / ${p.questions.length}</div><div>stars on your first answers</div><p>${missed?`${corrected} of ${missed} missed clues recognised on review.`:'Every clue recognised on the first try.'}</p><div class="cd-wordlist">${unique(p.items.map(i=>i[0])).slice(0,15).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div>${remaining.length?`<div class="cd-hint">Keep practising: <span lang="zh-Hans">${remaining.join('、')}</span></div>`:''}<div class="cd-actions"><button type="button" class="cd-button cursor-interaction" data-restart>Play this set again</button><button type="button" class="cd-button cd-primary cursor-interaction" ${next?`data-pack="${next.id}"`:'data-next-chapter'}>${next?'Next practice set →':state.chapter===revisionChapter?'Back to Lesson 1':'Next lesson →'}</button></div></section>`;}
+function switchPack(id){const p=packById[id];if(!p)return;state.chapter=p.lesson;state.pack=id;state.course=courseForPack(p,state.course);state.last[p.lesson]=id;state.coverage=false;render();save();}
+function coverageView(){const lesson=state.chapter, list=lesson===revisionChapter?packs.filter(p=>pack().packIds.includes(p.id)):packs.filter(p=>p.lesson===lesson);const expected=unique(list.flatMap(p=>p.characters));const seen=seenCharacters(lesson===revisionChapter?null:lesson);return `<div class="cd-coverage"><div class="cd-status"><span>Characters practised in a shape question</span><span>${expected.filter(c=>seen.has(c)).length} / ${expected.length}</span></div><div class="cd-character-list">${expected.map(c=>`<span lang="zh-Hans" class="cd-character${seen.has(c)?' practised':''}" aria-label="${c}: ${seen.has(c)?'practised':'not yet practised'}">${c}${seen.has(c)?'<small aria-hidden="true">✓</small>':''}</span>`).join('')}</div><p class="cd-coverage-note">A tick means you have attempted a shape question for this character.</p>${list.map(p=>`<details><summary>${esc(p.type)} · ${esc(p.title)} · ${p.questions.length} clues</summary><div class="cd-vocab-list">${p.items.map(([w,py,m])=>`<div><span lang="zh-Hans">${w}</span><span>${esc(py)}<br>${esc(m)}</span></div>`).join('')}</div><button type="button" class="cd-button cursor-interaction" data-pack="${p.id}">Practise this set</button></details>`).join('')}</div>`;}
+function finished(p,r){const missed=[...r.marks].filter(m=>m==='3'||m==='4').length;const corrected=[...r.marks].filter(m=>m==='3').length;const remaining=unique([...r.marks].flatMap((m,i)=>m==='4'?[p.questions[i].word]:[]));const siblings=visiblePacks();const next=siblings[siblings.findIndex(p2=>p2.id===p.id)+1];return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">SET COMPLETE</div><h2>${esc(p.title)}, explored.</h2><div class="cd-total">${stars(r)} / ${p.questions.length}</div><div>stars on your first answers</div><p>${missed?`${corrected} of ${missed} missed clues recognised on review.`:'Every clue recognised on the first try.'}</p><div class="cd-wordlist">${unique(p.items.map(i=>i[0])).slice(0,15).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div>${remaining.length?`<div class="cd-hint">Keep practising: <span lang="zh-Hans">${remaining.join('、')}</span></div>`:''}<div class="cd-actions"><button type="button" class="cd-button cursor-interaction" data-restart>Play this set again</button><button type="button" class="cd-button cd-primary cursor-interaction" ${next?`data-pack="${next.id}"`:'data-next-chapter'}>${next?'Next practice set →':state.chapter===revisionChapter?'Back to course':'Next lesson →'}</button></div></section>`;}
 function checkpoint(p,r){const seen=unique(p.questions.slice(0,r.at).flatMap(q=>q.targets));return `<section class="cd-summary" aria-live="polite"><div class="cd-stamp">ROUND COMPLETE</div><h2>Ten clues. A moment to pause.</h2><div class="cd-total">${r.at} / ${p.questions.length}</div><div>clues explored in this set</div><div class="cd-wordlist">${seen.slice(-12).map(w=>`<span class="cd-word" lang="zh-Hans">${w}</span>`).join('')}</div><p>Your place is kept when you switch sets.</p><button type="button" class="cd-button cd-primary cursor-interaction" data-continue>Next short round →</button></section>`;}
 function questionView(p,r,entry){const {q,index,review}=entry;const correct=q.answer===r.selected;return `<div class="cd-stage">${review?'Try it again':esc(q.stage)} / ${review?'Review':`Round ${Math.floor(r.at/10)+1} · clue ${r.at%10+1}`}</div><h2 id="cd-question">${esc(q.prompt)}</h2>${q.description?`<div class="cd-description">${esc(q.description)}</div>`:''}${q.display.length?`<div class="cd-display" aria-label="Character clue">${glyphs(q.display)}</div>`:''}<div class="cd-options${q.zh&&q.options.some(o=>o.length>4)?' cd-long-words':''}" role="group" aria-labelledby="cd-question">${q.options.map(o=>{const chosen=r.selected===o,right=q.answer===o;const status=r.checked?(right?' correct':chosen?' wrong':''):'';return `<button type="button" data-answer="${esc(o)}" class="cd-option cursor-interaction${q.zh?' zh'+(o.length>2?' long':''):''}${status}" ${q.zh?'lang="zh-Hans"':''} ${r.checked?'disabled':''}>${esc(o)}${r.checked&&right?'<span class="cd-marker" aria-label="Correct answer">✓</span>':r.checked&&chosen?'<span class="cd-marker cd-wrongmark" aria-label="Incorrect answer">×</span>':''}</button>`;}).join('')}</div><div aria-live="polite">${r.checked?`<div class="cd-feedback${correct?'':' missed'}" role="status"><strong>${correct?(review?'Recognised this time.':'You found it. +1 star'):'Look at the difference.'}</strong><div class="cd-reading">${esc(q.reading)}</div><div>${esc(q.note)}</div>${!correct&&!review?'<div class="cd-reading">This clue will return after a short gap.</div>':''}</div>`:r.hint?`<div class="cd-hint"><strong>Shape clue:</strong> ${esc(q.hint)}</div>`:''}</div><div class="cd-actions">${r.checked?`<span class="cd-eyebrow">${review?'Review practice':'First answer earns a star'}</span><button type="button" class="cd-button cd-primary cursor-interaction" data-next>Next clue →</button>`:`<button type="button" class="cd-button cd-plain cursor-interaction" data-hint aria-expanded="${r.hint}">${r.hint?'Hide shape clue':'Need a shape clue?'}</button><span class="cd-eyebrow">Choose one answer</span>`}</div><div class="cd-bottom">Pinyin appears after your answer · Missed clues return for practice</div>`;}
-function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=allPacks.filter(p=>p.lesson===state.chapter);const expected=state.chapter===revisionChapter?p.characters:unique(chapterPacks.flatMap(p=>p.characters));const seen=seenCharacters(state.chapter===revisionChapter?null:state.chapter);const attempted=[...r.marks].filter(m=>m!=='0').length;
-  root.innerHTML=`<header class="cd-head"><div class="cd-seal" lang="zh-Hans" aria-hidden="true">字</div><div><h1 class="cd-title">Character Detectives</h1><div class="cd-sub">汉字侦探 · ${allCharacters.length} characters · Lessons 1–${revisionChapter}</div></div></header><div class="cd-layout"><nav class="cd-side" aria-label="Choose a chapter"><div class="cd-eyebrow">Your case files</div>${chapters.map((ch,i)=>{const ps=i===revisionChapter?[packById['mixed-all']]:allPacks.filter(p=>p.lesson===i),chars=unique(ps.flatMap(p=>p.characters));return `<button type="button" class="cd-chapter cursor-interaction" data-chapter="${i}" aria-pressed="${state.chapter===i}"><span class="cd-chapter-number">${String(i+1).padStart(2,'0')}</span><span><span class="cd-chapter-name">${ch.title}</span><span class="cd-chapter-detail">${chars.length} characters · ${ps.reduce((n,p)=>n+p.questions.length,0)} clues</span></span></button>`;}).join('')}<div class="cd-note">Short rounds.<br>Every character included.<br><br>Core, bonus and names.<br>No timer.</div></nav><main class="cd-main"><div class="cd-setbar"><label for="cd-pack">Practice set</label><select id="cd-pack" class="cursor-interaction">${chapterPacks.map(p2=>`<option value="${p2.id}" ${p2.id===p.id?'selected':''}>${esc(p2.type)} · ${esc(p2.title)} (${p2.questions.length} clues)</option>`).join('')}</select><button type="button" class="cd-coverage-toggle cursor-interaction" data-coverage aria-expanded="${state.coverage}">${state.coverage?'Back to practice':'Vocabulary & coverage'}</button></div><div class="cd-status"><span>${state.coverage?`${expected.filter(c=>seen.has(c)).length} / ${expected.length} characters practised`:`${attempted} / ${p.questions.length} clues explored`}</span><span>${stars(r)} ${stars(r)===1?'star':'stars'}</span></div><div class="cd-progress" role="progressbar" aria-label="Practice set progress" aria-valuenow="${attempted}" aria-valuemin="0" aria-valuemax="${p.questions.length}"><span style="width:${attempted/p.questions.length*100}%"></span></div>${state.coverage?coverageView():!entry.q?finished(p,r):r.pause?checkpoint(p,r):questionView(p,r,entry)}</main></div>`;
-  root.querySelectorAll('[data-chapter]').forEach(b=>b.onclick=()=>{const i=+b.dataset.chapter;switchPack(state.last[i]);});
+function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=visiblePacks();const expected=state.chapter===revisionChapter?p.characters:unique(chapterPacks.flatMap(p=>p.characters));const seen=seenCharacters(state.chapter===revisionChapter?null:state.chapter);const attempted=[...r.marks].filter(m=>m!=='0').length;
+  root.innerHTML=`<header class="cd-head"><div class="cd-seal" lang="zh-Hans" aria-hidden="true">字</div><div><h1 class="cd-title">Character Detectives</h1><div class="cd-sub">汉字侦探 · ${allCharacters.length} characters · Beginner 1 · Beginner 2 · Intermediate 1</div></div></header><div class="cd-layout"><nav class="cd-side" aria-label="Choose a chapter"><div class="cd-course-picker"><label for="cd-course">Course</label><select id="cd-course">${courseUnits.map(c=>`<option value="${c.id}" ${c.id===state.course?'selected':''}>${c.title}</option>`).join('')}</select></div><div class="cd-eyebrow">Your case files</div>${chapters.map((ch,i)=>{if(i!==revisionChapter&&!course().numbers.includes(lessonNumbers[i]))return '';const ps=i===revisionChapter?[packById[course().revision]]:allPacks.filter(p=>p.lesson===i),chars=unique(ps.flatMap(p=>p.characters));return `<button type="button" class="cd-chapter cursor-interaction" data-chapter="${i}" aria-pressed="${state.chapter===i}"><span class="cd-chapter-number">${i===revisionChapter?'R':String(lessonNumbers[i]).padStart(2,'0')}</span><span><span class="cd-chapter-name">${ch.title}</span><span class="cd-chapter-detail">${chars.length} characters · ${ps.reduce((n,p)=>n+p.questions.length,0)} clues</span></span></button>`;}).join('')}<div class="cd-note">Short rounds.<br>Every character included.<br><br>Core, bonus and names.<br>No timer.</div></nav><main class="cd-main"><div class="cd-setbar"><label for="cd-pack">Practice set</label><select id="cd-pack" class="cursor-interaction">${chapterPacks.map(p2=>`<option value="${p2.id}" ${p2.id===p.id?'selected':''}>${esc(p2.type)} · ${esc(p2.title)} (${p2.questions.length} clues)</option>`).join('')}</select><button type="button" class="cd-coverage-toggle cursor-interaction" data-coverage aria-expanded="${state.coverage}">${state.coverage?'Back to practice':'Vocabulary & coverage'}</button></div><div class="cd-status"><span>${state.coverage?`${expected.filter(c=>seen.has(c)).length} / ${expected.length} characters practised`:`${attempted} / ${p.questions.length} clues explored`}</span><span>${stars(r)} ${stars(r)===1?'star':'stars'}</span></div><div class="cd-progress" role="progressbar" aria-label="Practice set progress" aria-valuenow="${attempted}" aria-valuemin="0" aria-valuemax="${p.questions.length}"><span style="width:${attempted/p.questions.length*100}%"></span></div>${state.coverage?coverageView():!entry.q?finished(p,r):r.pause?checkpoint(p,r):questionView(p,r,entry)}</main></div>`;
+  root.querySelectorAll('[data-chapter]').forEach(b=>b.onclick=()=>{const i=+b.dataset.chapter;switchPack(i===revisionChapter?course().revision:state.last[i]);});
+  root.querySelector('#cd-course').onchange=e=>{const c=courseUnits.find(c=>c.id===e.target.value);switchPack(state.last[lessonNumbers.indexOf(c.numbers[0])]);};
   root.querySelector('#cd-pack').onchange=e=>switchPack(e.target.value);
   root.querySelectorAll('[data-pack]').forEach(b=>b.onclick=()=>switchPack(b.dataset.pack));
   root.querySelector('[data-coverage]').onclick=()=>{state.coverage=!state.coverage;render();save();};
@@ -2087,7 +6099,7 @@ function render(){const p=pack(),r=run(),entry=current(p,r),chapterPacks=allPack
   root.querySelector('[data-next]')?.addEventListener('click',()=>{if(entry.review)r.pending.shift();else r.at++;r.selected='';r.checked=false;r.hint=false;if(!entry.review&&r.at>0&&r.at%10===0&&r.at<p.questions.length)r.pause=true;render();save();});
   root.querySelector('[data-continue]')?.addEventListener('click',()=>{r.pause=false;render();save();});
   root.querySelector('[data-restart]')?.addEventListener('click',()=>{state.runs[p.id]=freshRun();render();save();});
-  root.querySelector('[data-next-chapter]')?.addEventListener('click',()=>switchPack(state.last[(state.chapter+1)%chapters.length]));
+  root.querySelector('[data-next-chapter]')?.addEventListener('click',()=>{if(state.chapter===revisionChapter)switchPack(state.last[lessonNumbers.indexOf(course().numbers[0])]);else if(state.chapter+1===revisionChapter)switchPack(course().revision);else switchPack(state.last[state.chapter+1]);});
 }
 window.addEventListener('openai:set_globals',event=>{const incoming=event.detail?.globals?.widgetState;if(incoming?.privateContent?.game?.v===version&&JSON.stringify(incoming.privateContent.game)!==JSON.stringify(state)){state=restore(incoming);render();}});
 render();
