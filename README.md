@@ -1,5 +1,5 @@
 # NPCRpractices
-Practices for New Practical Chinese Reader vol.1 – Textbook, by Liu Xun, 2010, 2nd edition, Beijing Language &amp; Culture University Press.  Resources
+Practices for New Practical Chinese Reader vol.1 & vol. 2 – Textbook, by Liu Xun, 2010, 2nd edition, Beijing Language &amp; Culture University Press. Bonus texts covered in class are also included. 
 
 # Character Detectives · 汉字侦探
 
@@ -30,9 +30,7 @@ A character-recognition game for Chinese learners, based on the conversations an
 | Intermediate 1 revision | 390 | 2170 |
 | All-course revision | 480 | 4058 |
 
-There are **480 distinct characters overall**, including characters in the dialogue names, and 128 lesson practice sets. Lesson character counts overlap. Every character has a dedicated shape question. Each word or expression also gets meaning recognition and reverse retrieval practice. Frequent words such as 也、都 and 喝 receive additional sentence questions.
-
-The vocabulary is based on the existing Beginner 1 material and the supplied 中文会话合集_Beginner 2.pptx and 中文会话合集_Intermediate 1.pptx decks. Slide headings and lesson numbers are excluded from the character inventory. The original presentation is not included in this package. Visible component notes are recognition cues. Words such as 咖啡 and 葡萄牙人 keep their complete-word meanings when students inspect individual characters. Dialogue names appear in separate sets.
+There are **480 distinct characters overall**, including characters in the dialogue names, and 128 lesson practice sets.
 
 ## Start playing
 
@@ -64,14 +62,5 @@ Progress is stored in this browser's local storage for the current page address.
 Use the same page address and browser to resume. Opening the downloaded file and opening the hosted site create separate progress records. Moving or renaming the page, clearing site data, private browsing or browser storage restrictions can prevent progress from being retained. The game remains playable when storage is unavailable. To remove all saved progress, clear this site's data in your browser settings.
 
 
-## Course order and source notes
-
-- **Beginner 1:** Lessons 1–5.
-- **Beginner 2:** Lessons 6–10, added first in the course menu.
-- **Intermediate 1:** Lessons 11, 12 and 15–18, in the supplied deck’s order. Lessons 13–14 are not in that deck and have not been invented or added.
-
-Each lesson includes the new words and smaller sets of familiar vocabulary that reappears in its dialogues. Rounds pause every ten original questions. The coverage checklist counts attempted shape questions, including incorrect attempts; its ticks do not mean a character is mastered.
-
-The new decks include spelling variants in names, such as 丁立波 / 丁力波 and 大卫 / 大为. These are labelled and retained as written. The Shanghainese quote 阿拉勿懂 is practised as a written example from the slides; the feedback labels its Mandarin character readings rather than claiming to teach Shanghainese pronunciation. Ages, prices and exchange amounts in dialogue examples are textbook scenarios.
 
 `coverage.json` records the source-character inventory and question counts for each new lesson. Slide titles and lesson headings are excluded. The game remains a self-contained `index.html`: no installation, build command, account, analytics or external resource downloads are required.
